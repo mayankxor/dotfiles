@@ -12,7 +12,7 @@ return {
 		debounce = 100, -- Number of milliseconds that must pass before rendering markdown
 		preset = "lazy", -- stay up to date with LazyVim config
 		file_types = { "markdown", "codecompanion" },
-		code = { sign = false },
+		code = { sign = false }, -- stops the annoying sign-column for icons
 		completions = { lsp = { enabled = true } },
 		ignore = function()
 			return false

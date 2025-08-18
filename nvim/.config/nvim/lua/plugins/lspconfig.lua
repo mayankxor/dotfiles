@@ -438,6 +438,7 @@ return {
 		end,
 	},
 
+	-- TODO: Figure out how to get DAP working
 	-- {
 	-- 	"mfussenegger/nvim-dap",
 	-- 	config = function()
