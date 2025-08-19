@@ -263,6 +263,8 @@ return {
 							fallback()
 						end
 					end),
+
+					-- TODO: Look into this implementation, I think its a little redundant power usage and potential time waste
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							local entries = cmp.get_entries()
