@@ -265,7 +265,8 @@ return {
 					end),
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							if #cmp.get_entries() == 1 then
+							local entries = cmp.get_entries()
+							if #entries == 1 then
 								cmp.confirm({ select = true })
 							else
 								cmp.select_next_item()
@@ -274,13 +275,36 @@ return {
 							luasnip.jump(1)
 						elseif has_words_before() then
 							cmp.complete()
-							if #cmp.get_entries == 1 then
-								cmp.confirm({ select = true })
-							end
+							-- Only confirm if exactly 1 completion appears
+							vim.defer_fn(function()
+								local entries = cmp.get_entries()
+								if #entries == 1 then
+									cmp.confirm({ select = true })
+								end
+							end, 20)
 						else
 							fallback()
 						end
 					end, { "i", "s" }),
+
+					-- ["<Tab>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then
+					-- 		if #cmp.get_entries() == 1 then
+					-- 			cmp.confirm({ select = true })
+					-- 		else
+					-- 			cmp.select_next_item()
+					-- 		end
+					-- 	elseif luasnip.locally_jumpable(1) then
+					-- 		luasnip.jump(1)
+					-- 	elseif has_words_before() then
+					-- 		cmp.complete()
+					-- 		if #cmp.get_entries == 1 then
+					-- 			cmp.confirm({ select = true })
+					-- 		end
+					-- 	else
+					-- 		fallback()
+					-- 	end
+					-- end, { "i", "s" }),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
