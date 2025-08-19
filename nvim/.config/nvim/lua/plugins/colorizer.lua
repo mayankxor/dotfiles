@@ -7,8 +7,7 @@ return {
 				filetypes = { "*" },
 				buftypes = {},
 				user_commands = true,
-				-- TODO: Turn lazy loading
-				lazy_load = false,
+				lazy_load = true,
 				user_default_options = {
 					names = true, -- vim.api.nvim_get_color_map()
 					names_opts = {

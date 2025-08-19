@@ -1,6 +1,8 @@
 return {
 	{
 		"folke/which-key.nvim",
+		lazy = true,
+		enabled = true,
 		event = "VeryLazy",
 		config = function()
 			require("which-key").setup({
@@ -187,6 +189,7 @@ return {
 	},
 	{
 		"nvzone/showkeys",
+		lazy = true,
 		cmd = "ShowkeysToggle",
 		event = "VeryLazy",
 		config = function()

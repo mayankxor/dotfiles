@@ -204,8 +204,11 @@ return {
 			"PhilRunninger/cmp-rpncalc",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"hrsh7th/cmp-emoji",
-			"max397574/cmp-greek",
+
+			-- TODO:
+			-- Make these 2 load only at latex files
 			"kdheepak/cmp-latex-symbols",
+			"max397574/cmp-greek",
 		},
 		config = function()
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")

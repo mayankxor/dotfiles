@@ -17,4 +17,9 @@ return {
 	{ "lewis6991/gitsigns.nvim" },
 
 	{ "ThePrimeagen/git-worktree.nvim" },
+	-- TODO:
+	-- nvim-nightfly-colors
+	-- github/copilot
+	-- preservim/vimux
+	-- vim-test/vim-test
 }

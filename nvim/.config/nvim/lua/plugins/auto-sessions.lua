@@ -1,5 +1,6 @@
 return {
 	"rmagatti/auto-session",
+	enabled = true,
 	lazy = false,
 	-- TODO:
 	-- read readme and configure correctly
@@ -33,7 +34,7 @@ return {
 			args_allow_single_directory = true, -- follow normal session save/load logic if launched with a single directory as the only argument
 			args_allow_files_auto_save = false, -- allow saving a session even when launched with a file argument (or multiple files/dirs). it does not load any existing session first. while you can just set this to true, you probably want to set it to a function that decides when to save a session when launched with file args. see documentation for more detail
 			continue_restore_on_error = true, -- keep loading the session even if there's an error
-			show_auto_restore_notif = false, -- whether to show a notification when auto-restoring
+			show_auto_restore_notif = true, -- whether to show a notification when auto-restoring
 			cwd_change_handling = false, -- follow cwd changes, saving a session before change and restoring after
 			lsp_stop_on_restore = false, -- should language servers be stopped when restoring a session. can also be a function that will be called if set. not called on autorestore from startup
 			restore_error_handler = nil, -- called when there's an error restoring. by default, it ignores fold errors otherwise it displays the error and returns false to disable auto_save
