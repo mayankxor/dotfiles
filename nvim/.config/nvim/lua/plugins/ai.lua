@@ -7,6 +7,7 @@ return {
 	--
 	-- TODO: Find a functional notify plugin
 	"olimorris/codecompanion.nvim",
+	enabled = false,
 	dependencies = {
 		{ "nvim-lua/plenary.nvim", branch = "master" },
 		"nvim-treesitter/nvim-treesitter",
