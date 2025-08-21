@@ -547,7 +547,7 @@ return {
 	-- Try to figure out if it can be integrated with the already used sources and maybe it can replace nvim-cmp
 	{
 		"echasnovski/mini.completion",
-		dependencies = { "echasnovski/mini.snippets", enabled = false },
+		dependencies = { "echasnovski/mini.snippets", enabled = true },
 		enabled = false,
 		config = function()
 			require("mini.completion").setup({
