@@ -94,7 +94,27 @@ return {
 			end
 			local servers = {
 				clangd = { capabilities = capabilities },
-				lua_ls = { capabilities = capabilities },
+				lua_ls = {
+					capabilities = capabilities,
+					settings = {
+						Lua = {
+							diagnostics = {
+								globals = {
+									"vim",
+								},
+							},
+							completion = {
+								callSnippet = "Replace",
+							},
+							workspace = {
+								library = {
+									[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+									[vim.fn.stdpath("config") .. "/lua"] = true,
+								},
+							},
+						},
+					},
+				},
 				pyright = { capabilities = capabilities },
 				texlab = { capabilities = capabilities },
 			}
@@ -255,7 +275,7 @@ return {
 							-- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 							-- can also be a function to dynamically calculate max width such as
 							-- menu = function() return math.floor(0.45 * vim.o.columns) end,
-							menu = 50, -- leading text (labelDetails)
+							menu = 30, -- leading text (labelDetails)
 							abbr = 50, -- actual suggestion item
 						},
 						ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
