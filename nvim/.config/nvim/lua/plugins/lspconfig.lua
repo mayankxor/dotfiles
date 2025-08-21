@@ -326,15 +326,6 @@ return {
 							end
 						elseif luasnip.locally_jumpable(1) then
 							luasnip.jump(1)
-						elseif has_words_before() then
-							cmp.complete()
-							-- Only confirm if exactly 1 completion appears
-							vim.defer_fn(function()
-								local entries = cmp.get_entries()
-								if #entries == 1 then
-									cmp.confirm({ select = true })
-								end
-							end, 20)
 						else
 							fallback()
 						end
