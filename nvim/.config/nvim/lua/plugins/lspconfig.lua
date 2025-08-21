@@ -66,7 +66,7 @@ return {
 		enabled = true,
 		event = { "BufReadPre", "BufEnter" },
 		config = function()
-			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lspconfig = require("lspconfig")
 			local on_attach = function(client, bufnr)
 				local map = function(keys, func, desc)
@@ -216,16 +216,20 @@ return {
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-
-			local lspkind = require("lspkind")
-			-- To autocomplete the last remaining completion using <TAB>
-			local has_words_before = function()
-				unpack = unpack or table.unpack
-				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-				return col ~= 0
-					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+			local in_snippet = function()
+				local session = require("luasnip.session")
+				local node = session.current_nodes[vim.api.nvim_get_current_buf()]
+				if not node then
+					return false
+				end
+				local snippet = node.parent.snippet
+				local snip_begin_pos, snip_end_pos = snippet.mark:pos_begin_end()
+				local pos = vim.api.nvim_win_get_cursor(0)
+				if pos[1] - 1 >= snip_begin_pos[1] and pos[1] - 1 <= snip_end_pos[1] then
+					return true
+				end
 			end
-			-- insert mode completion setup
+			local lspkind = require("lspkind")
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -255,7 +259,7 @@ return {
 							abbr = 50, -- actual suggestion item
 						},
 						ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-						show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+						show_labelDetails = false, -- show labelDetails in menu. Disabled by default
 
 						-- The function below will be called before any actual modifications from lspkind
 						-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
@@ -316,6 +320,7 @@ return {
 					end),
 
 					-- TODO: Look into this implementation, I think its a little redundant power usage and potential time waste
+					-- DONE:
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							local entries = cmp.get_entries()
@@ -324,8 +329,17 @@ return {
 							else
 								cmp.select_next_item()
 							end
-						elseif luasnip.locally_jumpable(1) then
+						elseif in_snippet() and luasnip.locally_jumpable(1) then
 							luasnip.jump(1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif in_snippet() and luasnip.locally_jumpable(-1) then
+							luasnip.jump(-1)
 						else
 							fallback()
 						end
@@ -349,15 +363,15 @@ return {
 					-- 		fallback()
 					-- 	end
 					-- end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
+					-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then
+					-- 		cmp.select_prev_item()
+					-- 	elseif in_snippet() and luasnip.locally_jumpable(-1) then
+					-- 		luasnip.jump(-1)
+					-- 	else
+					-- 		fallback()
+					-- 	end
+					-- end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp_signature_help" },
