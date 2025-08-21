@@ -188,7 +188,6 @@ return {
 		},
 	},
 	{
-		-- TODO: How do you stop <C-W>W from focusing the showkeys window?
 		"nvzone/showkeys",
 		lazy = true,
 		cmd = "ShowkeysToggle",
@@ -202,11 +201,16 @@ return {
 				keys = {},
 				w = 1,
 				extmark_id = nil,
+				maxkeys = 3,
+				timeout = 3, -- in secs
+				show_count = true,
+				excluded_modes = { "i" }, -- example: {"i"}
 
 				config = {
 					-- :h nvim_open_win params
 					winopts = {
-						focusable = false,
+						-- TODO: Make <C-W><C-W> not focus the showkeys window
+						focusable = true,
 						relative = "editor",
 						style = "minimal",
 						border = "single",
@@ -217,11 +221,6 @@ return {
 					},
 
 					winhl = "FloatBorder:Comment,Normal:Normal",
-
-					timeout = 3, -- in secs
-					maxkeys = 3,
-					show_count = false,
-					excluded_modes = {}, -- example: {"i"}
 
 					-- bottom-left, bottom-right, bottom-center, top-left, top-right, top-center
 					position = "bottom-right",
