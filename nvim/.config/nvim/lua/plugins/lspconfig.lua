@@ -216,7 +216,6 @@ return {
 	{
 		"hrsh7th/nvim-cmp", -- sort and filter completions
 		enabled = true,
-		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-buffer",
 			"onsails/lspkind.nvim",

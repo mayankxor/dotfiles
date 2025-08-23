@@ -7,13 +7,14 @@ return {
 	--
 	-- TODO: Find a functional notify plugin
 
+  {
 	"olimorris/codecompanion.nvim",
 	enabled = false,
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
 		"nvim-treesitter/nvim-treesitter",
 	},
-
+  },
 	{
 		"github/copilot.vim",
 		lazy = true,
