@@ -159,7 +159,7 @@ return {
 								hint = "󰌶 ",
 							},
 							colored = true,
-							update_in_insert = true,
+							update_in_insert = false,
 							always_visible = false,
 						},
 					},
@@ -258,6 +258,12 @@ return {
 
 						-- \TESTING:
 
+						{
+							"searchcount",
+						},
+						{
+							"selectioncount",
+						},
 						{
 							-- TODO: Handle the 100 percent case, since this thing sometimes show 90 percent icon for 100 percent and it doesnt show charging in 100% whatsoever
 							function()

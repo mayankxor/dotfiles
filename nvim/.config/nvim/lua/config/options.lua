@@ -59,12 +59,12 @@ opt.timeoutlen = 1000 -- 1000 milliseconds(1 second) of timeout
 opt.title = false -- let vim select title of window
 
 -- Show yank highlight
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight parts of lines being yanked",
-	callback = function()
-		vim.hl.on_yank()
-	end,
-})
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+-- 	desc = "Highlight parts of lines being yanked",
+-- 	callback = function()
+-- 		vim.hl.on_yank()
+-- 	end,
+-- })
 
 opt.mouse = "a"
 vim.g.editorconfig = false -- consistent formatting across filetypes. Prefer off, may turn on for public projects.

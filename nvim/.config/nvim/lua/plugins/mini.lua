@@ -129,7 +129,7 @@ return {
 	{
 		"echasnovski/mini.notify",
 		version = false,
-		enabled = true,
+		enabled = false,
 		config = function()
 			require("mini.notify").setup({
 				-- Content management

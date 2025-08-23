@@ -1,4 +1,6 @@
 return {
+	--animations
+	-- cp
 	-- requires lua 5.1
 	-- TODO:
 	-- Switch to lua 5.1 maybe
