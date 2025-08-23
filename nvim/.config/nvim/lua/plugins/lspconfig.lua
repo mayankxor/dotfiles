@@ -221,15 +221,15 @@ return {
 			"onsails/lspkind.nvim",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-calc",
-			"PhilRunninger/cmp-rpncalc",
+			-- "hrsh7th/cmp-calc",
+			-- "PhilRunninger/cmp-rpncalc",
 			-- "hrsh7th/cmp-nvim-lsp-signature-help",
-			"hrsh7th/cmp-emoji",
+			-- "hrsh7th/cmp-emoji",
 
 			-- TODO:
 			-- Make these 2 load only at latex files
-			"kdheepak/cmp-latex-symbols",
-			"max397574/cmp-greek",
+			-- "kdheepak/cmp-latex-symbols",
+			-- "max397574/cmp-greek",
 		},
 		config = function()
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -404,7 +404,7 @@ return {
 					-- { name = "nvim_lsp_signature_help" },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					{ name = "codecompanion" },
+					-- { name = "codecompanion" },
 				}, {
 					{
 						name = "path",
@@ -468,9 +468,9 @@ return {
 					-- {
 					-- 	name = "calc",
 					-- },
-					{
-						name = "rpncalc",
-					},
+					-- {
+					-- 	name = "rpncalc",
+					-- },
 					-- {
 					-- 	name = "emoji",
 					-- 	option = {
@@ -507,7 +507,7 @@ return {
 							buffer = "[Buffer]",
 							path = "[Path]",
 							cmdline = "[Cmdline]",
-							codecompanion = "[CodeCompanion]",
+							-- codecompanion = "[CodeCompanion]",
 						})[entry.source.name]
 						return vim_item
 					end,
