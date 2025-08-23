@@ -256,7 +256,7 @@ return {
           ghost_text=true,
         },
         completion = {
-          completeopt = "fuzzy,menu,menuone,noinsert"
+          -- completeopt = "fuzzy,menu,menuone,noinsert"
         },
 				snippet = {
 					expand = function(args)

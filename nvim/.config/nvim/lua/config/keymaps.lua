@@ -5,11 +5,7 @@ vim.g.maplocalleader = " "
 
 -- TODO:
 -- Figure out how to strip away the extension and make it dynamic
-set(
-	"n",
-	"<C-m>",
-	"<cmd>update<CR><cmd>!g++ % -o compileditem -DNDEBUG -O2 -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -std=c++17 && ./compileditem<CR>"
-)
+set('n', '<C-M-b>', [[<cmd>let save_view = winsaveview() | execute "update main.cpp | update inputf.in | update outputf.in" | call winrestview(save_view)<CR><cmd>!g++ % -o %:r && timeout 4 ./%:r < ./inputf.in > ./outputf.in<CR>]], { noremap = true, silent = true })
 set("n", "<M-h>", "<C-w><C-h>")
 set("n", "<M-j>", "<C-w><C-j>")
 set("n", "<M-k>", "<C-w><C-k>")
