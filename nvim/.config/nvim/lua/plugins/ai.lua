@@ -6,14 +6,14 @@ return {
 	-- OPTIM: vim is getting slow(prolly cuz ai)
 	--
 	-- TODO: Find a functional notify plugin
-	{
-		"olimorris/codecompanion.nvim",
-		enabled = false,
-		dependencies = {
-			{ "nvim-lua/plenary.nvim", branch = "master" },
-			"nvim-treesitter/nvim-treesitter",
-		},
+
+	"olimorris/codecompanion.nvim",
+	enabled = false,
+	dependencies = {
+		{ "nvim-lua/plenary.nvim" },
+		"nvim-treesitter/nvim-treesitter",
 	},
+
 	{
 		"github/copilot.vim",
 		lazy = true,
