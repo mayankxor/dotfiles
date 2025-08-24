@@ -1,4 +1,5 @@
 return {
-  "fladson/vim-kitty",
-  ft="kitty",
+	"fladson/vim-kitty",
+	enabled = true,
+	ft = "kitty",
 }

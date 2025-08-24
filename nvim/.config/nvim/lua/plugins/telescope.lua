@@ -7,17 +7,14 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
+		enabled = true,
 		tag = "0.1.8",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-tree/nvim-web-devicons",
-			"andrew-george/telescope-themes",
 			-- "nvim-lua/popup.nvim",
 			-- "nvim-telescope/telescope-media-files.nvim",
-			"nvim-telescope/telescope-ui-select.nvim",
 			-- "nvim-telescope/telescope-z.nvim"
-			"xiyaowong/telescope-emoji.nvim",
 		},
 		-- DONE:
 		-- install treesitter
@@ -28,18 +25,14 @@ return {
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
 			local previewers = require("telescope.previewers")
-			local open_with_trouble = require("trouble.sources.telescope").open
 			local builtin = require("telescope.builtin")
 			local sorters = require("telescope.sorters")
-			local add_to_trouble = require("trouble.sources.telescope").add -- Add items to Trouble without clearing the list
 			telescope.setup({
 				defaults = {
 					mappings = {
 						i = {
-							["<C-t>"] = open_with_trouble,
 							["<C-/>"] = "which_key",
 						},
-						n = { ["<C-t>"] = open_with_trouble },
 					},
 					scroll_strategy = "cycle",
 					winblend = 0,
@@ -80,49 +73,7 @@ return {
 					qflist_previewer = previewers.vim_buffer_qflist.new,
 					buffer_previewer_maker = previewers.buffer_previewer_maker,
 				},
-				extensions = {
-					fzf = {
-						fuzzy = true,
-						override_generic_sorter = true,
-						override_file_sorter = true,
-						case_mode = "smart_case",
-					},
-					themes = {
-						enable_previewer = true,
-						enable_live_preview = true,
-						ignore = {},
-						light_themes = {
-							ignore = false,
-						},
-						dark_themes = {
-							ignore = false,
-						},
-						persist = {
-							enabled = true,
-							path = vim.fn.stdpath("config") .. "/lua/colorscheme.lua",
-						},
-					},
-					-- media_files = {
-					--   filetypes = { "png", "jpg", "webp", "webm", "jpeg", "mp4", "pdf" },
-					--   find_cmd = "rg"
-					-- },
-					emoji = {
-						action = function(emoji)
-							vim.fn.setreg("*", emoji.value)
-							vim.api.nvim_put({ emoji.value }, "c", false, true)
-						end,
-					},
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
-					},
-				},
 			})
-			telescope.load_extension("fzf")
-			telescope.load_extension("themes")
-			-- telescope.load_extension("media_files")
-			-- telescope.load_extension("z")
-			telescope.load_extension("emoji")
-			telescope.load_extension("ui-select")
 
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find files" })
 			vim.keymap.set("n", "<leader>fcf", function()
@@ -152,7 +103,6 @@ return {
 				{ desc = "Find search history and runs them on <CR>" }
 			)
 			vim.keymap.set("n", "<leader>fmp", builtin.man_pages, { desc = "Find man pages and run them on <CR>" })
-			vim.keymap.set("n", "<leader>fth", "<cmd>Telescope themes<CR>", { desc = "Find and enable a colorscheme" })
 			vim.keymap.set("n", "<leader>fvo", builtin.vim_options, { desc = "List Vim options and edit them at <CR>" })
 			vim.keymap.set(
 				"n",

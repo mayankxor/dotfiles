@@ -1,5 +1,6 @@
 return {
 	"szw/vim-maximizer",
+	enabled = true,
 	keys = {
 		{
 			"<leader>sm",
