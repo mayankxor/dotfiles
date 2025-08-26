@@ -5,7 +5,7 @@ vim.g.maplocalleader = " "
 
 -- TODO:
 -- Figure out how to strip away the extension and make it dynamic
-set('n', '<C-M-b>', [[<cmd>let save_view = winsaveview() | execute "update main.cpp | update inputf.in | update outputf.in" | call winrestview(save_view)<CR><cmd>!g++ % -o %:r && timeout 4 ./%:r < ./inputf.in > ./outputf.in<CR>]], { noremap = true, silent = true })
+-- set('n', '<C-M-b>', [[<cmd>let save_view = winsaveview() | execute "update main.cpp | update inputf.in | update outputf.in" | call winrestview(save_view)<CR><cmd>!g++ % -o %:r && timeout 4 ./%:r < ./inputf.in > ./outputf.in<CR>]], { noremap = true, silent = true })
 set("n", "<M-h>", "<C-w><C-h>")
 set("n", "<M-j>", "<C-w><C-j>")
 set("n", "<M-k>", "<C-w><C-k>")
@@ -70,3 +70,26 @@ set("n", "<leader>so", "<cmd>update<CR><cmd>source %<CR>", { desc = "Shoutout" }
 set("n", "<leader>db", "<cmd>bdelete<CR>", { desc = "Delete current buffer" })
 set("n", "<C-`>", "<cmd>bot term<CR>", { desc = "Open bottom terminal" })
 set("t", "<esc><esc>", "<c-\\><c-n>")
+
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "cpp",
+-- 	callback = function()
+-- 		vim.keymap.set("n", "<leader>cnr", function()
+-- 			local file = vim.fn.expand("%:p")
+-- 			local basename = vim.fn.expand("%:t:r")
+-- 			vim.cmd("!g++" .. file .. " -o " .. basename .. " && " .. "./" .. basename)
+-- 		end, { buffer = true, desc = "Compile CPP and run." })
+-- 	end,
+-- })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "cpp",
+	callback = function()
+		vim.keymap.set("n", "<leader>cnr", function()
+			local file = vim.fn.expand("%:p")
+			local basename = vim.fn.expand("%:t:r")
+			-- Open a horizontal split terminal running g++
+			vim.cmd("split | terminal !g++" .. file .. " -o " .. basename .. " && " .. "./" .. basename)
+		end, { buffer = true, desc = "Compile C++ file (terminal)" })
+	end,
+})
