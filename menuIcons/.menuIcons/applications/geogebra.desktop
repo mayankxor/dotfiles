@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Geogebra
+GenericName=Graphing
+Comment=Classic5
+Exec=/home/xor/installedApps/GeoGebra-Linux-Portable-5-2-894-3/geogebra/geogebra
+Type=Application
+Keywords=Calculator;Graphing;Mathematics
+Icon=/home/xor/.menuIcons/icons/geogebra.svg
+Terminal=false
+Categories=Calculator;Graphing;Mathematics;
+StartupNotify=false
