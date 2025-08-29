@@ -15,8 +15,8 @@ set("n", "<M-Left>", "<C-w>5<")
 set("n", "<M-right>", "<C-w>5>")
 set("n", "<M-up>", "<C-w>+")
 set("n", "<M-down>", "<C-w>-")
-set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected line(s) up" })
-set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected line(s) down" })
+set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected line(s) up", silent = true })
+set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected line(s) down", silent = true })
 
 set(
 	"n",
