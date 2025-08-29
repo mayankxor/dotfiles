@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Neovim
+GenericName=Text Editor
+Comment=Edit files
+TryExec=/home/xor/installedApps/bin/nvim
+Exec=/home/xor/installedApps/bin/nvim %F
+Type=Application
+Keywords=Text;Editor;Reader
+Icon=/home/xor/.menuIcons/icons/nvim.svg
+Terminal=true
+MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+Categories=Utility;TextEditor;
+StartupNotify=false

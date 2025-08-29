@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Obsidian
+Comment=Goto notes
+Keywords=obsidian;notes;
+Categories=Office;Utility;
+Exec=/home/xor/installedApps/bin/obsidian %U
+Icon=/home/xor/.menuIcons/icons/obsidian.svg
+Terminal=false
+Type=Application

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=eDEX-UI
+GenericName=Terminal Emulator
+Comment=Fancy Terminal Emulator
+Exec=/home/xor/installedApps/bin/eDEX-UI
+Type=Application
+Keywords=Terminal
+Icon=/home/xor/.menuIcons/icons/eDEX-UI.svg
+Terminal=false
+Categories=Utility;TerminalEmulator;
+StartupNotify=false
