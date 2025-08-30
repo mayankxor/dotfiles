@@ -194,7 +194,6 @@ return {
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
 			local ls = require("luasnip")
-
 			vim.keymap.set({ "i" }, "<C-K>", function()
 				ls.expand()
 			end, { silent = true })
@@ -204,7 +203,6 @@ return {
 			vim.keymap.set({ "i", "s" }, "<C-J>", function()
 				ls.jump(-1)
 			end, { silent = true })
-
 			vim.keymap.set({ "i", "s" }, "<C-E>", function()
 				if ls.choice_active() then
 					ls.change_choice(1)
@@ -579,15 +577,101 @@ return {
 	},
 
 	-- TODO: Figure out how to get DAP working
+	{
+		"mfussenegger/nvim-dap",
+		enabled = true,
+		dependencies = {
+			{
+				"nvim-neotest/nvim-nio",
+				enabled = true,
+			},
+			{
+				"rcarriga/nvim-dap-ui",
+				enabled = true,
+			},
+		},
+		config = function()
+			local set = vim.keymap.set
+			local dap = require("dap")
+			local dapui = require("dapui")
+			dap.adapters.gdb = {
+				type = "executable",
+				command = "gdb",
+				args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+			}
+			dap.configurations.c = {
+				{
+					name = "Launch",
+					type = "gdb",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+					stopAtBeginningOfMainSubprogram = false,
+				},
+				{
+					name = "Select and attach to process",
+					type = "gdb",
+					request = "attach",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end,
+					pid = function()
+						local name = vim.fn.input("Executable name (filter): ")
+						return require("dap.utils").pick_process({ filter = name })
+					end,
+					cwd = "${workspaceFolder}",
+				},
+				{
+					name = "Attach to gdbserver :1234",
+					type = "gdb",
+					request = "attach",
+					target = "localhost:1234",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end,
+					cwd = "${workspaceFolder}",
+				},
+			}
+			dap.configurations.cpp = dap.configurations.c
+			dap.configurations.rust = dap.configurations.c
+
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.close()
+			end
+			set("n", "<Leader>db", dap.toggle_breakpoint)
+			set("n", "<leader>dc", dap.continue)
+		end,
+	},
 	-- {
-	-- 	"mfussenegger/nvim-dap",
-	-- 	config = function()
-	-- 		local set = vim.keymap.set
-	-- 		local dap = require("dap")
-	-- 		set("n", "<Leader>Db", dap.toggle_breakpoint())
-	-- 		set("n", "<leader>Dc", dap.continue())
-	-- 	end,
-	-- },
+	--   "rcarriga/nvim-dap-ui",
+	--   enabled=true,
+	--   config=function ()
+	--     local dapui = require("dapui")
+	--     dap.listeners.before.attach.dapui_config = function()
+	-- 		dapui.open()
+	-- 	end
+	-- 	dap.listeners.before.launch.dapui_config = function()
+	-- 		dapui.open()
+	-- 	end
+	-- 	dap.listeners.before.event_terminated.dapui_config = function()
+	-- 		dapui.close()
+	-- 	end
+	-- 	dap.listeners.before.event_exited.dapui_config = function()
+	-- 		dapui.close()
+	-- 	end
+	--   end
+	-- }
 	-- {
 	-- 	"rcarriga/nvim-dap-ui",
 	-- 	dependencies = {
