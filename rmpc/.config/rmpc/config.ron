@@ -1,6 +1,5 @@
 // DEFAULT:
 
-
 #![enable(implicit_some)]
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
@@ -8,7 +7,9 @@
     address: "127.0.0.1:6600",
     password: None,
     theme: Some("default"),
-    cache_dir: "~/.cache/rmpc/",
+    cache_dir: Some("~/.cache/rmpc/"),
+    lyrics_dir: Some("~/.archive/music/lyrics"),
+    lyrics_offset_ms: 0,
     on_song_change: None,
     volume_step: 5,
     max_fps: 30,
@@ -24,11 +25,33 @@
     directories_sort: SortFormat(group_by_type: true, reverse: false),
     album_art: (
         method: Auto,
-        max_size_px: (width: 1200, height: 1200),
+        max_size_px: (width: 1000, height: 1000),
         disabled_protocols: ["http://", "https://"],
         vertical_align: Center,
         horizontal_align: Center,
     ),
+  cava: (
+    framerate: 60, // default 60
+    autosens: true, // default true
+    sensitivity: 100, // default 100
+    lower_cutoff_freq: 50, // not passed to cava if not provided
+    higher_cutoff_freq: 10000, // not passed to cava if not provided
+    input: (
+        method: Fifo,
+        source: "/tmp/mpd.fifo",
+        sample_rate: 44100,
+        channels: 2,
+        sample_bits: 16,
+    ),
+    smoothing: (
+        noise_reduction: 77, // default 77
+        monstercat: false, // default false
+        waves: false, // default false
+    ),
+    // this is a list of floating point numbers thats directly passed to cava
+    // they are passed in order that they are defined
+    eq: []
+),
     keybinds: (
         global: {
             ":":       CommandMode,
@@ -125,16 +148,61 @@
     ),
     tabs: [
         (
-            name: "Queue",
-            pane: Split(
-                direction: Horizontal,
-                panes: [(size: "40%", pane: Pane(AlbumArt)), (size: "60%", pane: Pane(Queue))],
-            ),
+
+        name: "Queue",
+
+        pane: Split(
+
+            direction: Vertical,
+
+            panes: [
+
+                // (size: "40%", pane: Pane(AlbumArt)),
+          (size: "50%", pane: Split(
+            direction: Horizontal,
+            panes: [
+            (size: "50%", pane: Pane(Lyrics) ,vertical_align: Bottom),
+              (size: "50%", pane: Pane(Queue)),
+            ]
+          )),
+
+                (size: "50%", pane: Split(
+
+                    direction: Horizontal,
+
+                    panes: [
+
+                        (size: "30%", pane: Pane(AlbumArt)),
+
+                        (size: "70%", pane: Pane(Cava)),
+
+                    ],
+
+                )),
+
+            ],
+
         ),
+
+    ),
+        // (
+        //     name: "Queue",
+        //     pane: Split(
+        //         direction: Horizontal,
+        //         panes: [(size: "40%", pane: Pane(AlbumArt)), (size: "60%", pane: Pane(Queue))],
+        //     ),
+        // ),
         (
             name: "Directories",
             pane: Pane(Directories),
         ),
+     // (
+     //        name: "Lyrics",
+     //        pane: Split(
+     //            direction: Vertical,
+     //            panes: [(size: "25%", pane: Pane(AlbumArt)), (size: "70%", pane: Pane(Lyrics), vertical_align: Bottom)],
+     //        ),
+     //    ),
         (
             name: "Artists",
             pane: Pane(Artists),
