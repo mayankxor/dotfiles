@@ -1,0 +1,31 @@
+-o "./%(playlist_title)s/%(playlist_index&{}~|)s%(playlist_count&{}-|)s%(title)s[%(id)s].%(ext)s"
+-S res:720,+size
+-f "bv+ba[format_note*=original]/bv+ba"
+--write-auto-subs
+--sub-langs "en"
+--embed-subs
+--compat-opt manifest-filesize-approx
+--no-abort-on-error
+--ignore-errors
+--cookies "~/.cookies/youtube.com/DanglingSunMessier.txt"
+--yes-playlist
+--write-playlist-metafiles
+--continue
+--part
+--mtime
+--progress
+--console-title
+--check-formats
+--no-prefer-free-formats
+--no-audio-multistreams
+--no-video-multistreams
+--no-format-sort-force
+--embed-metadata
+--post-overwrites
+--embed-chapters
+--embed-info-json
+--force-write-archive
+--download-archive "~/.archive/yt-dlp.archive"
+--sponsorblock-mark all
+--sponsorblock-remove sponsor,selfpromo,preview,interaction
+--no-warnings
