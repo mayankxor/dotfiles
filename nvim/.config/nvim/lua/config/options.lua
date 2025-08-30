@@ -91,11 +91,12 @@ vim.diagnostic.config({
 })
 vim.o.showmode = false
 
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "ron",
--- 	callback = function()
--- 		vim.bo.commentstring = "// %s"
--- 	end,
--- })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "ron",
+	callback = function()
+		vim.bo.commentstring = "// %s"
+	end,
+})
 
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon0-TermCursor"
+

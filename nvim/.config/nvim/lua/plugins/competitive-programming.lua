@@ -11,6 +11,7 @@ return {
 	{
 		"kawre/leetcode.nvim",
 		build = ":TSUpdate html",
+		branch = "disable-x-requested-with-header",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanmjim/nui.nvim",

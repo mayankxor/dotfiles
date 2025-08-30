@@ -68,7 +68,7 @@ end, { desc = "Copy filepath of current file relative to home directory" })
 
 set("n", "<leader>so", "<cmd>update<CR><cmd>source %<CR>", { desc = "Shoutout" })
 set("n", "<leader>db", "<cmd>bdelete<CR>", { desc = "Delete current buffer" })
-set("n", "<C-`>", "<cmd>bot term<CR>", { desc = "Open bottom terminal" })
+-- set("n", "<C-`>", "<cmd>bot term<CR>", { desc = "Open bottom terminal" })
 set("t", "<esc><esc>", "<c-\\><c-n>")
 
 -- vim.api.nvim_create_autocmd("FileType", {
