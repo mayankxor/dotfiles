@@ -93,3 +93,4 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = true, desc = "Compile C++ file (terminal)" })
 	end,
 })
+set("n", "<M-z>", ":!zathura <C-r>=expand('%:r)<cr>.pdf & <cr>")

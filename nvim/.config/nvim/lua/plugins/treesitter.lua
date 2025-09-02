@@ -61,7 +61,7 @@ return {
 				ignore_install = {},
 				highlight = {
 					enable = true,
-					disable = {},
+					disable = { "latex" },
 					additional_vim_regex_highlighting = false,
 				},
 				incremental_selection = {
