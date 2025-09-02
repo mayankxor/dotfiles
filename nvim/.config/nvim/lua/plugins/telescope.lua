@@ -52,7 +52,7 @@ return {
 					border = true,
 					path_display = { "tail" },
 					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-					hl_result_eol = false,
+					hl_result_eol = true,
 					dynamic_preview_title = false,
 					results_title = false,
 					prompt_title = false,

@@ -93,7 +93,23 @@ return {
 				end, "Format")
 			end
 			local servers = {
-				clangd = { capabilities = capabilities },
+				-- TODO: Install g++ 14 and put clang to that
+				clangd = {
+					capabilities = capabilities,
+					cmd = {
+						"clangd",
+					},
+					filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+					root_markers = {
+						".clangd",
+						".clang-tidy",
+						".clang-format",
+						"compile_commands.json",
+						"compile_flags.txt",
+						"configure.ac",
+						".git",
+					},
+				},
 				lua_ls = {
 					capabilities = capabilities,
 					settings = {
@@ -594,6 +610,7 @@ return {
 			local set = vim.keymap.set
 			local dap = require("dap")
 			local dapui = require("dapui")
+			dapui.setup()
 			dap.adapters.gdb = {
 				type = "executable",
 				command = "gdb",
@@ -649,7 +666,7 @@ return {
 			dap.listeners.before.event_exited.dapui_config = function()
 				dapui.close()
 			end
-			set("n", "<Leader>db", dap.toggle_breakpoint)
+			set("n", "<Leader>dt", dap.toggle_breakpoint)
 			set("n", "<leader>dc", dap.continue)
 		end,
 	},

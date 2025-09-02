@@ -94,3 +94,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 set("n", "<M-z>", ":!zathura <C-r>=expand('%:r)<cr>.pdf & <cr>")
+
+set("n", "j", "gj")
+set("n", "k", "gk")
