@@ -1,0 +1,30 @@
+--bind 'alt-v:become(vim {}),alt-n:become(nvim {}),alt-h:become(hx {}),alt-l:execute(less -f {}),alt-o:become(open {})'
+--height ~70%
+--ansi
+--multi
+--layout reverse
+--tmux 70%,border-native
+--smart-case
+--algo v2
+--border-label ""
+--no-highlight-line
+--cycle
+# --wrap
+--wrap-sign '↳ '
+--no-gap
+--marker  " "
+--pointer  " "
+--ellipsis  "…"
+--scrollbar '|'
+--prompt  " "
+--info right
+--info-command 'echo "\x1b[33;1m$FZF_POS\x1b[m/$FZF_INFO"'
+--separator ─
+--ghost "Type sum..."
+--input-border none
+# --preview 'bat --color=always --tabs 2 --theme "Monokai Extended Bright" --style auto {}'
+# --preview '~/fzf-preview.sh {}'
+--preview-label " preview "
+--preview-window '~3'
+--walker file,follow,hidden
+--walker-skip .git,node_modules
