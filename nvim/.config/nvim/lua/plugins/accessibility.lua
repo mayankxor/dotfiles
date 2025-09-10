@@ -189,6 +189,7 @@ return {
 	},
 	{
 		"nvzone/showkeys",
+		enabled = false,
 		lazy = true,
 		cmd = "ShowkeysToggle",
 		event = "VeryLazy",
