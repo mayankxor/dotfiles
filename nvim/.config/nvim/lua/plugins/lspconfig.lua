@@ -209,6 +209,9 @@ return {
 		run = "make install_jsregexp",
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_lua").lazy_load({
+				paths = "~/.config/nvim/lua/snippets",
+			})
 			local ls = require("luasnip")
 			vim.keymap.set({ "i" }, "<C-K>", function()
 				ls.expand()
