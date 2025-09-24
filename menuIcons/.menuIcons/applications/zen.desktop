@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=zen
+GenericName=Zen Browser
+Comment=Welcome to a calmer internet
+Exec=/home/xor/installedApps/zen/zen
+Type=Application
+Keywords=Browser
+Terminal=false
+Categories=Utility;Browser;
+StartupNotify=false
