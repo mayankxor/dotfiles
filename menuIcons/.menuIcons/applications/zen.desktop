@@ -1,8 +1,10 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 Name=zen
 GenericName=Zen Browser
 Comment=Welcome to a calmer internet
 Exec=/home/xor/installedApps/zen/zen
+Icon=/home/xor/.menuIcons/icons/zen.png
 Type=Application
 Keywords=Browser
 Terminal=false
