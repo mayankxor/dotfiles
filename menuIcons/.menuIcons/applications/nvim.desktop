@@ -1,3 +1,4 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
 # Translators: This is the Application Name used in the nvim desktop file
 Name[ca]=neovim
