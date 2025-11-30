@@ -1,0 +1,18 @@
+general {
+  output_format = "i3bar"
+  color_good = "#00FF00"
+  colors=true
+  separator = "~"
+  interval=1
+}
+# order += "ipv6"
+ipv6 {
+  format_up = "%ip"
+  format_down = "no IPv6"
+}
+
+order += "wireless wlo1"
+wireless wlo1 {
+  format_up = " %quality-%essid,%bitrate/%frequency"
+  format_down = ""
+}
