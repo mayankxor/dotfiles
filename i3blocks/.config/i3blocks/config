@@ -1,3 +1,23 @@
 [time]
 command=date +%T
 interval=1
+
+[volume]
+min_width=50
+align=center
+command=./volume.sh
+interval=once
+signal=10
+
+[battery]
+min_width=50
+full_text_only=true
+align=center
+command=./battery.sh
+interval=10
+
+[wifi]
+command=./wifi.sh
+min_width=5
+align=center
+interval=5
