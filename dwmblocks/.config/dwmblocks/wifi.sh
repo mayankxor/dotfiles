@@ -14,4 +14,3 @@ else
   ICON="󰤮 "
 fi
 echo "$ICON$CONNECTION"
-echo ""
