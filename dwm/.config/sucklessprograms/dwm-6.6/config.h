@@ -66,6 +66,9 @@ static const char *decvol[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5
 static const char *mutevol[] = {"pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL};
 static Keychord *keychords[] = {
        /* Keys        function        argument */
+	&((Keychord){1, {{0,XF86XK_AudioRaiseVolume}}, spawn, {.v = incvol}}),
+	&((Keychord){1, {{0,XF86XK_AudioLowerVolume}}, spawn, {.v = decvol}}),
+	&((Keychord){1, {{0,XF86XK_AudioMute       }}, spawn, {.v = mutevol}}),
        &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_Return}},                        spawn,          {.v = termcmd } }),
        &((Keychord){2, {{MODKEY, XK_e}, {MODKEY, XK_e}},                       spawn,          {.v = termcmd } }),
