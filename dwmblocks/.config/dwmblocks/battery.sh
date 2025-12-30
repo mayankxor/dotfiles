@@ -10,18 +10,12 @@ ACPI_LINE=$(acpi -b 2>/dev/null | head -n1)
 
 if [[ -z "$ACPI_LINE" ]]; then
     echo "󰂑"
-    echo ""
-    echo "#888888"
-    exit 0
 fi
 
 # Percentage (e.g. "42%")
 BAT=$(echo "$ACPI_LINE" | grep -o '[0-9]\+%')
 if [[ -z "$BAT" ]]; then
     echo "󰂑"
-    echo ""
-    echo "#888888"
-    exit 0
 fi
 PCT=${BAT%?}    # numeric percentage
 
@@ -70,17 +64,17 @@ COL_0="#ff0000"
 # Choose icon and color by percentage (discharging defaults)
 choose_by_pct() {
     local pct=$1
-    if   [[ $pct -ge 100 ]]; then echo "$dis_100" "$GREEN"
-    elif [[ $pct -ge 90  ]]; then echo "$dis_90"  "$COL_90"
-    elif [[ $pct -ge 80  ]]; then echo "$dis_80"  "$COL_80"
-    elif [[ $pct -ge 70  ]]; then echo "$dis_70"  "$COL_70"
-    elif [[ $pct -ge 60  ]]; then echo "$dis_60"  "$COL_60"
-    elif [[ $pct -ge 50  ]]; then echo "$dis_50"  "$COL_50"
-    elif [[ $pct -ge 40  ]]; then echo "$dis_40"  "$COL_40"
-    elif [[ $pct -ge 30  ]]; then echo "$dis_30"  "$COL_30"
-    elif [[ $pct -ge 20  ]]; then echo "$dis_20"  "$COL_20"
-    elif [[ $pct -ge 10  ]]; then echo "$dis_10"  "$COL_10"
-    else                            echo "$dis_0"   "$COL_0"
+    if   [[ $pct -ge 100 ]]; then echo "$dis_100"
+    elif [[ $pct -ge 90  ]]; then echo "$dis_90" 
+    elif [[ $pct -ge 80  ]]; then echo "$dis_80" 
+    elif [[ $pct -ge 70  ]]; then echo "$dis_70" 
+    elif [[ $pct -ge 60  ]]; then echo "$dis_60" 
+    elif [[ $pct -ge 50  ]]; then echo "$dis_50" 
+    elif [[ $pct -ge 40  ]]; then echo "$dis_40" 
+    elif [[ $pct -ge 30  ]]; then echo "$dis_30" 
+    elif [[ $pct -ge 20  ]]; then echo "$dis_20" 
+    elif [[ $pct -ge 10  ]]; then echo "$dis_10" 
+    else                            echo "$dis_0"
     fi
 }
 
@@ -132,6 +126,4 @@ fi
 
 # i3blocks: full_text / short_text / color
 echo "$icon $BAT"
-echo ""
-echo "$color"
 

@@ -61,14 +61,11 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-i", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *incvol[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL};
-static const char *decvol[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL};
-static const char *mutevol[] = {"pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL};
 static Keychord *keychords[] = {
        /* Keys        function        argument */
-	&((Keychord){1, {{0,XF86XK_AudioRaiseVolume}}, spawn, {.v = incvol}}),
-	&((Keychord){1, {{0,XF86XK_AudioLowerVolume}}, spawn, {.v = decvol}}),
-	&((Keychord){1, {{0,XF86XK_AudioMute       }}, spawn, {.v = mutevol}}),
+	&((Keychord){1, {{0,XF86XK_AudioRaiseVolume}}, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+24 dwmblocks")}),
+	&((Keychord){1, {{0,XF86XK_AudioLowerVolume}}, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+24 dwmblocks")}),
+	&((Keychord){1, {{0,XF86XK_AudioMute       }}, spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+24 dwmblocks")}),
        &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_Return}},                        spawn,          {.v = termcmd } }),
        &((Keychord){2, {{MODKEY, XK_e}, {MODKEY, XK_e}},                       spawn,          {.v = termcmd } }),
