@@ -93,6 +93,7 @@ static Keychord *keychords[] = {
        &((Keychord){1, {{MODKEY|ShiftMask, XK_period}},                        tagmon,         {.i = +1 } }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_q}},                             quit,           {0} }),
        &((Keychord){1, {{MODKEY|ControlMask|ShiftMask, XK_q}},                             quit,           {1} }),
+       &((Keychord){1, {{MODKEY|ShiftMask, XK_t}}, spawn, SHCMD("~/.scripts/todo-dmenu")}),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_b}}, spawn, SHCMD("zen")}),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_t}}, spawn, SHCMD("kitty")}),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_f}}, spawn, SHCMD("dolphin")}),
