@@ -103,6 +103,8 @@ static Keychord *keychords[] = {
        &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_t}}, spawn, SHCMD("kitty")}),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_f}}, spawn, SHCMD("dolphin")}),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_e}}, spawn, SHCMD("thunderbird")}),
+       &((Keychord){1, {{0, XK_Print}}, spawn, SHCMD("flameshot gui")}),
+       &((Keychord){1, {{ShiftMask, XK_Print}}, spawn, SHCMD("flameshot full")}),
 	   TAGKEYS(                        XK_1,                      0)
 	   TAGKEYS(                        XK_2,                      1)
 	   TAGKEYS(                        XK_3,                      2)

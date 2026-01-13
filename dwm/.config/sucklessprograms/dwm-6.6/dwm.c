@@ -2639,6 +2639,9 @@ main(int argc, char *argv[])
 		die("pledge");
 #endif /* __OpenBSD__ */
 	scan();
+  if (fork()==0) {
+    execl("/bin/sh", "sh", "-c", "aw-qt >/dev/null 2>&1 </dev/null &", (char *)NULL);
+  }
 	run();
 	if(restart) execvp(argv[0], argv);
 	cleanup();
