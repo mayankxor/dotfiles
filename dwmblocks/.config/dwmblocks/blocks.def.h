@@ -2,10 +2,11 @@
 static const Block blocks[] = {
 	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
 	{"Mem:", "free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g",	30,		0},
-	{"", "date +%R",					60,		0},
+	{"", "~/.config/dwmblocks/time.sh",					1,		12},
 	{"", "~/.config/dwmblocks/wifi.sh", 5, 0},
 	{"", "~/.config/dwmblocks/volume.sh", 0, 24},
 	{"","~/.config/dwmblocks/battery.sh", 10,0},
+	{"","~/.config/dwmblocks/some.sh", 1, 0},
 };
 
 //sets delimiter between status commands. NULL character ('\0') means no delimiter.

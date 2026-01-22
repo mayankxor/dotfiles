@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rm blocks.h
+rm -f blocks.h
 make
 sudo make install
 kill -9 $(pgrep dwmblocks)
