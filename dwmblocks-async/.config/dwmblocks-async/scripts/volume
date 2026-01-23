@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+case $BLOCK_BUTTON in
+	1) pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+7 dwmblocks;;
+	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/volume";;
+	3) st -e sh -c "pulsemixer";;
+esac
+# Read mute status
+MUTED=$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')
+
+# Read current volume
+VOLUME=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')
+VOLUME="${VOLUME//%/}" # strip "%"
+VOLUME="${VOLUME//[^0-9]/}" # Convert string to int
+
+# Output volume level(muted icon incase muted)
+if [[ "$MUTED" = "yes" ]]; then
+  ICON=" "
+elif [[ "$VOLUME" -le 5 ]]; then
+  ICON=" "
+elif [[ "$VOLUME" -le 30 ]]; then
+  ICON=" "
+else
+  ICON=" "
+fi
+echo "$ICON$VOLUME"

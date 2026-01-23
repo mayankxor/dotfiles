@@ -21,14 +21,14 @@
     X("", "/home/xor/.config/dwmblocks-async/scripts/time", 1, 4)  \
     X("", "/home/xor/.config/dwmblocks-async/scripts/memory", 30, 5) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/battery", 10, 6) \
-    X("", "/home/xor/.config/dwmblocks-async/scripts/volume", 30, 7) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/volume", 0, 7) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/wifi", 30, 8) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/bluetooth", 10, 9) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/weather", 30, 10) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/disc", 30, 11) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/music", 30, 12) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/email", 30, 13) \
-    X("", "/home/xor/.config/dwmblocks-async/scripts/clipmenu", 30, 14) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/clipmenu", 0, 14) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/todolist", 30, 15) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/uptime", 30, 16) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/temp", 30, 17) \

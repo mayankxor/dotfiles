@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+echo "󰆒"
+case $BLOCK_BUTTON in 
+	1) clipmenu;;
+	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/clipmenu";;
+esac

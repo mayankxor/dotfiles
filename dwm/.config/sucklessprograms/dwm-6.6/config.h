@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#define TERMINAL kitty
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -69,9 +70,9 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static Keychord *keychords[] = {
        /* Keys        function        argument */
-	&((Keychord){1, {{0,XF86XK_AudioRaiseVolume}}, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+24 dwmblocks")}),
-	&((Keychord){1, {{0,XF86XK_AudioLowerVolume}}, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+24 dwmblocks")}),
-	&((Keychord){1, {{0,XF86XK_AudioMute       }}, spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+24 dwmblocks")}),
+	&((Keychord){1, {{0,XF86XK_AudioRaiseVolume}}, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+7 dwmblocks")}),
+	&((Keychord){1, {{0,XF86XK_AudioLowerVolume}}, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+7 dwmblocks")}),
+	&((Keychord){1, {{0,XF86XK_AudioMute       }}, spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+7 dwmblocks")}),
        &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_Return}},                        spawn,          {.v = termcmd } }),
        &((Keychord){2, {{MODKEY, XK_e}, {MODKEY, XK_e}},                       spawn,          {.v = termcmd } }),
