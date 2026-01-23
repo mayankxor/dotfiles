@@ -18,15 +18,22 @@
 
 // Define blocks for the status feed as X(icon, cmd, interval, signal).
 #define BLOCKS(X)             \
-    X("", "sb-mail", 600, 1)  \
-    X("", "sb-music", 0, 2)   \
-    X("", "sb-disk", 1800, 3) \
-    X("", "sb-memory", 10, 4) \
-    X("", "sb-loadavg", 5, 5) \
-    X("", "sb-mic", 0, 6)     \
-    X("", "sb-record", 0, 7)  \
-    X("", "sb-volume", 0, 8)  \
-    X("", "sb-battery", 5, 9) \
-    X("", "sb-date", 1, 10)
+    X("", "/home/xor/.config/dwmblocks-async/scripts/time", 1, 4)  \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/memory", 30, 5) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/battery", 10, 6) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/volume", 30, 7) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/wifi", 30, 8) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/bluetooth", 10, 9) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/weather", 30, 10) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/disc", 30, 11) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/music", 30, 12) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/email", 30, 13) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/clipmenu", 30, 14) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/todolist", 30, 15) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/uptime", 30, 16) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/temp", 30, 17) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/packagestoupdate", 30, 18) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/moonphases", 30, 19) \
+
 
 #endif  // CONFIG_H

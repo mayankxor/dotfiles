@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+time=$(date +%T)
+echo "$time"
+fulltime="$(date)"
+case $BLOCK_BUTTON in 
+	1) notify-send "$fulltime";;
+	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/time";;
+esac

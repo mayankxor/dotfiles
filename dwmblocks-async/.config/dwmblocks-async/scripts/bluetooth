@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+if ! bluetoothctl show >/dev/null 2>&1; then
+    echo "󰂲"
+    exit 0
+fi
+
+mac=$(bluetoothctl devices Connected 2>/dev/null | awk 'NR==1 {print $2}')
+
+if [[ -n "$mac" ]]; then
+    info=$(bluetoothctl info "$mac" 2>/dev/null)
+    name=$(echo "$info" | grep "Name:" | cut -d' ' -f2-)
+    
+    # FIXED: Better battery extraction
+    battery_line=$(echo "$info" | grep "Battery Percentage:")
+    
+    if [[ -n "$battery_line" ]]; then
+        # Extract the number in parentheses: (70)
+        battery=$(echo "$battery_line" | grep -o '([0-9]\+)' | tr -d '()')
+        
+        # Alternative: extract hex and convert (0x46 → 70)
+        # battery_hex=$(echo "$battery_line" | grep -o '0x[0-9a-fA-F]\+')
+        # battery=$((16#${battery_hex#0x}))  # Convert hex to decimal
+        
+        if [[ -n "$battery" ]] && [[ "$battery" =~ ^[0-9]+$ ]]; then
+            [[ ${#name} -gt 12 ]] && name="${name:0:10}..."
+	    echo "󰂱 $name ($battery%)"
+        else
+            [[ ${#name} -gt 12 ]] && name="${name:0:10}..."
+            echo "󰂱 $name"
+        fi
+    else
+        [[ ${#name} -gt 12 ]] && name="${name:0:10}..."
+        echo "󰂱 $name"
+    fi
+else
+    echo "󰂯"
+fi
+case $BLOCK_BUTTON in 
+	1) notify-send "$info";;
+	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/bluetooth";;
+	3) blueman-manager;;
+esac
