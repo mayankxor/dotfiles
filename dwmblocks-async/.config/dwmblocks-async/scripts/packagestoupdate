@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+dpkg=$(apt list --upgradable 2>/dev/null | grep -c upgradable)
+snap=$(snap refresh --list 2>/dev/null | grep -v "^Name\|^All\|^-" | wc -l)
+brew=$(brew outdated | wc -l)
+echo "󰏗 $(($snap+$brew+$dpkg))"
+case $BLOCK_BUTTON in
+	1) notify-send "dpkg: $dpkg\nSnap: $snap\nHomebrew: $brew";;
+	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/packagestoupdate";;
+esac

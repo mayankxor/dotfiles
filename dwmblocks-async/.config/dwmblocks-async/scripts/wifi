@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+toggle() {
+    if nmcli radio wifi | grep -q "enabled"; then
+        nmcli radio wifi off
+    else
+        nmcli radio wifi on
+    fi
+    pkill -RTMIN+8 dwmblocks
+}
+case "$BLOCK_BUTTON" in
+    1) toggle ;;
+    2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/wifi" ;;
+    3) st -e sh -c "nmtui-connect; sleep 1; pkill -RMIN+8 dwmblocks" ;;
+esac
+# Use the first WiFi interface found, or fall back
+WIFI_INTERFACE=$(nmcli -t -f DEVICE,TYPE device status | awk -F: '$2 == "wifi" {print $1; exit}')
+if [[ -z "$WIFI_INTERFACE" ]]; then
+    echo "󰤮"
+    exit 0
+fi
+
+# Check if WiFi is enabled
+if nmcli radio wifi | grep -q "enabled"; then
+    CONNECTION=$(nmcli -t -f GENERAL.CONNECTION dev show "$WIFI_INTERFACE" 2>/dev/null | cut -d: -f2-)
+    
+    if [[ -n "$CONNECTION" ]]; then
+        SIGNAL=$(nmcli -t -f IN-USE,SIGNAL dev wifi list 2>/dev/null | grep '^\*' | cut -d: -f2)
+        
+        # Handle case where no active connection is found
+        if [[ -z "$SIGNAL" ]]; then
+            echo "󰤯"
+            exit 0
+        fi
+        
+        if [[ $SIGNAL -ge 75 ]]; then
+            ICON="󰤨"
+        elif [[ $SIGNAL -ge 50 ]]; then
+            ICON="󰤥"
+        elif [[ $SIGNAL -ge 25 ]]; then
+            ICON="󰤢"
+        elif [[ $SIGNAL -ge 0 ]]; then
+            ICON="󰤟"
+        else
+            ICON="󰤯"
+        fi
+        echo "$ICON $CONNECTION"
+    else
+        echo "󰤯"  # WiFi on but not connected
+    fi
+else
+    echo "󰤮"
+fi
+
+

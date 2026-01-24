@@ -5,18 +5,19 @@
 # - When charging, the color is always green
 # - Proper 3-line i3blocks output (full_text / short_text / color)
 # - Handles "Full" and "No battery" cases
-
+case $BLOCK_BUTTON in
+	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/battery";;
+esac
 ACPI_LINE=$(acpi -b 2>/dev/null | head -n1)
+isempty(){
+	[[ -z "${1//[[:space:]]/}" ]]
+}
 
-if [[ -z "$ACPI_LINE" ]]; then
-    echo "󰂑"
-fi
+isempty "$ACPI_LINE" && { echo "󰂑"; exit 0;} # If ACPILINE is empty
 
 # Percentage (e.g. "42%")
 BAT=$(echo "$ACPI_LINE" | grep -o '[0-9]\+%')
-if [[ -z "$BAT" ]]; then
-    echo "󰂑"
-fi
+isempty "$BAT" && { echo "󰂑"; exit 0; }
 PCT=${BAT%?}    # numeric percentage
 
 # Status: Charging / Discharging / Full (remove trailing commas)
@@ -119,7 +120,6 @@ if [[ -n "$BLOCK_BUTTON" ]]; then
       gnome-power-statistics > /dev/null 2>&1 < /dev/null &
       ;;
   esac
-
 fi
 ## /HANDLE CLICKS HERE
 

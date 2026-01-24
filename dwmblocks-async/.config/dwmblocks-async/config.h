@@ -22,7 +22,7 @@
     X("", "/home/xor/.config/dwmblocks-async/scripts/memory", 30, 5) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/battery", 10, 6) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/volume", 0, 7) \
-    X("", "/home/xor/.config/dwmblocks-async/scripts/wifi", 30, 8) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/wifi", 10, 8) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/bluetooth", 10, 9) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/weather", 30, 10) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/disc", 30, 11) \
