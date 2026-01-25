@@ -5,7 +5,7 @@
 #define DELIMITER "  "
 
 // Maximum number of Unicode characters that a block can output.
-#define MAX_BLOCK_OUTPUT_LENGTH 45
+#define MAX_BLOCK_OUTPUT_LENGTH 20
 
 // Control whether blocks are clickable.
 #define CLICKABLE_BLOCKS 1
@@ -25,14 +25,14 @@
     X("", "/home/xor/.config/dwmblocks-async/scripts/wifi", 10, 8) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/bluetooth", 10, 9) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/weather", 30, 10) \
-    X("", "/home/xor/.config/dwmblocks-async/scripts/disc", 30, 11) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/disc", 900, 11) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/music", 30, 12) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/email", 30, 13) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/clipmenu", 0, 14) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/todolist", 30, 15) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/uptime", 30, 16) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/temp", 30, 17) \
-    X("", "/home/xor/.config/dwmblocks-async/scripts/packagestoupdate", 30, 18) \
+    X("", "/home/xor/.config/dwmblocks-async/scripts/packagestoupdate", 3600, 18) \
     X("", "/home/xor/.config/dwmblocks-async/scripts/moonphases", 30, 19) \
 
 

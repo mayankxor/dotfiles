@@ -39,5 +39,5 @@ fi
 case $BLOCK_BUTTON in 
 	1) notify-send "$info";;
 	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/bluetooth";;
-	3) blueman-manager;;
+	3) st -e sh -c "bluetui; sleep 1; pkill -RTMIN+9 dwmblocks";;
 esac
