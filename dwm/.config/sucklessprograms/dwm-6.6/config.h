@@ -76,6 +76,11 @@ static Keychord *keychords[] = {
        &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_Return}},                        spawn,          {.v = termcmd } }),
        &((Keychord){2, {{MODKEY, XK_e}, {MODKEY, XK_e}},                       spawn,          {.v = termcmd } }),
+       &((Keychord){2, {{MODKEY|ShiftMask, XK_d}, {0, XK_h}},                       spawn,         SHCMD("dunstctl history-pop") }),
+       &((Keychord){2, {{MODKEY|ShiftMask, XK_d}, {0, XK_c}},                       spawn,         SHCMD("dunstctl close")}),
+       &((Keychord){2, {{MODKEY|ShiftMask, XK_d}, {0, XK_x}},                       spawn,         SHCMD("dunstctl close-all") }),
+       &((Keychord){2, {{MODKEY|ShiftMask, XK_d}, {0, XK_o}},                       spawn,         SHCMD("dunstctl context") }),
+       &((Keychord){2, {{MODKEY|ShiftMask, XK_d}, {0, XK_p}},                       spawn,         SHCMD("dunstctl set-paused toggle") }),
        &((Keychord){1, {{MODKEY, XK_b}},                                       togglebar,      {0} }),
        &((Keychord){1, {{MODKEY, XK_j}},                                       focusstack,     {.i = +1 } }),
        &((Keychord){1, {{MODKEY, XK_k}},                                       focusstack,     {.i = -1 } }),
@@ -106,8 +111,8 @@ static Keychord *keychords[] = {
        &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_f}}, spawn, SHCMD("dolphin")}),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_e}}, spawn, SHCMD("thunderbird")}),
        &((Keychord){1, {{0, XK_Print}}, spawn, SHCMD("flameshot gui --raw | xclip -selection clipboard -target image/png")}),
-       &((Keychord){1, {{ShiftMask, XK_Print}}, spawn, SHCMD("~/.scripts/useful/savescreenshot")}),
-       &((Keychord){1, {{MODKEY|ShiftMask, XK_x}},                             spawn,           SHCMD("~/.scripts/useful/dmenukill.sh") }),
+       &((Keychord){1, {{ShiftMask, XK_Print}}, spawn, SHCMD("~/.scripts/savescreenshot")}),
+       &((Keychord){1, {{MODKEY|ShiftMask, XK_x}},                             spawn,           SHCMD("~/.scripts/dmenukill.sh") }),
 	   TAGKEYS(                        XK_1,                      0)
 	   TAGKEYS(                        XK_2,                      1)
 	   TAGKEYS(                        XK_3,                      2)
