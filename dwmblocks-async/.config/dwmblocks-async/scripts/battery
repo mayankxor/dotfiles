@@ -5,9 +5,6 @@
 # - When charging, the color is always green
 # - Proper 3-line i3blocks output (full_text / short_text / color)
 # - Handles "Full" and "No battery" cases
-case $BLOCK_BUTTON in
-	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/battery";;
-esac
 ACPI_LINE=$(acpi -b 2>/dev/null | head -n1)
 isempty(){
 	[[ -z "${1//[[:space:]]/}" ]]
