@@ -1,6 +1,7 @@
 return {
 	{
 		"s1n7ax/nvim-window-picker",
+		enabled = false,
 		name = "window-picker",
 		event = "VeryLazy",
 		version = "2.*",
@@ -536,6 +537,7 @@ return {
 	},
 	{
 		"stevearc/oil.nvim",
+		enabled = true,
 		lazy = false,
 		dependencies = {
 			{
@@ -764,6 +766,7 @@ return {
 	},
 	{
 		"echasnovski/mini.files",
+		enabled = false,
 		version = false,
 		config = function()
 			local set = vim.keymap.set

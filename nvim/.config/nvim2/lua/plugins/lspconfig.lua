@@ -133,6 +133,14 @@ return {
 				},
 				pyright = { capabilities = capabilities },
 				texlab = { capabilities = capabilities },
+				tinymist = {
+					capabilities = capabilities,
+					settings = {
+						formatterMode = "typstyle",
+						exportPdf = "never",
+						semanticTokens = "disable",
+					},
+				},
 			}
 			for name, opts in pairs(servers) do
 				opts.on_attach = on_attach

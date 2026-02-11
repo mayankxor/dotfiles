@@ -1,5 +1,5 @@
-vim.cmd("let g:netrw_banner=0")
-local opt=vim.opt
+vim.cmd("let g:netrw_banner=0") -- disable netrw banner
+local opt = vim.opt
 
 opt.nu = true -- enable line numbers
 opt.relativenumber = true -- enable relative line numbers

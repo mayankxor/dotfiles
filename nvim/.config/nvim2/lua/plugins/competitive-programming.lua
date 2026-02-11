@@ -1,6 +1,7 @@
 return {
 	{
 		"xeluxee/competitest.nvim",
+		enabled = false,
 		dependencies = {
 			"MunifTanmjim/nui.nvim",
 		},
@@ -10,6 +11,7 @@ return {
 	},
 	{
 		"kawre/leetcode.nvim",
+		enabled = false,
 		build = ":TSUpdate html",
 		branch = "disable-x-requested-with-header",
 		dependencies = {

@@ -2,5 +2,5 @@
 
 return {
 	"theprimeagen/harpoon",
-	enabled = true,
+	enabled = false,
 }
