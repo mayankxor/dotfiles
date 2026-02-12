@@ -1,17 +1,19 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 # Disk usage script - shows used/total(percentage)
 
 # Get disk info for root filesystem
-line=$(df -h / | tail -1)  # Get last line (the actual data)
+line=$(df -h /home | tail -n 1 )  # Get home directory (the actual data)
 full=$(df)
 
 # Extract values
-used=$(echo "$line" | awk '{print $3}' | sed 's/[A-Z]//g')
-total=$(echo "$line" | awk '{print $2}' | sed 's/[A-Z]//g')
+# used=$(echo "$line" | awk '{print $3}' | sed 's/[A-Z]//g')
+# total=$(echo "$line" | awk '{print $2}' | sed 's/[A-Z]//g')
 perc=$(echo "$line" | awk '{print $5}' | sed 's/%//')
+used=$(awk '{gsub(/[A-Z]/,"",$3); print $3}' <<< "$line")
+total=$(awk '{gsub(/[A-Z]/,"",$2); print $2}' <<< "$line")
 
 echo "$used/$total($perc%)"
 case $BLOCK_BUTTON in 
-	1) st -e bash -ic 'df -h; echo "Press Enter to close..."; read';;
-	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/disc";;
+	1) "$TERMINAL" -e sh -ic 'df -h; echo "Press Enter to close..."; read';;
+	2) "$TERMINAL" -e sh -c "vim ~/.config/dwmblocks-async/scripts/disc";;
 esac

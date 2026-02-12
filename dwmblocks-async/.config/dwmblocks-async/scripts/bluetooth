@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 if ! bluetoothctl show >/dev/null 2>&1; then
     echo "󰂲"
@@ -38,6 +38,6 @@ else
 fi
 case $BLOCK_BUTTON in 
 	1) notify-send "$info";;
-	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/bluetooth";;
-	3) st -e sh -c "bluetui; sleep 1; pkill -RTMIN+9 dwmblocks";;
+	2) "$TERMINAL" -e sh -c "vim ~/.config/dwmblocks-async/scripts/bluetooth";;
+	3) "$TERMINAL" -e sh -c "bluetoothctl; sleep 1; pkill -RTMIN+9 dwmblocks";;
 esac

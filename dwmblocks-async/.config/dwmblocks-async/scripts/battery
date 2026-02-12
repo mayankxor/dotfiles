@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 # i3blocks battery script:
 # - Icons vary by percentage
 # - Charging uses the matching "lightning" variant of the same icon
@@ -112,10 +112,8 @@ if [[ -n "$BLOCK_BUTTON" ]]; then
     1) # Left click
       notify-send "Battery Status" "Status: $STATUS, Level: $PCT%"
       ;;
-	2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/battery";;
-    3)
-      gnome-power-statistics > /dev/null 2>&1 < /dev/null &
-      ;;
+	2) "$TERMINAL" -e sh -c "vim ~/.config/dwmblocks-async/scripts/battery";;
+    3) "$TERMINAL" -e sh -c "watch -n 1 acpi -V";;
   esac
 fi
 ## /HANDLE CLICKS HERE

@@ -10,8 +10,8 @@ toggle() {
 }
 case "$BLOCK_BUTTON" in
     1) toggle ;;
-    2) st -e sh -c "vim ~/.config/dwmblocks-async/scripts/wifi" ;;
-    3) st -e sh -c "nmtui-connect; sleep 1; pkill -RMIN+8 dwmblocks" ;;
+    2) "$TERMINAL" -e sh -c "vim ~/.config/dwmblocks-async/scripts/wifi" ;;
+    3) "$TERMINAL" -e sh -c "nmtui-connect; sleep 1; pkill -RMIN+8 dwmblocks" ;;
 esac
 # Use the first WiFi interface found, or fall back
 WIFI_INTERFACE=$(nmcli -t -f DEVICE,TYPE device status | awk -F: '$2 == "wifi" {print $1; exit}')

@@ -1,1 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+case $BLOCK_BUTTON in 
+	1) "$TERMINAL" -e sh -ic 'free -h; echo "Press Enter to close..."; read';;
+	2) "$TERMINAL" -e sh -c "vim ~/.config/dwmblocks-async/scripts/memory";;
+esac
+freecmd=$(free -h | grep 'Mem')
+# total=$(echo $freecmd | awk '{print $2}'|sed 's/Gi//g')
+# used=$(echo $freecmd |awk '{print $3}' |sed 's/Gi//g')
+used=$(awk '{gsub(/[A-Z]i/,"",$3); print $3}' <<< "$freecmd")
+total=$(awk '{gsub(/[A-Z]i/,"",$2); print $2}' <<< "$freecmd")
+echo "Mem: $used/$total"
