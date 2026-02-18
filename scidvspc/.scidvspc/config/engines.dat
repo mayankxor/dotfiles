@@ -1,0 +1,38 @@
+# Analysis Engines configuration for Scid vs. PC 4.26
+
+engine {
+  Name Toga
+  Cmd  fruit
+  Args {}
+  Dir  /home/xor/.scidvspc
+  Elo  0
+  Time 1771401207
+  URL  {}
+  UCI  1
+  UCIoptions {}
+}
+
+engine {
+  Name Phalanx
+  Cmd  phalanx
+  Args {}
+  Dir  /home/xor/.scidvspc
+  Elo  0
+  Time 0
+  URL  {}
+  UCI  0
+  UCIoptions {}
+}
+
+engine {
+  Name Scidlet
+  Cmd  scidlet
+  Args {}
+  Dir  .
+  Elo  0
+  Time 0
+  URL  {}
+  UCI  0
+  UCIoptions {}
+}
+
