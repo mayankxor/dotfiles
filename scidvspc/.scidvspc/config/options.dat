@@ -3,7 +3,7 @@
 # If you edit this file, you must preserve valid its Tcl
 # format or it will not set your Scid options properly.
 
-set boardSize 60
+set boardSize 55
 set boardStyle Glass
 set language E
 set ::pgn::showColor 1
@@ -23,7 +23,7 @@ set ::pgn::symbolicNags 1
 set ::pgn::moveNumberSpaces 0
 set ::pgn::columnFormat 0
 set ::pgn::showScrollbar 1
-set myPlayerNames {}
+set myPlayerNames mayankxor
 set optionsAutoSave 1
 set ::tree::mask::recentMask {}
 set ::tree::mask::autoLoadMask 0
@@ -40,7 +40,8 @@ set ecoFile /usr/local/share/scid/data/scid.eco
 set suggestMoves 0
 set showVarPopup 0
 set showVarArrows 1
-set colorActiveSquare 0
+set showLegalMoveDots 1
+set colorActiveSquare 1
 set annotate(blunder) 1.0
 set annotate(addTag) 1
 set annotate(Moves) all
@@ -56,20 +57,20 @@ set annotate(WantedDepth) 13
 set annotate(Depth) 1
 set autoplayDelay 5000
 set animateDelay 200
-set boardCoords 0
+set boardCoords 1
 set boardSTM 1
-set moveEntry(AutoExpand) 0
+set moveEntry(AutoExpand) 1
 set moveEntry(Coord) 1
 set translatePieces 1
 set highlightLastMove 1
-set highlightLastMoveWidth 3
-set highlightLastMoveColor grey
+set highlightLastMoveWidth 2
+set highlightLastMoveColor {#d3343b}
 set askToReplaceMoves 1
 set ::windows::switcher::icons 1
 set ::windows::switcher::confirmCopy 1
 set locale(numeric) .,
 set spellCheckFile /usr/local/share/scid/spelling.ssp
-set ::splash::keepopen 1
+set ::splash::keepopen 0
 set autoRaise 1
 set autoIconify 1
 set windowsDock 1
@@ -93,15 +94,15 @@ set ::windows::gamelist::showButtons 1
 set ::windows::gamelist::customFont 0
 set ::windows::gamelist::currColor blue2
 set gameInfo(show) 1
-set gameInfo(photos) 0
-set gameInfo(wrap) 0
+set gameInfo(photos) 1
+set gameInfo(wrap) 1
 set gameInfo(showStatus) 1
-set gameInfo(fullComment) 0
+set gameInfo(fullComment) 1
 set gameInfo(showMarks) 1
 set gameInfo(showMenu) 1
 set gameInfo(showTool) 1
 set gameInfo(showMaterial) 1
-set gameInfo(showFEN) 0
+set gameInfo(showFEN) 1
 set gameInfo(showButtons) 1
 set gameInfo(showTB) 2
 set gameInfo(showEval) 1
@@ -122,8 +123,8 @@ set analysis(boardSeqNumColor) black
 set analysis(boardSeqCount) 3
 set scidBooksDir /usr/local/share/scid/books
 set scidBasesDir /usr/local/share/scid/bases
-set ::book::lastBook1 {}
-set ::book::lastBook2 {}
+set ::book::lastBook1 Elo2400.bin
+set ::book::lastBook2 Elo2400.bin
 set ::book::lastTuning {}
 set ::book::sortAlpha 0
 set ::book::showTwo 0
@@ -182,7 +183,7 @@ set ::commenteditor::State(markColor) yellow3
 set ::commenteditor::State(markType) full
 set boardfile_lite emptySquare
 set boardfile_dark emptySquare
-set ::file::finder::data(dir) /home/xor/tostore/openings
+set ::file::finder::data(dir) /home/xor/hobbies/chess/mine/games/lichess/blitz
 set ::file::finder::data(sort) name
 set ::file::finder::data(Scid) 1
 set ::file::finder::data(PGN) 1
@@ -198,7 +199,7 @@ set FilterMaxYear 2026
 set FilterMinYear 1995
 set FilterStepYear 1
 set FilterGuessELO 1
-set lookTheme default
+set lookTheme alt
 set autoResizeBoard 1
 set comp(timecontrol) pergame
 set comp(seconds) 180
@@ -226,11 +227,11 @@ set ::tools::graphs::rating::year 1900
 set maintFlag W
 set useGraphFigurine 0
 set photosMinimized 0
-set bookmarks(gamehistory) {{g {StaffordGambit:  ? - mayankxor, *,  ? 2026} /home/xor/tostore/openings/StaffordGambit 1 1 ? mayankxor 2026 ? ? *}}
+set bookmarks(gamehistory) {{g {blitz:  mayankxor - Gunner_02, 0-1,  https://lichess.org/XH6fsT8A (-) 2026} /home/xor/hobbies/chess/mine/games/lichess/blitz/blitz 1 1 mayankxor Gunner_02 2026 https://lichess.org/XH6fsT8A - 0-1} {g {blitz.pgn:  mayankxor - Gunner_02, 0-1,  https://lichess.org/XH6fsT8A (-) 2026} /home/xor/hobbies/chess/mine/games/lichess/blitz/blitz.pgn 1 1 mayankxor Gunner_02 2026 https://lichess.org/XH6fsT8A - 0-1} {g {StaffordGambit:  ? - mayankxor, *,  ? 2026} /home/xor/tostore/openings/StaffordGambit 1 1 ? mayankxor 2026 ? ? *}}
 set playerInfoHistory {}
 set defaultDBs {}
 set tbOnline Nalimov
-set glistSize 15
+set glistSize 7
 set glexport {g6: w13 W4  b13 B4  r3:m2 y4 s11 o4}
 set glistColOrder {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21}
 set glistColWidth {56 112 112 40 40 80 80 40 40 40 80 24 24 24 24 40 48 24 24 24 56 56}
@@ -248,8 +249,8 @@ set epdAnnotateMode 0
 set epdDelay 3
 set evalTime 200
 set evalScale 5
-set evalUseLog 0
-set evalTicks 0
+set evalUseLog 1
+set evalTicks 1
 
 set winWidth(.analysisWin0)  44
 set winHeight(.analysisWin0) 8
@@ -279,12 +280,16 @@ set winWidth(.pgnWin)  65
 set winHeight(.pgnWin) 20
 set winWidth(.playerInfoWin)  45
 set winHeight(.playerInfoWin) 20
+set winWidth(.plist)  168
+set winHeight(.plist) 33
 set winWidth(.spellcheckWin)  55
 set winHeight(.spellcheckWin) 25
-set winWidth(.statsWin)  60
-set winHeight(.statsWin) 13
+set winWidth(.statsWin)  1366
+set winHeight(.statsWin) 714
 set winWidth(.tacticsWin)  1366
 set winHeight(.tacticsWin) 748
+set winWidth(.tourney)  168
+set winHeight(.tourney) 31
 set winWidth(.treeWin)  58
 set winHeight(.treeWin) 20
 
@@ -292,8 +297,8 @@ set winX(.)  -1
 set winY(.)  -1
 set winX(.baseWin)  -1
 set winY(.baseWin)  -1
-set winX(.bdOptions)  412
-set winY(.bdOptions)  -37
+set winX(.bdOptions)  239
+set winY(.bdOptions)  -172
 set winX(.coachWin)  754
 set winY(.coachWin)  23
 set winX(.commentWin)  -1
@@ -326,12 +331,14 @@ set winX(.pgnWin)  -1
 set winY(.pgnWin)  -1
 set winX(.playerInfoWin)  -1
 set winY(.playerInfoWin)  -1
-set winX(.statsWin)  -1
-set winY(.statsWin)  -1
+set winX(.plist)  0
+set winY(.plist)  20
+set winX(.statsWin)  0
+set winY(.statsWin)  20
 set winX(.tacticsWin)  0
 set winY(.tacticsWin)  20
-set winX(.tourney)  -1
-set winY(.tourney)  -1
+set winX(.tourney)  0
+set winY(.tourney)  20
 set winX(.treeBest)  -1
 set winY(.treeBest)  -1
 set winX(.treeBest1)  -1
@@ -387,7 +394,7 @@ set engineLineColor black
 set whiteLineColor white
 set blackLineColor grey40
 set rowcolor lightsteelblue1
-set highlightcolor gray85
+set highlightcolor {#d8d9d9}
 set progcolor rosybrown
 set crosscolor grey80
 set scorecolor steelblue
@@ -435,29 +442,29 @@ set startup(tip) 0
 set startup(tree) 0
 set toolbar(bkm) 1
 set toolbar(book) 1
-set toolbar(bsearch) 0
-set toolbar(close) 0
-set toolbar(comment) 0
-set toolbar(copy) 0
+set toolbar(bsearch) 1
+set toolbar(close) 1
+set toolbar(comment) 1
+set toolbar(copy) 1
 set toolbar(crosst) 1
-set toolbar(eco) 0
+set toolbar(eco) 1
 set toolbar(engine) 1
-set toolbar(finder) 0
+set toolbar(finder) 1
 set toolbar(gfirst) 1
 set toolbar(ginfo) 1
 set toolbar(glast) 1
 set toolbar(glist) 1
 set toolbar(gnext) 1
 set toolbar(gprev) 1
-set toolbar(hsearch) 0
+set toolbar(hsearch) 1
 set toolbar(maint) 1
-set toolbar(msearch) 0
-set toolbar(new) 0
-set toolbar(newgame) 0
-set toolbar(open) 0
-set toolbar(paste) 0
+set toolbar(msearch) 1
+set toolbar(new) 1
+set toolbar(newgame) 1
+set toolbar(open) 1
+set toolbar(paste) 1
 set toolbar(pgn) 1
-set toolbar(rfilter) 0
+set toolbar(rfilter) 1
 set toolbar(save) 1
 set toolbar(tmt) 1
 set toolbar(tree) 1
@@ -495,7 +502,7 @@ set fontOptions(Menu) {{Noto Sans} 10 normal roman}
 set fontOptions(Small) {{Noto Sans} 10 normal roman}
 set fontOptions(Tiny) {{Noto Sans} 8 normal roman}
 set fontOptions(Fixed) {{Noto Sans} 11 normal roman}
-set initialDir(base) /home/xor/tostore/openings
+set initialDir(base) /home/xor/hobbies/chess/mine/games/lichess/blitz
 set initialDir(book) /home/xor
 set initialDir(html) /home/xor
 set initialDir(tex) /home/xor
@@ -503,7 +510,7 @@ set initialDir(epd) /home/xor
 set initialDir(stm) /home/xor
 set initialDir(sso) /home/xor
 set initialDir(sff) /home/xor
-set initialDir(pgn) /home/xor
+set initialDir(pgn) /home/xor/hobbies/chess/mine/games/lichess/blitz
 set initialDir(report) /home/xor
 set initialDir(tablebase1) {}
 set initialDir(tablebase2) {}
@@ -611,7 +618,7 @@ set ::fics::user_commands {
 	{::fics::writechan "abort"}
       }
 set ::fics::showEval 1
-set ::docking::layout_list(1) {{MainWindowGeometry 834x640+80+50} {{.pw vertical {}} {TPanedwindow {{.pw.pw0 horizontal 564} {TNotebook .nb .fdockmain} {TNotebook .tb1 .fdockpgnWin}}}}}
+set ::docking::layout_list(1) {{MainWindowGeometry 1366x714+0+20} {{.pw vertical {}} {TPanedwindow {{.pw.pw0 horizontal 924} {TNotebook .nb {.fdockmain .fdockcrosstabWin .fdocktbWin .fdockbookWin}} {TPanedwindow {{.pw.pw0.pw2 vertical 410} {TNotebook .tb1 {.fdockpgnWin .fdockcommentWin}} {TNotebook .tb3 {.fdockglistWin .fdocktreeWin1}}}}}}}}
 set ::docking::layout_list(2) {{MainWindowGeometry 1311x716+65+36} {{.pw vertical {}} {TPanedwindow {{.pw.pw0 horizontal 570} {TNotebook .nb .fdockmain} {TPanedwindow {{.pw.pw0.pw2 vertical 261} {TPanedwindow {{.pw.pw0.pw2.pw9 horizontal 235} {TNotebook .tb32 .fdockpgnWin} {TPanedwindow {{.pw.pw0.pw2.pw9.pw30 vertical {}} {TNotebook .tb1 {.fdockplayerInfoWin .fdockcommentWin}}}}}} {TPanedwindow {{.pw.pw0.pw2.pw3 horizontal {}} {TNotebook .tb8 {.fdockglistWin .fdockcrosstabWin}}}}}}}}}}
 set ::docking::layout_list(3) {{MainWindowGeometry 968x666+80+50} {{.pw vertical {}} {TPanedwindow {{.pw.pw0 horizontal 566} {TNotebook .nb .fdockmain} {TPanedwindow {{.pw.pw0.pw2 vertical 363} {TNotebook .tb1 {.fdockanalysisWin1 .fdockpgnWin}} {TNotebook .tb3 {.fdocktreeWin1 .fdocktreeBest1}}}}}}}}
 set ::docking::layout_list(4) {{MainWindowGeometry 1449x817+76+30} {{.pw vertical {}} {TPanedwindow {{.pw.pw0 horizontal 747} {TNotebook .nb .fdockmain} {TPanedwindow {{.pw.pw0.pw2 vertical {}} {TPanedwindow {{.pw.pw0.pw2.pw3 horizontal {}} {TPanedwindow {{.pw.pw0.pw2.pw3.pw35 vertical 378} {TPanedwindow {{.pw.pw0.pw2.pw3.pw35.pw38 horizontal 347} {TNotebook .tb36 {.fdockpgnWin .fdockcommentWin}} {TNotebook .tb39 {.fdockanalysisWin0 .fdockplayerInfoWin .fdocktreeWin1}}}} {TNotebook .tb8 {.fdockglistWin .fdocksgraph .fdockcrosstabWin}}}}}}}}}}}}
