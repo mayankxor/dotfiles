@@ -178,8 +178,8 @@ set ::sergame::current 0
 set ::sergame::chosenOpening 0
 set ::sergame::isOpening 0
 set ::commenteditor::showBoard 0
-set ::commenteditor::State(markColor) skyBlue
-set ::commenteditor::State(markType) circle
+set ::commenteditor::State(markColor) yellow3
+set ::commenteditor::State(markType) full
 set boardfile_lite emptySquare
 set boardfile_dark emptySquare
 set ::file::finder::data(dir) /home/xor/tostore/openings
@@ -238,7 +238,7 @@ set glistColAnchor {e w w e e w w e e e w e e e e e w e e e w e}
 set addRatings(overwrite) 0
 set addRatings(filter) 1
 set ::board::arrowWidth 7
-set ::board::arrowLength 0.6
+set ::board::arrowLength 0.1
 set ::board::enableMPVTls 0
 set blistColOrder {0 1 2 3 4 5 6 7 8 9 10 11 12 13}
 set blistColWidth {56 112 112 40 40 80 80 40 40 40 80 24 56 48}
@@ -263,6 +263,8 @@ set winWidth(.coachWin)  605
 set winHeight(.coachWin) 738
 set winWidth(.commentWin)  40
 set winHeight(.commentWin) 6
+set winWidth(.configTactics)  1366
+set winHeight(.configTactics) 748
 set winWidth(.configWin)  1366
 set winHeight(.configWin) 748
 set winWidth(.crosstabWin)  75
@@ -281,6 +283,8 @@ set winWidth(.spellcheckWin)  55
 set winHeight(.spellcheckWin) 25
 set winWidth(.statsWin)  60
 set winHeight(.statsWin) 13
+set winWidth(.tacticsWin)  1366
+set winHeight(.tacticsWin) 748
 set winWidth(.treeWin)  58
 set winHeight(.treeWin) 20
 
@@ -294,6 +298,8 @@ set winX(.coachWin)  754
 set winY(.coachWin)  23
 set winX(.commentWin)  -1
 set winY(.commentWin)  -1
+set winX(.configTactics)  0
+set winY(.configTactics)  20
 set winX(.configWin)  0
 set winY(.configWin)  20
 set winX(.crosstabWin)  -1
@@ -322,6 +328,8 @@ set winX(.playerInfoWin)  -1
 set winY(.playerInfoWin)  -1
 set winX(.statsWin)  -1
 set winY(.statsWin)  -1
+set winX(.tacticsWin)  0
+set winY(.tacticsWin)  20
 set winX(.tourney)  -1
 set winY(.tourney)  -1
 set winX(.treeBest)  -1
