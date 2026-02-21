@@ -1,7 +1,5 @@
 local options = { noremap = true, silent = true }
 local set = vim.keymap.set
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- TODO:
 -- Figure out how to strip away the extension and make it dynamic
