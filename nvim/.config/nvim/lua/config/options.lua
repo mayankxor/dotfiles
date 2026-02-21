@@ -1,9 +1,11 @@
 vim.cmd("let g:netrw_banner=0")
 local opt=vim.opt
 
+opt.shortmess:append("I")
 opt.nu = true -- enable line numbers
 opt.relativenumber = true -- enable relative line numbers
 
+opt.showcmdloc="statusline"
 opt.tabstop = 2 -- 1 <TAB> = 2 spaces(visually)
 opt.softtabstop = 2
 opt.shiftwidth = 2 -- 2 spaces as autoindent
@@ -24,7 +26,7 @@ opt.smartcase = true -- dont ignore cases when searching string contains atleast
 opt.termguicolors = true -- use 24 BIT colors
 opt.background = "dark" -- NEVER USE LIGHT
 opt.scrolloff = 3 -- while scrolling, keep a 3 lines padding
-opt.signcolumn = "yes" -- show extra column for diagnostics at all times
+opt.signcolumn = "yes" -- show extra column for diagnostics when: no=never, auto=when there's something to show, yes=always
 
 opt.backspace = { "indent", "eol", "start" } -- allows backspace to delete content in indent, beyond line and beyond the position insert mode was activated from
 
@@ -99,3 +101,5 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon0-TermCursor"
+opt.statusline = "%t%m%r%w%y%q buf=%n (%l:%c/%L)%p%% %S%a"
+opt.cmdheight=0
