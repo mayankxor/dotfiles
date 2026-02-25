@@ -9,6 +9,10 @@ set("n", "<M-j>", "<C-w><C-j>")
 set("n", "<M-k>", "<C-w><C-k>")
 set("n", "<M-l>", "<C-w><C-l>")
 
+set('n', "<M-Tab>", ":bnext<CR>")
+set('n', "<leader>bd", ":bdelete<CR>")
+set('n', "<leader>ex", ":Explore<CR>")
+
 set("n", "<M-Left>", "<C-w>5<")
 set("n", "<M-right>", "<C-w>5>")
 set("n", "<M-up>", "<C-w>+")
