@@ -13,6 +13,7 @@ return {
             border="none",
             side_padding=0,
             padding=0,
+            max_height=10,
           },
         },
         mapping = cmp.mapping.preset.insert({
@@ -20,7 +21,7 @@ return {
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          ['<Tab>'] = cmp.mapping.confirm({ select = true }),
     }),
         sources = {
           {name="nvim_lsp"},
