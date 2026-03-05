@@ -66,15 +66,13 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
 static Keychord *keychords[] = {
        /* Keys        function        argument */
 	&((Keychord){1, {{0,XF86XK_AudioRaiseVolume}}, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+7 dwmblocks")}),
 	&((Keychord){1, {{0,XF86XK_AudioLowerVolume}}, spawn, SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+7 dwmblocks")}),
 	&((Keychord){1, {{0,XF86XK_AudioMute       }}, spawn, SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+7 dwmblocks")}),
        &((Keychord){1, {{MODKEY, XK_p}},                                       spawn,          {.v = dmenucmd } }),
-       &((Keychord){1, {{MODKEY|ShiftMask, XK_Return}},                        spawn,          {.v = termcmd } }),
-       &((Keychord){2, {{MODKEY, XK_e}, {MODKEY, XK_e}},                       spawn,          {.v = termcmd } }),
+       &((Keychord){1, {{MODKEY|ShiftMask, XK_Return}},                        spawn,          SHCMD("$TERMINAL") }),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_d}, {0, XK_h}},                       spawn,         SHCMD("dunstctl history-pop") }),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_d}, {0, XK_c}},                       spawn,         SHCMD("dunstctl close")}),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_d}, {0, XK_x}},                       spawn,         SHCMD("dunstctl close-all") }),
@@ -94,7 +92,7 @@ static Keychord *keychords[] = {
        &((Keychord){1, {{MODKEY, XK_f}},                                       setlayout,      {.v = &layouts[1]} }),
        &((Keychord){1, {{MODKEY, XK_m}},                                       setlayout,      {.v = &layouts[2]} }),
        &((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
-       &((Keychord){1, {{MODKEY|ShiftMask, XK_w}},                                   spawn,      SHCMD("feh --no-fehbg --bg-fill --randomize --recursive ~/Pictures/Wallpapers/walls/") }),
+       // &((Keychord){1, {{MODKEY|ShiftMask, XK_w}},                                   spawn,      SHCMD("feh --no-fehbg --bg-fill --randomize --recursive ~/Pictures/Wallpapers/walls/") }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_space}},                         togglefloating, {0} }),
        &((Keychord){1, {{MODKEY, XK_0}},                                       view,           {.ui = ~0 } }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_0}},                             tag,            {.ui = ~0 } }),
@@ -105,11 +103,11 @@ static Keychord *keychords[] = {
        &((Keychord){1, {{MODKEY|ShiftMask, XK_q}},                             quit,           {0} }),
        &((Keychord){1, {{MODKEY|ControlMask|ShiftMask, XK_q}},                             quit,           {1} }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_t}}, spawn, SHCMD("~/.scripts/todo-dmenu")}),
-       &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_b}}, spawn, SHCMD("zen")}),
-       &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_t}}, spawn, SHCMD("kitty")}),
-       &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_f}}, spawn, SHCMD("dolphin")}),
+       &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_b}}, spawn, SHCMD("$BROWSER")}),
+       &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_t}}, spawn, SHCMD("$TERMINAL")}),
+       &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_f}}, spawn, SHCMD("$TERMINAL -e $EXPLORER")}),
        &((Keychord){2, {{MODKEY|ShiftMask, XK_o}, {0, XK_e}}, spawn, SHCMD("thunderbird")}),
-       &((Keychord){1, {{0, XK_Print}}, spawn, SHCMD("flameshot gui --raw | xclip -selection clipboard -target image/png")}),
+       &((Keychord){1, {{0, XK_Print}}, spawn, SHCMD("~/.scripts/takescreenshot")}),
        &((Keychord){1, {{ShiftMask, XK_Print}}, spawn, SHCMD("~/.scripts/savescreenshot")}),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_x}},                             spawn,           SHCMD("~/.scripts/dmenukill.sh") }),
 	   TAGKEYS(                        XK_1,                      0)
