@@ -92,7 +92,7 @@ static Keychord *keychords[] = {
        &((Keychord){1, {{MODKEY, XK_f}},                                       setlayout,      {.v = &layouts[1]} }),
        &((Keychord){1, {{MODKEY, XK_m}},                                       setlayout,      {.v = &layouts[2]} }),
        &((Keychord){1, {{MODKEY, XK_space}},                                   setlayout,      {0} }),
-       // &((Keychord){1, {{MODKEY|ShiftMask, XK_w}},                                   spawn,      SHCMD("feh --no-fehbg --bg-fill --randomize --recursive ~/Pictures/Wallpapers/walls/") }),
+       &((Keychord){1, {{MODKEY|ShiftMask, XK_w}},                                   spawn,      SHCMD("feh --no-fehbg --bg-fill --randomize --recursive ~/Pictures/walls") }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_space}},                         togglefloating, {0} }),
        &((Keychord){1, {{MODKEY, XK_0}},                                       view,           {.ui = ~0 } }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_0}},                             tag,            {.ui = ~0 } }),
