@@ -53,4 +53,4 @@ set timeout
 set timeoutlen=1000
 set notitle
 syntax on
-colorscheme catppuccin
+colorscheme industry
