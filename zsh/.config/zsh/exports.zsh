@@ -5,7 +5,11 @@ export MANPAGER="sh -c 'col -bx | /usr/bin/bat --language=man -p'"
 export MANROFFOPT="-c"
 export MPD_HOST="localhost"
 export MPD_PORT="6600"
-export TERMINAL="alacritty"
+export TERMINAL="st"
 export EXPLORER="yazi"
 export EDITOR="nvim"
-export PATH="/home/xor/installedApps/bin:$PATH"
+export PATH="/home/xor/installedApps/bin:/home/xor/.scripts/:$PATH"
+export _ZO_DATA_DIR="$HOME/.archive/zoxide/data"
+export _ZO_ECHO=0
+export _ZO_EXCLUDE_DIRS=""
+

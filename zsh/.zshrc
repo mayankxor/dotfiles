@@ -7,7 +7,7 @@ fi
 # Load Powerlevel10k theme
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
-autoload -Uz compinit && compinit
+autoload -Uz +X compinit && compinit
 
 source ~/.config/zsh/alias.zsh
 source ~/.config/zsh/autostart.zsh
@@ -19,6 +19,9 @@ source ~/.config/zsh/secrets.zsh
 source ~/.config/zsh/style.zsh
 source ~/.config/zsh/locale.zsh
 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu select
+
 # Load P10K config
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
@@ -28,6 +31,7 @@ HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
+eval "$(zoxide init zsh --cmd cd --hook pwd )"
 
-colorscript --random 
+#colorscript --random 
 

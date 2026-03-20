@@ -1,6 +1,7 @@
 alias ls="ls --color=auto"
 alias l="ls --color=auto -l"
 alias la="ls --color=auto -l --all"
+alias cd..="cd .."
 alias nohup=nohupx
 
 bat_alias() {
