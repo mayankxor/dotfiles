@@ -1,4 +1,4 @@
 #/usr/bin/env bash
 
 rm -f config.h
-sudo make install
+sudo make clean install
