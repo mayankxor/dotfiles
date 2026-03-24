@@ -24,7 +24,7 @@ zstyle ':completion:*' menu select
 
 # Load P10K config
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
+export _JAVA_AWT_WM_NONREPARENTING=1
 # ----
 source <(fzf --zsh)
 HISTSIZE=10000
