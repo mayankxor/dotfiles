@@ -2,4 +2,4 @@
 
 rm -f config.h
 sudo make clean install
-rm *.o
+rm *.o *.orig -f
