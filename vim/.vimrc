@@ -13,6 +13,7 @@ set clipboard=unnamedplus
 hi StatusLine ctermbg=white ctermfg=black
 hi StatusLineNC ctermbg=darkgrey ctermfg=black
 set laststatus=2
+nnoremap <leader>co :!timeout 6s g++ main.cpp && ./a.out < inputf.in > outputf.in<CR>
 set statusline=%t%m%r%=buf=%n\ ft=%{&ft}\ %l/%L:%c(%P)\ bo=%o\ format=%{&ff}\ enc=%{&fenc}
 
 set incsearch
