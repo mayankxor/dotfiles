@@ -19,4 +19,4 @@ static const char * message = "";
 static const char * text_color = "#ffffff";
 
 /* text size (must be a valid size) */
-static const char * font_name = "7x13";
+static const char * font_name = "-misc-fixed-medium-r-semicondensed--0-0-75-75-c-0-iso8859-1";
