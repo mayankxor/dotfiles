@@ -110,6 +110,12 @@ static Keychord *keychords[] = {
        &((Keychord){1, {{0, XK_Print}}, spawn, SHCMD("~/.scripts/takescreenshot")}),
        &((Keychord){1, {{ShiftMask, XK_Print}}, spawn, SHCMD("~/.scripts/savescreenshot")}),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_x}},                             spawn,           SHCMD("~/.scripts/dmenukill.sh") }),
+
+       // In case of no numpad symbols, use:
+       // XK_KP_Add -> XK_equal and XK_KP_Subtract -> XK_minus
+       // This binds them to the +, - beside top number row
+       &((Keychord){1, {{MODKEY|ShiftMask, XK_KP_Add}},                             spawn,           SHCMD("~/.scripts/changeopacity.sh +1") }),
+       &((Keychord){1, {{MODKEY|ShiftMask, XK_KP_Subtract}},                             spawn,           SHCMD("~/.scripts/changeopacity.sh -1") }),
 	   TAGKEYS(                        XK_1,                      0)
 	   TAGKEYS(                        XK_2,                      1)
 	   TAGKEYS(                        XK_3,                      2)
