@@ -69,12 +69,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- })
 
 -- lua-language-server(lua_ls)
-local root_markers1={
+local luarootmarkers1={
   '.emmyrc.json',
   '.luarc.json',
   '.luarc.jsonc'
 }
-local root_markers2={
+local luarootmarkers2={
   '.luacheckrc',
   '.stylua.toml',
   'stylua.toml',
@@ -85,7 +85,7 @@ vim.lsp.config("lua_ls", {
   cmd = {"lua-language-server"},
   filetypes={"lua"},
   capabilities=capabilities,
-  root_markers={root_markers1, root_markers2, '.git'},
+  root_markers={luarootmarkers1, luarootmarkers2, '.git'},
   settings = {
     Lua = {
       codeLens={
