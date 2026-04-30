@@ -19,3 +19,5 @@ bat_alias lsblk conf
 bat_alias free cpuinfo
 bat_alias ps log
 
+alias nvz='NVIM_APPNAME=lazy-nvim nvim'
+
