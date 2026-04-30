@@ -3,7 +3,7 @@ function Linemode:size_and_mtime()
 	if time == 0 then
 		time = ""
 	elseif os.date("%Y", time) == os.date("%Y") then
-		time = os.date("%b %d %H:%M", time)
+		time = os.date("%b%d-%Y-%H:%M", time)
 	else
 		time = os.date("%b %d %Y", time)
 	end
