@@ -61,12 +61,12 @@ opt.timeoutlen = 1000 -- 1000 milliseconds(1 second) of timeout
 opt.title = false -- let vim select title of window
 
 -- Show yank highlight
--- vim.api.nvim_create_autocmd("TextYankPost", {
--- 	desc = "Highlight parts of lines being yanked",
--- 	callback = function()
--- 		vim.hl.on_yank()
--- 	end,
--- })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight parts of lines being yanked",
+	callback = function()
+		vim.hl.on_yank()
+	end,
+})
 
 opt.mouse = "a"
 vim.g.editorconfig = false -- consistent formatting across filetypes. Prefer off, may turn on for public projects.
@@ -103,3 +103,5 @@ vim.api.nvim_create_autocmd("FileType", {
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon0-TermCursor"
 opt.statusline = "%t%m%r%w%y%q buf=%n (%l:%c/%L)%p%% %S%a"
 opt.cmdheight=0
+vim.cmd('autocmd BufEnter * set formatoptions-=cro')
+vim.cmd('autocmd BufEnter * setlocal formatoptions-=cro')

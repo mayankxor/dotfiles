@@ -105,3 +105,8 @@ vim.api.nvim_set_keymap(
 	[[:lua vim.fn.jobstart({"qutebrowser", vim.fn.expand("%:p")})<CR>]],
 	{ noremap = true, silent = true }
 )
+
+set("n", "<leader>co", ":!timeout 6s g++ -std=c++11 -O2 -Wall main.cpp && ./a.out < inputf.in > outputf.in<CR>")
+set("n", "<M-`>", ":ToggleTermToggleAll<CR>")
+set("n", "<leader>fo", ":lua vim.lsp.buf.format()<CR>")
+set("n", "ciq", "ci\"")
