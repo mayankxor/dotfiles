@@ -6,22 +6,22 @@
 ratio          = [ 1, 4, 3 ]
 sort_by        = "natural"
 sort_sensitive = false
-sort_reverse 	 = false
+sort_reverse   = false
 sort_dir_first = true
 sort_translit  = true
-linemode       = "mtime"
+linemode       = "size_and_mtime"
 show_hidden    = false
 show_symlink   = true
 scrolloff      = 5
-mouse_events   = [ "click", "scroll" ]
+mouse_events   = [ "click", "scroll", "touch", "move", "drag" ]
 title_format   = "{cwd}"
 
 [preview]
 wrap            = "yes"
-tab_size        = 2
+tab_size        = 1
 max_width       = 600
 max_height      = 900
-cache_dir       = ""
+# cache_dir       = ""
 image_delay     = 30
 image_filter    = "triangle"
 image_quality   = 75
