@@ -1,0 +1,17 @@
+-o "./%(playlist_title).20s/%(playlist_index&{}~|)s%(playlist_count&{}-|)s%(title).50s[%(id)s].%(ext)s"
+-f "bv+(ba[format_note*=original]/ba)"
+-S res:720,+size
+--write-auto-subs
+--sub-langs "en"
+--embed-subs
+--continue
+--part
+--write-playlist-metafiles
+--embed-metadata
+--embed-chapters
+--embed-info-json
+--force-write-archive
+--download-archive "~/.archive/yt-dlp.archive"
+--sponsorblock-mark all
+--sponsorblock-remove sponsor,selfpromo,preview,interaction
+
