@@ -11,3 +11,21 @@ function Linemode:size_and_mtime()
 	local size = self._file:size()
 	return string.format("%s %s", size and ya.readable_size(size) or "-", time)
 end
+
+require("bookmarks"):setup({
+	last_directory = { enable = false, persist = false, mode = "dir" },
+	persist = "none",
+	desc_format = "full",
+	file_picker_mode = "hover",
+	custom_desc_input = false,
+	show_keys = false,
+	notify = {
+		enable = true,
+		timeout = 5,
+		message = {
+			new = "New bookmark '<key>' -> '<folder>'",
+			delete = "Deleted bookmark in '<key>'",
+			delete_all = "Deleted all bookmarks",
+		},
+	},
+})
