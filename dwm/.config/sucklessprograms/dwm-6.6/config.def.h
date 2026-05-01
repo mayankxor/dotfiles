@@ -1,5 +1,4 @@
 /* See LICENSE file for copyright and license details. */
-
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 3;        /* gaps between windows */
@@ -116,6 +115,7 @@ static Keychord *keychords[] = {
        // This binds them to the +, - beside top number row
        &((Keychord){1, {{MODKEY|ShiftMask, XK_KP_Add}},                             spawn,           SHCMD("~/.scripts/changeopacity.sh +1") }),
        &((Keychord){1, {{MODKEY|ShiftMask, XK_KP_Subtract}},                             spawn,           SHCMD("~/.scripts/changeopacity.sh -1") }),
+       &((Keychord){1, {{MODKEY|ShiftMask, XK_Escape}},                             spawn,           SHCMD("~/.scripts/xkiller.sh") }),
 	   TAGKEYS(                        XK_1,                      0)
 	   TAGKEYS(                        XK_2,                      1)
 	   TAGKEYS(                        XK_3,                      2)
