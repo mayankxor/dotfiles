@@ -7,4 +7,4 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Build command
-vim.keymap.set("n", "<leader>co", ':! gcc "%" -o "%:r" -O2 -Wall -Wpedantic -Werror && "./%:r"')
+vim.keymap.set("n", "<leader>co", ':! gcc "%" -o "%:r" -O2 -Wall -Wpedantic -Werror && "./%:r"<CR>')
