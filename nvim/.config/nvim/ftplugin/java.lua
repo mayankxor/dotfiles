@@ -6,5 +6,3 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Build command (Non interactive)
-vim.keymap.set('n', '<leader>co', ':! javac "%" && java "%:r" <CR>')
