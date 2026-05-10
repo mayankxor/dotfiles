@@ -35,7 +35,7 @@ edit = [
 	{ run = "code -w %s",       desc = "code (block)", for = "windows", block = true },
 ]
 play = [
-	{ run = "mpv %s",                desc = "Play", for = "linux" },
+	{ run = "command nohup mpv %s > /dev/null 2>&1 </dev/null &",                desc = "Play", for = "linux" },
 	{ run = "open %s",                     desc = "Play", for = "macos" },
 	{ run = 'start "" %s1', orphan = true, desc = "Play", for = "windows" },
 	{ run = "termux-open %s1",             desc = "Play", for = "android" },
@@ -43,7 +43,7 @@ play = [
 	{ run = "mediainfo %s1 & pause", block = true, desc = "Show media info", for = "windows" },
 ]
 open = [
-	{ run = "xdg-open %s",    desc = "Open", for = "linux" },
+	{ run = "command nohup xdg-open %s > /dev/null 2>&1 < /dev/null &",    desc = "Open", for = "linux" },
 	{ run = "open %s",         desc = "Open", for = "macos" },
 	{ run = 'start "" %s1',    desc = "Open", for = "windows", orphan = true },
 	{ run = "termux-open %s1", desc = "Open", for = "android" },
