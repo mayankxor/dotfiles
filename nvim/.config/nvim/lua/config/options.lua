@@ -100,4 +100,5 @@ vim.api.nvim_create_autocmd("FileType", {
 
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon0-TermCursor"
 
-opt.shortmess = "I"
+opt.shortmess:append("I")
+opt.cmdheight = 0
