@@ -2,7 +2,7 @@
 vim.api.nvim_create_autocmd("UIEnter", {
 	desc = "Sync OS clipboard to nvim",
 	callback = function()
-		opt.clipboard = "unnamedplus"
+		vim.opt.clipboard = "unnamedplus"
 	end,
 })
 
@@ -10,6 +10,13 @@ vim.api.nvim_create_autocmd("UIEnter", {
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight parts of line being yanked",
 	callback = function()
-		vim.hl.on_yank()
+		vim.hl.on_yank({
+			higroup = "IncSearch",
+			timeout = 150,
+			on_macro = false,
+			on_visual = true,
+			event = vim.v.event,
+			priority = vim.hl.priorities.user
+		})
 	end,
 })
