@@ -4,20 +4,10 @@ alias la="ls --color=auto -l --all"
 alias cd..="cd .."
 alias nohup=nohupx
 
-bat_alias() {
+bat_alias(){
   local name=$1
   local lang=$2
-
-  eval "
-  $name() {
-    command $name \"\$@\" | /usr/bin/bat --language=$lang --plain
-  }
-  "
-}
-
+  eval " $name() {command $name \"\$@\" | /usr/bin/bat --language=$lang --plain}"}
 bat_alias lsblk conf
 bat_alias free cpuinfo
 bat_alias ps log
-
-alias nvz='NVIM_APPNAME=lazy-nvim nvim'
-
