@@ -7,8 +7,6 @@ fi
 # Load Powerlevel10k theme
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
-autoload -Uz +X compinit && compinit
-
 source ~/.config/zsh/alias.zsh
 source ~/.config/zsh/autostart.zsh
 source ~/.config/zsh/exports.zsh
@@ -16,12 +14,9 @@ source ~/.config/zsh/functions.zsh
 source ~/.config/zsh/keybinds.zsh
 source ~/.config/zsh/options.zsh
 source ~/.config/zsh/secrets.zsh
-source ~/.config/zsh/style.zsh
+source ~/.config/zsh/completion.zsh
 source ~/.config/zsh/locale.zsh
 source ~/.config/zsh/xdg.zsh
-
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-zstyle ':completion:*' menu select
 
 # Load P10K config
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
