@@ -8,5 +8,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt interactive_comments # Allow comments in shell
 setopt dot_glob
+setopt histexpiredupsfirst
 setopt extended_glob
 setopt emacs
+setopt numericglobsort # When expanding glob, sort naturally, so file10 comes after file9 not after file1
