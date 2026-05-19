@@ -1,1 +1,1 @@
-mpd 2>/dev/null
+# mpd 2>/dev/null
