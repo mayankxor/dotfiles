@@ -8,6 +8,7 @@
 static char *fonts[] = {
     "JetBrainsMono Nerd Font:style=Regular:size=14",
     "0xProto Nerd Font:style=Regular:size=14",
+    "Monocraft:style=Regular:size=14",
 };
 static size_t currentfont = 0;
 static int borderpx = 0;
