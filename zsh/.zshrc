@@ -18,6 +18,7 @@ source ~/.config/zsh/options.zsh
 source ~/.config/zsh/secrets.zsh
 source ~/.config/zsh/style.zsh
 source ~/.config/zsh/locale.zsh
+source ~/.config/zsh/xdg.zsh
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' menu select
