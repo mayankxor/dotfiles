@@ -5,11 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *fonts[] = {
-    "JetBrainsMono Nerd Font:style=Regular:size=14",
-    "0xProto Nerd Font:style=Regular:size=14",
-};
-static size_t currentfont = 0;
+static char *font = "JetBrainsMono Nerd Font:style=Regular:size=14";
 static int borderpx = 0;
 
 /*
@@ -204,7 +200,6 @@ static Shortcut shortcuts[] = {
     {TERMMOD, XK_Y, selpaste, {.i = 0}},
     {ShiftMask, XK_Insert, selpaste, {.i = 0}},
     {TERMMOD, XK_Num_Lock, numlock, {.i = 0}},
-    {TERMMOD, XK_S, cyclefonts, {}},
 };
 
 /*
