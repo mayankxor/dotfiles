@@ -1,5 +1,4 @@
 return {
-
 	-- To download servers
 	{
 		"mason-org/mason.nvim",
@@ -165,7 +164,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		enabled = true,
-		dependencies = { "hrsh7th/cmp-nvim-lsp" },
+		dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer" },
 		config = function()
 			-- Use for Visual Studio Code Dark+ Theme Colors in the completion menu(Only for custom view)
 			-- vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg='NONE', strikethrough=true, fg='#808080' })
@@ -210,9 +209,9 @@ return {
 			}
 
 			-- Customization for Pmenu
-			vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#000000", fg = "#ffffff" })
+			vim.api.nvim_set_hl(0, "Pmenu", { bg = "#1e1e2e", fg = "#cdd6f4" })
+			vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#89b4fa", fg = "#11111b", bold = true })
 			-- vim.api.nvim_set_hl(0, "Pmenu", { fg = "#C5CDD9", bg = "#22252A" })
-			vim.api.nvim_set_hl(0, "Pmenu", { fg = "#ffffff", bg = "#000000" })
 			--
 			-- vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#7E8294", bg = "NONE", strikethrough = true })
 			-- vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })
@@ -283,6 +282,32 @@ return {
 				-- Where completions come from
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
+					-- {
+					-- 	name = "buffer",
+					-- 	option = {
+					-- 		keyword_length = 3, -- Minimum number of characters needed to be typed to trigger this completion
+					-- 		keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%([\-.]\w*\)*\)]],
+					-- 		get_bufnrs = function()
+					-- 			if -- If file size > 1 megabyte, dont scan it for buffer completion
+					-- 				vim.api.nvim_buf_get_offset(
+					-- 					vim.api.nvim_get_current_buf(),
+					-- 					vim.api.nvim_buf_line_count(vim.api.nvim_get_current_buf())
+					-- 				) > 1024 * 1024
+					-- 			then
+					-- 				return {}
+					-- 			end
+					-- 			-- Otherwise, only scan visible buffers for completions
+					-- 			local bufs = {}
+					-- 			for _, win in ipairs(vim.api.nvim_list_wins()) do
+					-- 				bufs[vim.api.nvim_win_get_buf(win)] = true
+					-- 			end
+					-- 			return vim.tbl_keys(bufs)
+					-- 		end,
+					-- 		indexing_interval = 100,
+					-- 		indexing_batch_size = 1000,
+					-- 		max_indexed_line_length = 1024 * 40,
+					-- 	},
+					-- },
 				}),
 				window = {
 					completion = {
@@ -298,7 +323,20 @@ return {
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-n>"] = cmp.mapping.complete(),
+					["<C-n>"] = cmp.mapping(function(fallback)
+						if next(vim.lsp.get_clients({ bufnr = 0 })) then
+							cmp.complete()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					-- ["<C-n>"] = cmp.mapping(function()
+					-- 	if cmp.visible() then
+					-- 		cmp.select_next_item()
+					-- 	else
+					-- 		cmp.complete()
+					-- 	end
+					-- end, { "i", "s" }),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = false }), -- Only accept explicitly selected completion
 					-- Tab => if there's only one completion possible, accept it
