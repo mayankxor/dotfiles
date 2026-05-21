@@ -16,7 +16,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 			on_macro = false,
 			on_visual = true,
 			event = vim.v.event,
-			priority = vim.hl.priorities.user
+			priority = vim.hl.priorities.user,
 		})
 	end,
 })
+
+vim.api.nvim_create_autocmd(
+	"QuickFixCmdPost",
+	{ desc = "Whenever using vimgrep, automatically open qflist", pattern = "vimgrep", command = "copen" }
+)
