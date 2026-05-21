@@ -47,11 +47,15 @@ set(
 )
 
 -- tab management
-set("n", "to", "<cmd>tabnew<cr>", { desc = "Open a new tab" })
-set("n", "tx", "<cmd>tabclose<cr>", { desc = "Close the tab" })
-set("n", "tn", "<cmd>tabnext<cr>", { desc = "Go to next tab" })
-set("n", "tp", "<cmd>tabprevious<cr>", { desc = "Go to previous tab" })
-set("n", "td", "<cmd>tabnew %<cr>", { desc = "Duplicate the current tab" })
+set("n", "to", vim.cmd.tabnew, { desc = "Open a new tab" })
+set("n", "tx", vim.cmd.tabclose, { desc = "Close the tab" })
+set("n", "tn", vim.cmd.tabnext, { desc = "Go to next tab" })
+set("n", "tp", vim.cmd.tabprevious, { desc = "Go to previous tab" })
+set("n", "td", function()
+	vim.cmd("tabnew %")
+end, { desc = "Duplicate the current tab" })
+set("n", "<tab>", vim.cmd.tabnext, { desc = "Go to next tab" })
+set("n", "<s-tab>", vim.cmd.tabprevious, { desc = "Go to previous tab" })
 
 -- split screen management
 set("n", "sv", "<c-w>v", { desc = "Make a vertical split" })
@@ -87,3 +91,5 @@ set(
 )
 set("n", "<leader>ex", "<cmd>Ex<cr>", { desc = "Open file explorer" })
 set("n", "<m-tab>", "<cmd>bnext<cr>", { desc = "Go to next buffer" })
+set("o", "aq", 'a"')
+set("o", "iq", 'i"')
