@@ -16,14 +16,11 @@ return {
 		)
 		-- local x =
 		-- require("telescope.builtin").live_grep({ layout_strategy = "vertical", layout_config = { width = 0.5 } })
-		vim.keymap.set(
-			"n",
-			"<leader>rg",
-			":lua require'telescope.builtin'.live_grep(require('telescope.themes').get_dropdown({}))<CR>",
-			{
-				desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore. (Requires ripgrep)",
-			}
-		)
+		vim.keymap.set("n", "<leader>rg", function()
+			require("telescope.builtin").live_grep(require("telescope.themes").get_dropdown({}))
+		end, {
+			desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore. (Requires ripgrep)",
+		})
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Lists open buffers in current neovim instance" })
 		vim.keymap.set(
 			"n",
