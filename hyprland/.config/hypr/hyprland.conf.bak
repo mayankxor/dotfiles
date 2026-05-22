@@ -1,0 +1,17 @@
+# This config is a STUB! This should never be generated.
+# Use the default lua config from https://github.com/hyprwm/Hyprland/blob/main/example/hyprland.lua
+
+
+exec-once = waybar
+
+$mainMod = SUPER
+$terminal = st
+$fileManager = st -e sh -c 'yazi'
+$menu = hyprlauncher
+
+bind = SUPER_SHIFT, ENTER, exec, $terminal
+bind = $mainMod, C, killactive,
+bind = $mainMod, q, exec, command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit
+bind = $mainMod, E, exec, $fileManager
+bind = $mainMod, f, togglefloating,
+bind = $mainMod, p, exec, $menu
