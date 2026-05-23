@@ -8,6 +8,7 @@ hl.bind(mainMod .. " + SHIFT + Q",
   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(FILEMANAGER))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(BROWSER))
+hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = 1, action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(MENU))
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
