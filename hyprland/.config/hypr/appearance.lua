@@ -1,6 +1,7 @@
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 
 hl.config({
+  -- https://wiki.hypr.land/Configuring/Basics/Variables/#general
   general = {
     border_size             = 2,                                                               -- size of the border around windows
     gaps_in                 = 2,                                                               -- gaps between windows
@@ -10,7 +11,7 @@ hl.config({
     col                     = {
       inactive_border       = "rgba(595959aa)",                                                -- border color for inactive windows
       active_border         = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 }, -- border color for active window
-      nogroup_border        = 0xffffaaff,                                                      -- inactive border color for window that cannot be added to a group (see hl.dsp.window.deny_from_group dispatcher)
+      nogroup_border        = 0xffffaaff,                                                      -- inactive border color for window that cannot be added to a group (see `hl.dsp.window.deny_from_group dispatcher`)
       nogroup_border_active = 0xffff00ff,                                                      -- active border color for window that cannot be added to a group
     },
     layout                  = "dwindle",                                                       -- which layout to use. ["dwindle"/"master"/"scrolling"/"monocle"]
@@ -22,33 +23,78 @@ hl.config({
     resize_corner           = 0,                                                               -- force floating windows to use a specific corner when being resized (1-4 going clockwise from top left, 0 to disable)
     modal_parent_blocking   = true,                                                            -- whether parent windows of modals will be interactive
     locale                  = [[]],                                                            -- overrides the system locale (e.g. "en_US", "es")
+
+    -- https://wiki.hypr.land/Configuring/Basics/Variables/#snap
+    snap                    = {
+      enabled = false,        -- enable snapping for floating windows
+      window_gap = 10,        -- minimum gap in pixels between windows before snapping
+      monitor_gap = 10,       -- minimum gap in pixels between window and monitor edges before snapping
+      border_overlap = false, -- if true, windows snap such that only one border's worth of space is between them
+      respect_gaps = false,   -- if true, snapping will respect gaps between windows(set in general:gaps_in)
+    },
   },
 
+  -- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
   decoration = {
-    rounding         = 10,
-    rounding_power   = 2,
+    rounding              = 6,     -- rounded corners' radius(in layout px)
+    rounding_power        = 2.0,   -- adjusts the curve used for rounding corners, larger is smoother, 2.0 is a circle, 4.0 is a squircle, 1.0 is a triangular corner. [1.0 - 10.0]
+    active_opacity        = 1.0,   -- opacity of active windows. [0.0 - 1.0]
+    inactive_opacity      = 0.75,  -- opacity of inactive windows. [0.0 - 1.0]
+    fullscreen_opacity    = 1.0,   -- opacity of fullscreen windows. [0.0 - 1.0]
+    dim_modal             = true,  -- enables dimming of parents of modal windows
+    dim_inactive          = false, -- enables dimming of inactive windows
+    dim_strength          = 0.5,   -- how much inactive windows should be dimmed [0.0 - 1.0]
+    dim_special           = 0.2,   -- how much to dim the rest of the screen by when a special workspace is open. [0.0 - 1.0]
+    dim_around            = 0.4,   -- how much the `dim_around` window rule should dim by. [0.0 - 1.0]
+    screen_shader         = [[]],  -- a path to a custom shader to be applied at the end of rendering. See
+    border_part_of_window = true,  -- whether the window border should be a part of the window
 
-    -- Change transparency of focused and unfocused windows
-    active_opacity   = 1.0,
-    inactive_opacity = 1.0,
-
-    shadow           = {
-      enabled      = true,
-      range        = 4,
-      render_power = 3,
-      color        = 0xee1a1a1a,
+    -- https://wiki.hypr.land/Configuring/Basics/Variables/#blur
+    blur                  = {
+      enabled                   = true,   -- enable kawase window background blur
+      size                      = 8,      -- blur size (distance)
+      passes                    = 1,      -- the amount of passes to perform
+      ignore_opacity            = true,   -- make the blur layer ignore the opacity of the window
+      new_optimizations         = true,   -- whether to enable further optimizations to the blur. Recommended to leave on, as it will massively improve performance.
+      xray                      = false,  -- if enabled, floating windows will ignore tiled windows in their blur. Only available if new_optimizations is true. Will reduce overhead on floating blur significantly.
+      noise                     = 0.0117, -- how much noise to apply. [0.0 - 1.0]
+      contrast                  = 0.8916, -- contrast modulation for blur. [0.0 - 2.0]
+      brightness                = 0.8172, -- brightness modulation for blur. [0.0 - 2.0]
+      vibrancy                  = 0.1696, -- Increase saturation of blurred colors. [0.0 - 1.0]
+      vibrancy_darkness         = 0.0,    -- How strong the effect of `vibrancy` is on dark areas . [0.0 - 1.0]
+      special                   = false,  -- whether to blur behind the special workspace (note: expensive)
+      popups                    = false,  -- whether to blur popups (e.g. right-click menus)
+      popups_ignorealpha        = 0.2,    -- works like `ignore_alpha` in layer rules. If pixel opacity is below set value, will not blur. [0.0 - 1.0]
+      input_methods             = false,  -- whether to blur input methods (e.g. fcitx5)
+      input_methods_ignorealpha = 0.2,    -- works like `ignore_alpha` in layer rules. If pixel opacity is below set value, will not blur. [0.0 - 1.0]
     },
 
-    blur             = {
-      enabled  = true,
-      size     = 3,
-      passes   = 1,
-      vibrancy = 0.1696,
+    -- https://wiki.hypr.land/Configuring/Basics/Variables/#shadow
+    shadow                = {
+      enabled        = true,       -- enable drop shadows on windows
+      range          = 4,          -- Shadow range ("size") in layout px
+      render_power   = 3,          -- in what power to render the falloff (more power, the faster falloff) [1 - 4]
+      sharp          = false,      -- if enabled, will make the shadows sharp, akin to an infinite render power
+      color          = 0xee1a1a1a, -- shadow's color. Alpha dictates shadow's opacity
+      color_inactive = 0xee1a1a1a, -- inactive shadow color. (if not set, will fall back to color)
+      offset         = { 0, 0 },   -- shadow's rendering offset.
+      scale          = 1.0,        -- shadow's scale. [0.0 - 1.0]
     },
+
+    -- https://wiki.hypr.land/Configuring/Basics/Variables/#glow
+    glow                  = {
+      enabled = true,              -- enable inner glow on windows
+      range = 10,                  -- Glow range ("size") in layout px
+      render_power = 3,            -- in what power to render the falloff (more power, the faster the falloff) [1 - 4]
+      color = 0xee1a1a1a,          -- glow's color. Alpha dictates glow's opacity.
+      color_inactive = 0xee1a1a1a, -- inactive glow color. (if not set, will fall back to color)
+    }
   },
 
+  -- https://wiki.hypr.land/Configuring/Basics/Variables/#animations
   animations = {
-    enabled = true,
+    enabled = true,              -- enable animations
+    workspace_wraparound = true, -- enable workspace wraparound, causing directional workspace animations to animate as if the first and last workspaces were adjacent
   },
 })
 
