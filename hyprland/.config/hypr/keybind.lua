@@ -104,15 +104,41 @@ hl.bind(mainMod .. " + D", hl.dsp.layout("removemaster"))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.layout("orientationcycle"))
 
 hl.bind(mainMod .. " + L", function()
-  if layout() == "scrolling" then
+  local layoutt = layout()
+  if layoutt == "scrolling" then
     hl.dispatch(hl.dsp.layout("focus right"))
+  elseif layoutt == "monocle" then
+    hl.dispatch(hl.dsp.layout("cyclenext"))
+  else
+    hl.dispatch(hl.dsp.focus({ direction = "right" }))
+  end
+end)
+hl.bind(mainMod .. " + K", function()
+  local layoutt = layout()
+  if layoutt == "scrolling" then
+    hl.dispatch(hl.dsp.layout("focus right"))
+  elseif layoutt == "monocle" then
+    hl.dispatch(hl.dsp.layout("cyclenext"))
   else
     hl.dispatch(hl.dsp.focus({ direction = "right" }))
   end
 end)
 hl.bind(mainMod .. " + H", function()
-  if layout() == "scrolling" then
+  local layoutt = layout()
+  if layoutt == "scrolling" then
     hl.dispatch(hl.dsp.layout("focus left"))
+  elseif layoutt == "monocle" then
+    hl.dispatch(hl.dsp.layout("cycleprev"))
+  else
+    hl.dispatch(hl.dsp.focus({ direction = "left" }))
+  end
+end)
+hl.bind(mainMod .. " + J", function()
+  local layoutt = layout()
+  if layoutt == "scrolling" then
+    hl.dispatch(hl.dsp.layout("focus left"))
+  elseif layoutt == "monocle" then
+    hl.dispatch(hl.dsp.layout("cycleprev"))
   else
     hl.dispatch(hl.dsp.focus({ direction = "left" }))
   end

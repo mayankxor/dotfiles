@@ -2,7 +2,7 @@
 
 hl.config({
   general = {
-    layout = "scrolling", -- which layout to use. ["dwindle"/"master"/"scrolling"/"monocle"]
+    layout = "dwindle", -- which layout to use. ["dwindle"/"master"/"scrolling"/"monocle"]
   },
   layout = {
     single_window_aspect_ratio = { 0, 0 },      -- Whenever only a single window is shown on a screen, add padding so that it conforms to the specified aspect ratio. A value like {4, 3} on a {16, 9} screen will make it a 4:3 window in the middle with padding to the sides.
