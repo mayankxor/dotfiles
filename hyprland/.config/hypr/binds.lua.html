@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>~/.dotfiles/hyprland/.config/hypr/binds.lua.html</title>
+<meta name="Generator" content="Vim/9.2">
+<meta name="plugin-version" content="vim9.0_v2">
+<meta name="syntax" content="lua">
+<meta name="settings" content="number_lines,use_css,no_foldcolumn,expand_tabs,line_ids,pre_wrap,prevent_copy=,use_input_for_pc=none">
+<meta name="colorscheme" content="industry">
+<style>
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #dadada; background-color: #000000; }
+body { font-family: monospace; color: #dadada; background-color: #000000; }
+* { font-size: 1em; }
+a { color: inherit; }
+.LineNr { color: #ffff00; }
+.Constant { color: #00ffff; }
+.Statement { color: #ffffff; font-weight: bold; }
+.Comment { color: #00afaf; }
+.Type { color: #00ff00; font-weight: bold; }
+-->
+</style>
+
+<script>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  var lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr"> 1 </span><span class="Comment">-- <a href="https://wiki.hypr.land/Configuring/Basics/Variables/#binds">https://wiki.hypr.land/Configuring/Basics/Variables/#binds</a></span>
+<span id="L2" class="LineNr"> 2 </span>
+<span id="L3" class="LineNr"> 3 </span>hl.config(<span class="Type">{</span>
+<span id="L4" class="LineNr"> 4 </span>  binds <span class="Statement">=</span> <span class="Type">{</span>
+<span id="L5" class="LineNr"> 5 </span>    pass_mouse_when_bound <span class="Statement">=</span> <span class="Constant">false</span>,            <span class="Comment">-- If disabled, will not pass the mouse events to apps / dragging windows around if a keybind has been triggered.</span>
+<span id="L6" class="LineNr"> 6 </span>    scroll_event_delay <span class="Statement">=</span> <span class="Constant">300</span>,                 <span class="Comment">-- In ms, how many ms to wait after a scroll event to allow passing another one of the binds.</span>
+<span id="L7" class="LineNr"> 7 </span>    workspace_back_and_forth <span class="Statement">=</span> <span class="Constant">false</span>,         <span class="Comment">-- If enabled, an attempt to switch to the currently focused workspace will instead switch to the previous workspace. Akin to i3's `auto_back_and_forth`</span>
+<span id="L8" class="LineNr"> 8 </span>    hide_special_on_workspace_change <span class="Statement">=</span> <span class="Constant">false</span>, <span class="Comment">-- If enabled, changing the active workspace (including to itself) will hide the special workspace on the monitor where the newly active workspace resides.</span>
+<span id="L9" class="LineNr"> 9 </span>    allow_workspace_cycles <span class="Statement">=</span> <span class="Constant">false</span>,           <span class="Comment">-- If enabled, workspaces don't forget their previous workspace, so cycles can be created by switching to the first workspace in a sequence, then endlessly going to the previous workspace.</span>
+<span id="L10" class="LineNr">10 </span>    workspace_center_on <span class="Statement">=</span> <span class="Constant">0</span>,                  <span class="Comment">-- Whether switching workspaces should center the curso the workspace (0) or on the last active window for that workspace(1)</span>
+<span id="L11" class="LineNr">11 </span>    focus_preferred_method <span class="Statement">=</span> <span class="Constant">0</span>,               <span class="Comment">-- Sets the preferred focus finding method when using `hl.dsp.focus({direction}) / hl.dsp.window.move({direction}) / ` etc. 0 - history (recent have priority), 1 - length (longer shared edges have priority)</span>
+<span id="L12" class="LineNr">12 </span>    ignore_group_lock <span class="Statement">=</span> <span class="Constant">false</span>,                <span class="Comment">-- If enabled, dispatchers like `hl.dsp.window.move({into_group})` will ignore lock per group.</span>
+<span id="L13" class="LineNr">13 </span>    movefocus_cycles_fullscreen <span class="Statement">=</span> <span class="Constant">false</span>,      <span class="Comment">-- If enabled, when on a fullscreen window, `hl.dsp.focus({ direction })` will cycle fullscreen, if not, it will move the focus in a direction.</span>
+<span id="L14" class="LineNr">14 </span>    movefocus_cycles_groupfirst <span class="Statement">=</span> <span class="Constant">false</span>,      <span class="Comment">-- If enabled, when in a grouped window, `hl.dsp.focus({ direction })` will cycle windows in the groups first, then at each ends of tabs, it’ll move on to other windows/groups.</span>
+<span id="L15" class="LineNr">15 </span>    window_direction_monitor_fallback <span class="Statement">=</span> <span class="Constant">true</span>, <span class="Comment">-- If enabled, moving a window or focus over the edge of a monitor with a direction will move it to the next monitor in that direction.</span>
+<span id="L16" class="LineNr">16 </span>    disable_keybind_grabbing <span class="Statement">=</span> <span class="Constant">false</span>,         <span class="Comment">-- If enabled, apps that request keybinds to be disabled (e.g. VMs) will not be able to do so.</span>
+<span id="L17" class="LineNr">17 </span>
+<span id="L18" class="LineNr">18 </span>  <span class="Type">}</span>,
+<span id="L19" class="LineNr">19 </span><span class="Type">}</span>)
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

@@ -1,22 +1,112 @@
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local layout = hl.get_config("general.layout")
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(TERMINAL))
-local closeWindowBind = hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + SHIFT + Q",
   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(FILEMANAGER))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(BROWSER))
-hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = 1, action = "toggle" }))
+-- hl.bind(mainMod .. " + M", hl.dsp.window.fullscreen({ mode = 1, action = "toggle" }))
+hl.bind(mainMod .. " + M", function()
+  if layout == "dwindle" then
+    hl.dispatch(hl.dsp.window.fullscreen({ mode = 1, action = "toggle" }))
+  elseif layout == "master" then
+    hl.dispatch(hl.dsp.layout("mfact exact 1.0"))
+  elseif layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("fit visible"))
+  end
+end)
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(MENU))
--- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + RETURN", hl.dsp.layout("togglesplit")) -- dwindle only
+hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("hyprlock"))
+
+-- hl.bind(mainMod .. " + Y", hl.dsp.window.pseudo(splitratio = 0.1))
+-- hl.bind(mainMod .. " + UP", hl.dsp.layout("splitratio -0.01"))
+hl.bind(mainMod .. " + LEFT", function()
+  if layout == "dwindle" then
+    hl.dispatch(hl.dsp.layout("splitratio -0.01"))
+  elseif layout == "master" then
+    hl.dispatch(hl.dsp.layout("mfact -0.01"))
+  elseif layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("colresize -0.01"))
+  end
+end)
+
+hl.bind(mainMod .. " + RIGHT", function()
+  if layout == "dwindle" then
+    hl.dispatch(hl.dsp.layout("splitratio +0.01"))
+  elseif layout == "master" then
+    hl.dispatch(hl.dsp.layout("mfact +0.01"))
+  elseif layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("colresize +0.01"))
+  end
+end)
+
+hl.bind(mainMod .. " + SHIFT + LEFT", function()
+  if layout == "dwindle" then
+    hl.dispatch(hl.dsp.layout("splitratio -0.1"))
+  elseif layout == "master" then
+    hl.dispatch(hl.dsp.layout("mfact -0.1"))
+  elseif layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("colresize -0.1"))
+  end
+end)
+
+hl.bind(mainMod .. " + SHIFT + RIGHT", function()
+  if layout == "dwindle" then
+    hl.dispatch(hl.dsp.layout("splitratio +0.1"))
+  elseif layout == "master" then
+    hl.dispatch(hl.dsp.layout("mfact +0.1"))
+  elseif layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("colresize +0.1"))
+  end
+end)
+hl.bind(mainMod .. " + UP", hl.dsp.layout("splitratio -0.01"))
+hl.bind(mainMod .. " + SHIFT + UP", hl.dsp.layout("splitratio -0.1"))
+hl.bind(mainMod .. " + DOWN", hl.dsp.layout("splitratio 0.01"))
+hl.bind(mainMod .. " + SHIFT + DOWN", hl.dsp.layout("splitratio 0.1"))
+hl.bind(mainMod .. " + RETURN", hl.dsp.layout("rotatesplit 180"))
+hl.bind(mainMod .. " + SHIFT + R", function()
+  if layout == "dwindle" then
+    hl.dispatch(hl.dsp.layout("movetoroot"))
+  elseif layout == "master" then
+    hl.dispatch(hl.dsp.layout("swapwithmaster ignoremaster"))
+  end
+end)
+hl.bind(mainMod .. " + E", function()
+  if layout == "dwindle" then
+    hl.dispatch(hl.dsp.layout("splitratio 1 exact"))
+  elseif layout == "master" then
+    local default = hl.get_config("master.mfact")
+    hl.dispatch(hl.dsp.layout("mfact exact " .. default))
+  elseif layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("fit visible"))
+  end
+end)
+hl.bind(mainMod .. " + I", hl.dsp.layout("addmaster"))
+hl.bind(mainMod .. " + D", hl.dsp.layout("removemaster"))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.layout("orientationcycle"))
+
+-- hl.bind(mainMod .. " + RETURN", hl.dsp.layout("togglesplit")) -- dwindle only, preserve_splits must be enabled
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + L", function()
+  if layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("focus right"))
+  else
+    hl.dispatch(hl.dsp.focus({ direction = "right" }))
+  end
+end)
+hl.bind(mainMod .. " + H", function()
+  if layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("focus left"))
+  else
+    hl.dispatch(hl.dsp.focus({ direction = "left" }))
+  end
+end)
 hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
 
