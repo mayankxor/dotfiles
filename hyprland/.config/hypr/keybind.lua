@@ -254,7 +254,7 @@ hl.bind(mainMod .. " + SHIFT + G", function()
 end)
 
 local hourlytimer = hl.timer(function()
-  hl.notification.create({ text = "Another second passed", timeout = 10000, font_size = 20, })
+  hl.notification.create({ text = "Another hour passed", timeout = 10000, font_size = 20, })
 end, { timeout = 3600000, type = "repeat" })
 hourlytimer:set_enabled(false)
 hl.bind(mainMod .. " + SHIFT + T", function()
