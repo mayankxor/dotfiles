@@ -22,7 +22,7 @@ hl.config({
     enable_swallow = false,                 -- enable window swallowing
     swallow_regex = "",                     -- The class regex to be used for windows that should be swallowed (usually, a terminal). To know more about the list of regex which can be used, see https://github.com/ziishaned/learn-regex/blob/master/README.md
     swallow_exception_regex = "",           -- The title regex to be used for windows that should not be swallowed by the window specified in `swallow_regex` (e.g. wev). The regex is matched against the parent (e.g. kitty) window's title on the assumption that it changes to whatever the process it's running
-    focus_on_activate = true,               -- Whether Hyprland should focus an app that requests to be focused (an `activate` request)
+    focus_on_activate = false,              -- Whether Hyprland should focus an app that requests to be focused (an `activate` request)
     mouse_move_focuses_monitor = true,      -- Whether mouse moving into a different monitor should focus it
     allow_session_lock_restore = false,     -- If true, will allow you to restart a lockscreen app in case it crashes
     session_lock_xray = false,              -- If true, keep rendering workspaces below your lockscreen

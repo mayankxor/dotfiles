@@ -1,0 +1,6 @@
+hl.on("config.reloaded", function()
+  hl.notification.create({ text = "Config reloaded", icon = "ok", duration = 2000, font_size = 20 })
+end)
+hl.on("window.urgent", function(w)
+  hl.notification.create({ text = w.class .. " requested intervention", icon = "info", duration = 2000, font_size = 20 })
+end)

@@ -3,12 +3,13 @@
 hl.env("XCURSOR_THEME", "capitaine-cursors")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("HYPRLAND_TRACE", "1")            -- Enables more verbose logging.
-hl.env("AQ_TRACE", "1")                  -- Enables more verbose logging.
-hl.env("GDK_BACKEND", "wayland,x11,*")   -- GTK: Use Wayland if available; if not, try X11 and then any other GDK backend.
-hl.env("QT_QPA_PLATFORM", "wayland;xcb") -- Qt: Use Wayland if available, fall back to X11 if not.
-hl.env("SDL_VIDEODRIVER", "wayland")     -- Run SDL2 applications on Wayland. Remove or set to x11 if games that provide older versions of SDL cause compatibility issues
-hl.env("CLUTTER_BACKEND", "wayland")     -- Clutter package already has Wayland enabled, this variable will force Clutter applications to try and use the Wayland backend
+hl.env("HYPRLAND_TRACE", "1")                            -- Enables more verbose logging.
+hl.env("HYPRLAND_CONFIG", "~/.config/hypr/hyprland.lua") -- Specifies where you want your Hyprland configuration.
+hl.env("AQ_TRACE", "1")                                  -- Enables more verbose logging.
+hl.env("GDK_BACKEND", "wayland,x11,*")                   -- GTK: Use Wayland if available; if not, try X11 and then any other GDK backend.
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")                 -- Qt: Use Wayland if available, fall back to X11 if not.
+hl.env("SDL_VIDEODRIVER", "wayland")                     -- Run SDL2 applications on Wayland. Remove or set to x11 if games that provide older versions of SDL cause compatibility issues
+hl.env("CLUTTER_BACKEND", "wayland")                     -- Clutter package already has Wayland enabled, this variable will force Clutter applications to try and use the Wayland backend
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")

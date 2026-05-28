@@ -1,4 +1,10 @@
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+if hl.version() ~= "0.55.2" then
+  hl.notification.create({
+    text = "Using version " ..
+        hl.version() .. ", config was written for 0.55.2, config may break."
+  })
+end
+local mainMod = "SUPER" -- Sets "Window + ALT + s" key as main modifier
 local resize_actions = {
   dwindle = function(delta)
     hl.dispatch(hl.dsp.layout("splitratio " .. delta))
@@ -107,7 +113,7 @@ hl.bind(mainMod .. " + L", function()
   local layoutt = layout()
   if layoutt == "scrolling" then
     hl.dispatch(hl.dsp.layout("focus right"))
-  elseif layoutt == "monocle" then
+  elseif layoutt == "monocle" or layoutt == "master" then
     hl.dispatch(hl.dsp.layout("cyclenext"))
   else
     hl.dispatch(hl.dsp.focus({ direction = "right" }))
@@ -117,17 +123,17 @@ hl.bind(mainMod .. " + K", function()
   local layoutt = layout()
   if layoutt == "scrolling" then
     hl.dispatch(hl.dsp.layout("focus right"))
-  elseif layoutt == "monocle" then
+  elseif layoutt == "monocle" or layoutt == "master" then
     hl.dispatch(hl.dsp.layout("cyclenext"))
   else
-    hl.dispatch(hl.dsp.focus({ direction = "right" }))
+    hl.dispatch(hl.dsp.focus({ direction = "up" }))
   end
 end)
 hl.bind(mainMod .. " + H", function()
   local layoutt = layout()
   if layoutt == "scrolling" then
     hl.dispatch(hl.dsp.layout("focus left"))
-  elseif layoutt == "monocle" then
+  elseif layoutt == "monocle" or layoutt == "master" then
     hl.dispatch(hl.dsp.layout("cycleprev"))
   else
     hl.dispatch(hl.dsp.focus({ direction = "left" }))
@@ -137,14 +143,12 @@ hl.bind(mainMod .. " + J", function()
   local layoutt = layout()
   if layoutt == "scrolling" then
     hl.dispatch(hl.dsp.layout("focus left"))
-  elseif layoutt == "monocle" then
+  elseif layoutt == "monocle" or layoutt == "master" then
     hl.dispatch(hl.dsp.layout("cycleprev"))
   else
-    hl.dispatch(hl.dsp.focus({ direction = "left" }))
+    hl.dispatch(hl.dsp.focus({ direction = "down" }))
   end
 end)
-hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -192,3 +196,72 @@ hl.bind(mainMod .. " + ALT + M", function() setLayout("monocle") end)
 hl.bind(mainMod .. " + ALT + D", function() setLayout("dwindle") end)
 hl.bind(mainMod .. " + ALT + N", function() setLayout("master") end)
 hl.bind(mainMod .. " + ALT + S", function() setLayout("scrolling") end)
+hl.bind("SUPER + X", function()
+  hl.dispatch(hl.dsp.workspace.toggle_special("minimize"))
+  hl.dispatch(hl.dsp.window.move({ workspace = "+0" }))
+  hl.dispatch(hl.dsp.workspace.toggle_special("minimize"))
+  hl.dispatch(hl.dsp.window.move({ workspace = "special:minimize" }))
+  hl.dispatch(hl.dsp.workspace.toggle_special("minimize"))
+end)
+hl.bind(mainMod .. " + F1", function()
+  local game_mode = (hl.get_config("animations.enabled") == false)
+  if game_mode then
+    hl.exec_cmd("hyprctl reload")
+    return
+  end
+  hl.config({
+    general    = {
+      gaps_in = 0,
+      gaps_out = 0,
+      border_size = 2,
+      col = {
+        active_border = "#ff0000"
+      }
+    },
+    animations = {
+      enabled = false,
+    },
+    decoration = {
+      shadow = { enabled = false, },
+      blur = { enabled = false, },
+      rounding = 0,
+    }
+  })
+end)
+
+hl.bind(mainMod .. " + tab", function()
+  local layouts     = { "scrolling", "dwindle", "master", "monocle" }
+  local workspace   = hl.get_active_workspace()
+  local next_layout = "dwindle"
+
+  if not workspace then
+    return
+  end
+
+  for i = 1, #layouts do
+    if layouts[i] == workspace.tiled_layout then
+      local next_layout_idx = (i % #layouts) + 1
+      next_layout = layouts[next_layout_idx]
+      break
+    end
+  end
+
+  hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
+  hl.notification.create({ text = "Workspace layout: " .. next_layout, timeout = 5000, color = "#00ff00" })
+end)
+hl.bind(mainMod .. " + SHIFT + G", function()
+  hl.exec_cmd("hyprctl reload")
+end)
+
+local hourlytimer = hl.timer(function()
+  hl.notification.create({ text = "Another second passed", timeout = 10000, font_size = 20, })
+end, { timeout = 3600000, type = "repeat" })
+hourlytimer:set_enabled(false)
+hl.bind(mainMod .. " + SHIFT + T", function()
+  if not hourlytimer:is_enabled() then
+    hl.notification.create({ text = "A repeating timer for 1 hour has been started", timeout = 5000, icon = "info", font_size = 20, })
+  else
+    hl.notification.create({ text = "Timer stopped", timeout = 5000, icon = "info", font_size = 20, })
+  end
+  hourlytimer:set_enabled(not hourlytimer:is_enabled())
+end)
