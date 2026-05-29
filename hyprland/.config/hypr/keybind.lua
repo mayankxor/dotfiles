@@ -265,3 +265,6 @@ hl.bind(mainMod .. " + SHIFT + T", function()
   end
   hourlytimer:set_enabled(not hourlytimer:is_enabled())
 end)
+
+hl.bind("PRINT", hl.dsp.exec_cmd("~/.config/hypr/scripts/takescreenshot.sh"))
+hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("~/.config/hypr/scripts/savescreenshot.sh"))
