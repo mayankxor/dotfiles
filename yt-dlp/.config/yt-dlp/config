@@ -1,6 +1,6 @@
--o "./%(playlist_title).50s/%(playlist_index&{}~|)s%(playlist_count&{}-|)s%(title).100s[%(id)s].%(ext)s"
--S res:720,+size
--f "bv+ba[format_note*=original]/bv+ba"
+--output "./%(playlist_title).50s/%(playlist_index&{}~|)s%(playlist_count&{}-|)s%(title).100s[%(id)s].%(ext)s"
+--format-sort res:480,+size
+--format "bv+ba[format_note*=original]/bv+ba"
 --write-auto-subs
 --sub-langs "en"
 --embed-subs
@@ -8,7 +8,7 @@
 --no-abort-on-error
 --ignore-errors
 --cookies "~/.cookies/youtube/DanglingSunMessier63.txt"
---yes-playlist
+--no-playlist
 --write-playlist-metafiles
 --continue
 --part
