@@ -1,0 +1,40 @@
+* {
+  border: none;
+  border-radius: 0px;
+  font-family: JetBrainsMono Nerd Font Propo;
+  font-size: 13px;
+  min-height: 0px;
+}
+
+window#waybar {
+  background: rgba(43, 48, 59, 0);
+  color: white;
+  border-bottom: 0px;
+}
+
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+
+#workspaces {
+  background: rgba(39, 39, 42, 1);
+  border-radius: 2px;
+}
+
+#workspaces button {
+  color: white;
+  background: transparent;
+  padding: 3px;
+  margin: 0px 0px 0px 0px;
+  border-radius: 2px;
+}
+
+#workspaces button.active {
+  background: rgba(117, 241, 250, 1);
+  color: black;
+}
+
+#workspaces button.urgent {
+  background: rgba(227, 81, 73, 1);
+}

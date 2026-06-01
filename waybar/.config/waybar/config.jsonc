@@ -1,0 +1,39 @@
+{
+  "layer": "top", // Decide if the bar is displayed in front (top) of the windows or behind (bottom) them.
+  "position": "top", // Bar position, can be `top`, `bottom`, `left`, `right`
+  "modules-left": ["hyprland/workspaces", "clock"], // Modules that will be displayed on the left.
+  "modules-center": [], // Modules that will be displayed in the center.
+  "modules-right": [], // Modules that will be displayed on the right.
+  "spacing": 4, // Size of gaps in between of the different modules.
+  "start_hidden": false, // Option to start the bar hidden.
+  "modifier-reset": "press", // Defines the timing of modifier key to reset the bar visibility. To reset the visibility of the bar with the press of the modifier key use `press`. Use `release` to reset the visibility upon the release of the modifier key and only if no other action happened while the key was pressed. This prevents hiding the bar when the modifier is used to switch a workspace, change binding mode or start a keybinding.
+  "exclusive": true, // Option to request an exclusive zone from the compositor. Disable this to allow drawing application windows underneath or on top of the bar. Disabled by default for `overlay` layer.
+  "fixed-center": true, // Prefer fixed center position for the `modules-center` block. The center block will stay in the middle of the bar whenever possible. It can still be pushed around if other blocks need more space. When false, the center block is centered in the space between the left and right block.
+  "passthrough": false, // Option to pass any pointer events to the window under the bar. Intended to be used with either `top` or `overlay` layers and without exclusive zone. Enabled by default for `overlay` layer.
+  "ipc": false, // Option to subscribe to the Sway IPC bar configuration and visibility events and control waybar with `swaymsg` bar command. Requires `bar_id` value from sway configuration to be wither passed with the `-b` commandline argument or specified with the `id` option. See https://github.com/Alexays/Waybar/pull/1244 for the documentation and configuration examples.
+  "reload_style_on_change": false, // Option to enable reloading the CSS style if a modification is detected on the style sheet file or any imported CSS files.
+  "on-sigusr1": "toggle", // Action that is performed when receiving SIGUSR1 kill signal. Possible values: `show`, `hide`, `toggle`, `reload`, `noop`.
+  "on-sigusr2": "reload", // Action that is performed when receiving SIGUSR2 kill signal. Possible values: `show`, `hide`, `toggle`, `reload`, `noop`.
+
+  "hyprland/workspaces": {
+    "active-only": false, // If set to true, only active workspace will be shown on bar. Unless a workspace is persistent, visible, or special. Otherwise all workspace groups are shown.
+    "hide-active": false, // If set to true, the active workspace will be hidden. Unless a workspace is persistent or special.
+    "all-outputs": false, // If set to false, workspaces group will be shown only in assigned output. Otherwise all workspace groups are shown.
+    "format": "{id}", // The format, how information should be displayed.
+    "format-icons": [], // Based on the workspace name and state, the corresponding icon gets selected. See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#module-hyprland-configuration-icons
+    "persistent-workspaces": [], // Lists workspaces that should always be shown, even when nonexistent. See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#persistent-workspaces
+    "workspace-taskbar": [], // Show per-workspace taskbars with app icons (similar to wlr/taskbar) instead of text representations. See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#workspace-taskbars
+    "persistent-only": false, // If set to true, only persistent workspaces will be shown on bar.
+    "show-special": false, // If set to true, will display special workspace alongside regular workspaces.
+    "special-visible-only": false, // If this and `show-special` are set to true, special workspaces will be shown only if visible.
+    "sort-by": "DEFAULT", // How to sort workspaces.
+    "window-rewrite": [], // An object of regexes to match against window classes (and/or titles, See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#module-hyprland-window-rewrite and map to a new representation. Mapping `firefox -> `, for example.
+    "window-rewrite-default": "?", // The default representation to be used when a window does not match any rules configured in `window-rewrite`.
+    "format-window-separator": " ", // The string used to separate window representations from each other.
+    "move-to-monitor": false, // If set to true, open the workspace on the current monitor when clicking on a workspace button. Otherwise, the workspace will open on the monitor where it was previously assigned. Analog to using `focusworkspaceoncurrentmonitor` dispatcher instead of `workspace` in Hyprland.
+    "ignore-workspaces": [], // An array of regexes to match against workspace names. If there's a match, the workspace will be ignored and won't be shown in your bar.
+    "on-scroll-up": "", // Command to execute when scrolling up on the module.
+    "on-scroll-down": "", // Command to execute when scrolling down on the module.
+    "on-click": "activate",
+  },
+}
