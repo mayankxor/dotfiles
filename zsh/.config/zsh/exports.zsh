@@ -9,7 +9,7 @@ export TERMINAL="st"
 export EXPLORER="yazi"
 export EDITOR="vim"
 export GCC_COLORS='error=01;35:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-export PATH="$HOME/installedApps/bin:$HOME/.scripts/:$HOME/.bun/bin:$PATH"
+export PATH="$HOME/installedApps/bin:$HOME/.scripts/:$HOME/.bun/bin:$HOME/.local/bin/:$PATH"
 export _ZO_DATA_DIR="$HOME/.archive/zoxide/data"
 export _ZO_ECHO=0
 export _ZO_EXCLUDE_DIRS=""
