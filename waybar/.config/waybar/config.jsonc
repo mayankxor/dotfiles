@@ -1,9 +1,9 @@
 {
   "layer": "top", // Decide if the bar is displayed in front (top) of the windows or behind (bottom) them.
   "position": "top", // Bar position, can be `top`, `bottom`, `left`, `right`
-  "modules-left": ["hyprland/workspaces", "clock"], // Modules that will be displayed on the left.
-  "modules-center": [], // Modules that will be displayed in the center.
-  "modules-right": [], // Modules that will be displayed on the right.
+  "modules-left": ["group/windows", "hyprland/window"], // Modules that will be displayed on the left.
+  "modules-center": ["clock"], // Modules that will be displayed in the center.
+  "modules-right": ["battery", "group/brightness"], // Modules that will be displayed on the right.
   "spacing": 4, // Size of gaps in between of the different modules.
   "start_hidden": false, // Option to start the bar hidden.
   "modifier-reset": "press", // Defines the timing of modifier key to reset the bar visibility. To reset the visibility of the bar with the press of the modifier key use `press`. Use `release` to reset the visibility upon the release of the modifier key and only if no other action happened while the key was pressed. This prevents hiding the bar when the modifier is used to switch a workspace, change binding mode or start a keybinding.
@@ -24,8 +24,8 @@
     "persistent-workspaces": [], // Lists workspaces that should always be shown, even when nonexistent. See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#persistent-workspaces
     "workspace-taskbar": [], // Show per-workspace taskbars with app icons (similar to wlr/taskbar) instead of text representations. See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#workspace-taskbars
     "persistent-only": false, // If set to true, only persistent workspaces will be shown on bar.
-    "show-special": false, // If set to true, will display special workspace alongside regular workspaces.
-    "special-visible-only": false, // If this and `show-special` are set to true, special workspaces will be shown only if visible.
+    "show-special": true, // If set to true, will display special workspace alongside regular workspaces.
+    "special-visible-only": true, // If this and `show-special` are set to true, special workspaces will be shown only if visible.
     "sort-by": "DEFAULT", // How to sort workspaces.
     "window-rewrite": [], // An object of regexes to match against window classes (and/or titles, See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#module-hyprland-window-rewrite and map to a new representation. Mapping `firefox -> `, for example.
     "window-rewrite-default": "?", // The default representation to be used when a window does not match any rules configured in `window-rewrite`.
@@ -34,6 +34,109 @@
     "ignore-workspaces": [], // An array of regexes to match against workspace names. If there's a match, the workspace will be ignored and won't be shown in your bar.
     "on-scroll-up": "", // Command to execute when scrolling up on the module.
     "on-scroll-down": "", // Command to execute when scrolling down on the module.
-    "on-click": "activate",
+  },
+
+  "hyprland/window": {
+    "format": "{title}", // The format, how information should be displayed. On `{}` the current window title is displayed.
+    "max-length": 30, // The maximum length in character the module should display.
+    "rewrite": {
+      "(.*) — LibreWolf": " $1",
+      "nvim": "",
+      "st": "",
+      "vim": "",
+      "(.*) - mpv": " $1",
+    }, // Rules to rewrite the module format output. The rules are identical to those for `sway/window`. See https://github.com/Alexays/Waybar/wiki/Module:-Sway#rewrite-rules
+    "separate-outputs": false, // Show the active window of the monitor the bar belongs to, instead of the focused window.
+    "icon": false, // Option to disable application icon.
+    "icon-size": 24, // Set the size of application icon.
+  },
+
+  "hyprland/windowcount": {
+    "format": "[{}]", // The format for how information should be displayed. On {}, the current workspace window count in displayed.
+    "format-empty": "​", // Override the format when the workspace contains no windows.
+    "format-windowed": "", // Override the format when the workspace contains no fullscreen windows.
+    "format-fullscreen": "", // Override the format when the workspace contains a fullscreen window.
+    "separate-outputs": true, // Show the active workspace window count of the monitor the bar belongs to, instead of the focused workspace.
+  },
+
+  "group/windows": {
+    "orientation": "horizontal",
+    "modules": ["hyprland/workspaces", "hyprland/windowcount"],
+  },
+
+  "backlight": {
+    "interval": 2, // The polling interval (in seconds) for the backlight level.
+    "format": "{icon} {percent}%", // The format, how information should be displayed. On `{}` data gets inserted.
+    "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"], // Based on the current screen brightness, the corresponding icon gets selected. The order is low to high.
+    "max-length": 7, // The maximum length in characters the module should display.
+    "rotate": 0, // Positive value to rotate the text label.
+    "states": {}, // A number of backlight states which get activated on certain brightness levels. See https://github.com/Alexays/Waybar/wiki/States
+    "on-click": "", // Command to execute when clicking on the module.
+    "on-click-middle": "", // Command to execute when you middle click on the module using the mousewheel.
+    "on-click-right": "", // Command to execute when you right click on the module.
+    "on-scroll-up": "", // Command to execute when scrolling up on the module. This replaces the default behaviour of brightness control.
+    "on-scroll-down": "", // Command to execute when scrolling down on the module. This replaces the default behaviour of brightness control.
+    "reverse-scrolling": false, // Option to reverse the scroll direction for devices other than a mouse (touchpad, trackpad, etc)
+    "reverse-mouse-scrolling": false, // Option to reverse the scroll direction for mice.
+    "scroll-step": 1.0, // The speed in which to change the brightness when scrolling.
+    "tooltip": false, //  	Option to disable tooltip on hover.
+    "tooltip-format": "", // Text to be displayed in the tooltip.
+  },
+
+  "backlight/slider": {
+    "min": 10, // The minimum value the slider should display and set.
+    "max": 100, // The maximum value the slider should display and set.
+    "orientation": "horizontal", // The orientation of the slider. Can be either `horizontal` or `vertical`.
+    "device": "", // The name of the preferred device to control. If left empty, a device will be chosen automatically.
+  },
+
+  "group/brightness": {
+    "orientation": "inherit",
+    "modules": ["backlight", "backlight/slider"],
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false,
+      "click-to-reveal": false,
+      "start-expanded": false,
+    },
+  },
+
+  "battery": {
+    "design-capacity": false, // Option to enable the use of the design capacity instead of the actual maximal capacity. This, even full, the battery may be at less than 100%.
+    "interval": 10, // The polling interval (in seconds) for the battery status.
+    "states": {
+      // A number of battery states which get activated on certain capacity levels. See https://github.com/Alexays/Waybar/wiki/States
+      "full": 101, // 94-100
+      "almost-full": 93, // 85-93
+      "healthy": 85, // 59-85
+      "half": 59, // 40-59
+      "alright": 40, // 20-40
+      "low": 20, // 10-20
+      "critical": 10, // 0-10
+    },
+    "format": "{icon} {capacity}%", // The format, how the information should be displayed.
+    "format-time": "{H} h {M} min", // The format of the estimate of time until full or empty. Use {m} for zero-padded minutes.
+    "format-icons": {
+      // Based on the current capacity, the corresponding icon gets selected. The order is low to high. Or by the state if it is an object.
+      "default": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+      "charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+    },
+    "max-length": 7, // The maximum length (in characters) the module should display.
+    "rotate": 0, // Positive value to rotate the text label.
+    "on-click": "", // Command to execute when clicking the module.
+    "on-click-middle": "", // Command to execute when you middle click on the module using the mousewheel.
+    "on-click-right": "", // Command to execute when you right click on the module.
+    "on-scroll-up": "", // Command to execute when scrolling up on the module.
+    "on-scroll-down": "", // Command to execute when scrolling down on the module.
+    "tooltip": true, // Option to enable tooltip on hover.
+    "tooltip-format": "Power drawn: {power} W\n{timeTo}\nCharge cycles seen: {cycles}\nMax Battery health: {health}%", // The tooltip format.
+    "tooltip-format-charging": "Power drawn: {power} W\n{timeTo}\nCharge cycles seen: {cycles}\nBattery health: {health}%",
+  },
+
+  // TODO: COMPLETE THIS MODULE
+  "clock": {
+    "interval": 1,
+    "format": "{:%B %d %Y %H:%M:%S %A}", // strftime
+    "tooltip-format": "<span>{calendar}</span>",
   },
 }
