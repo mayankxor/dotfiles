@@ -40,11 +40,26 @@
     "format": "{title}", // The format, how information should be displayed. On `{}` the current window title is displayed.
     "max-length": 30, // The maximum length in character the module should display.
     "rewrite": {
-      "(.*) — LibreWolf": " $1",
+      "amazon.com:?.? :? ?(.*) — librewolf": " $1",
+      "google — librewolf": "",
+      "(.*) - google search — librewolf": " $1",
+      "reddit - .* — librewolf": "",
+      "(.* : r/[a-zA-Z0-9]*) — LibreWolf": " $1",
+      "wikipedia — librewolf": "",
+      "(.*) - wikipedia — LibreWolf": " $1",
+      "whatsapp ?w?e?b? ?— librewolf": "󰖣",
+      "(.*) whatsapp — librewolf": "󰖣 $1",
+      "github — librewolf": "",
+      "Discord .* ?— librewolf": "",
+      "^(.*) discord .* ?— librewolf": " $1",
       "nvim": "",
       "st": "",
       "vim": "",
-      "(.*) - mpv": " $1",
+      "(.*) - mpv$": " $1",
+      "(.*) - youtube — librewolf$": "󰗃 $1",
+      "youtube — librewolf": "󰗃",
+      "^(?!amazon.com:?.? :? ?)(?!.* - youtube — librewolf$)(?!google ?)(?!reddit.*)(?!wikipedia)(?!whatsapp ?w?e?b?)(?!github)(.*) — librewolf$": " $1",
+      "librewolf": "",
     }, // Rules to rewrite the module format output. The rules are identical to those for `sway/window`. See https://github.com/Alexays/Waybar/wiki/Module:-Sway#rewrite-rules
     "separate-outputs": false, // Show the active window of the monitor the bar belongs to, instead of the focused window.
     "icon": false, // Option to disable application icon.
