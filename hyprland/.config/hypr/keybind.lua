@@ -32,7 +32,8 @@ hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q",
   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(FILEMANAGER))
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(BROWSER))
+-- TODO: Map this to submap
+-- hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(BROWSER))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(MENU))
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("hyprlock"))
@@ -193,6 +194,7 @@ local function setLayout(name)
   })
 end
 hl.bind(mainMod .. " + ALT + M", function() setLayout("monocle") end)
+hl.bind(mainMod .. " + M", function() setLayout("monocle") end)
 hl.bind(mainMod .. " + ALT + D", function() setLayout("dwindle") end)
 hl.bind(mainMod .. " + ALT + N", function() setLayout("master") end)
 hl.bind(mainMod .. " + ALT + S", function() setLayout("scrolling") end)
@@ -268,3 +270,5 @@ end)
 
 hl.bind("PRINT", hl.dsp.exec_cmd("~/.config/hypr/scripts/takescreenshot.sh"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("~/.config/hypr/scripts/savescreenshot.sh"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("bash -c 'kill -SIGUSR1 $(pidof waybar)'"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("bash -c 'kill -SIGUSR2 $(pidof waybar)'"))
