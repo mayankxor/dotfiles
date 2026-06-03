@@ -5,13 +5,13 @@ export STATUS_FILE="$XDG_RUNTIME_DIR/keyboard.status"
 enable_keyboard() {
     printf "true" >"$STATUS_FILE"
     notify-send -u normal "Enabling Keyboard"
-    hyprctl keyword '$LAPTOP_KB_ENABLED' "true" -r
+    hyprctl eval 'hl.device({name="at-translated-set-2-keyboard", enabled = true})'
 }
 
 disable_keyboard() {
     printf "false" >"$STATUS_FILE"
     notify-send -u normal "Disabling Keyboard"
-    hyprctl keyword '$LAPTOP_KB_ENABLED' "false" -r
+    hyprctl eval 'hl.device({name="at-translated-set-2-keyboard", enabled = false})'
 }
 
 if ! [ -f "$STATUS_FILE" ]; then
