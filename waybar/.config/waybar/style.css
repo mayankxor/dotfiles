@@ -22,8 +22,11 @@ tooltip {
 
 #window,
 #windows,
+#submap,
 #battery,
 #clock,
+#tray,
+#bluetoothgroup,
 #brightness {
   background: rgba(39, 39, 42, 1);
   border-radius: 8px;
@@ -34,10 +37,17 @@ tooltip {
 
 #windows {
   padding-left: 0px;
+  padding-right: 0px;
+}
+
+#windowcount {
+  padding: 0px 2px 0px 3px;
 }
 
 window#waybar.empty #windowcount {
   background: transparent;
+  padding: 0px;
+  margin: 0px;
 }
 
 #window {
@@ -116,7 +126,8 @@ window#waybar.empty #window {
   animation-direction: alternate;
 }
 
-#battery.critical:not(.charging) {
+#battery.critical:not(.charging),
+#tray > .needs-attention {
   background-color: #f53c3c;
   color: #ffffff;
   animation-name: blink;
@@ -124,4 +135,10 @@ window#waybar.empty #window {
   animation-timing-function: steps(12);
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+#submap {
+  border: 2px solid red;
+}
+#bluetooth {
+  min-width: 16px;
 }

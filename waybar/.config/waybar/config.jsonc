@@ -1,12 +1,17 @@
 {
   "layer": "top", // Decide if the bar is displayed in front (top) of the windows or behind (bottom) them.
   "position": "top", // Bar position, can be `top`, `bottom`, `left`, `right`
-  "modules-left": ["group/windows", "hyprland/window"], // Modules that will be displayed on the left.
+  "modules-left": ["group/windows", "hyprland/window", "hyprland/submap"], // Modules that will be displayed on the left.
   "modules-center": ["clock"], // Modules that will be displayed in the center.
-  "modules-right": ["battery", "group/brightness"], // Modules that will be displayed on the right.
+  "modules-right": [
+    "battery",
+    "group/bluetoothgroup",
+    "group/brightness",
+    "tray",
+  ], // Modules that will be displayed on the right.
   "spacing": 4, // Size of gaps in between of the different modules.
   "start_hidden": false, // Option to start the bar hidden.
-  "modifier-reset": "press", // Defines the timing of modifier key to reset the bar visibility. To reset the visibility of the bar with the press of the modifier key use `press`. Use `release` to reset the visibility upon the release of the modifier key and only if no other action happened while the key was pressed. This prevents hiding the bar when the modifier is used to switch a workspace, change binding mode or start a keybinding.
+  "modifier-reset": "press", // Defines the timing of modifier key to reset the bar visibility. To reset the visibility of the bar with the press of the modifier key use `press`. Use `release` to reset the visibility upon the release of the modifier key and only if no other action happened while the key was pressed. This prevents hiding the bar when the modifier is used to switch a workpace, change binding mode or start a keybinding.
   "exclusive": true, // Option to request an exclusive zone from the compositor. Disable this to allow drawing application windows underneath or on top of the bar. Disabled by default for `overlay` layer.
   "fixed-center": true, // Prefer fixed center position for the `modules-center` block. The center block will stay in the middle of the bar whenever possible. It can still be pushed around if other blocks need more space. When false, the center block is centered in the space between the left and right block.
   "passthrough": false, // Option to pass any pointer events to the window under the bar. Intended to be used with either `top` or `overlay` layers and without exclusive zone. Enabled by default for `overlay` layer.
@@ -14,6 +19,8 @@
   "reload_style_on_change": false, // Option to enable reloading the CSS style if a modification is detected on the style sheet file or any imported CSS files.
   "on-sigusr1": "toggle", // Action that is performed when receiving SIGUSR1 kill signal. Possible values: `show`, `hide`, `toggle`, `reload`, `noop`.
   "on-sigusr2": "reload", // Action that is performed when receiving SIGUSR2 kill signal. Possible values: `show`, `hide`, `toggle`, `reload`, `noop`.
+
+  "custom/space": { "format": " ", "tooltip": false },
 
   "hyprland/workspaces": {
     "active-only": false, // If set to true, only active workspace will be shown on bar. Unless a workspace is persistent, visible, or special. Otherwise all workspace groups are shown.
@@ -28,8 +35,7 @@
     "special-visible-only": true, // If this and `show-special` are set to true, special workspaces will be shown only if visible.
     "sort-by": "DEFAULT", // How to sort workspaces.
     "window-rewrite": [], // An object of regexes to match against window classes (and/or titles, See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#module-hyprland-window-rewrite and map to a new representation. Mapping `firefox -> `, for example.
-    "window-rewrite-default": "?", // The default representation to be used when a window does not match any rules configured in `window-rewrite`.
-    "format-window-separator": " ", // The string used to separate window representations from each other.
+    "window-rewrite-default": "?", // The default representation to be used when a window does not match any rules configured in `window-rewrite`. "format-window-separator": " ", // The string used to separate window representations from each other.
     "move-to-monitor": false, // If set to true, open the workspace on the current monitor when clicking on a workspace button. Otherwise, the workspace will open on the monitor where it was previously assigned. Analog to using `focusworkspaceoncurrentmonitor` dispatcher instead of `workspace` in Hyprland.
     "ignore-workspaces": [], // An array of regexes to match against workspace names. If there's a match, the workspace will be ignored and won't be shown in your bar.
     "on-scroll-up": "", // Command to execute when scrolling up on the module.
@@ -66,6 +72,19 @@
     "icon-size": 24, // Set the size of application icon.
   },
 
+  "hyprland/submap": {
+    "format": "{}",
+    "max-length": 10,
+    "on-click": "",
+    "on-click-middle": "",
+    "on-click-right": "",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "rotate": 0,
+    "tooltip": true,
+    "always-on": false,
+    "default-submap": "Default",
+  },
   "hyprland/windowcount": {
     "format": "[{}]", // The format for how information should be displayed. On {}, the current workspace window count in displayed.
     "format-empty": "​", // Override the format when the workspace contains no windows.
@@ -148,10 +167,99 @@
     "tooltip-format-charging": "Power drawn: {power} W\n{timeTo}\nCharge cycles seen: {cycles}\nBattery health: {health}%",
   },
 
-  // TODO: COMPLETE THIS MODULE
   "clock": {
     "interval": 1,
-    "format": "{:%B %d %Y %H:%M:%S %A}", // strftime
-    "tooltip-format": "<span>{calendar}</span>",
+    "format-alt": "{:%B %d %Y %H:%M:%S %A}", // strftime
+    "format": "{:%H:%M:%S}",
+    "rotate": 0,
+    "on-click": "",
+    "on-click-middle": "",
+    "on-click-right": "",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "tooltip": true,
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "left",
+      "on-scroll": 1,
+      "iso8601": true,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b>:</span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-middle": "shift_reset",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down",
+    },
+  },
+
+  "tray": {
+    "icon-size": 20,
+    "show-passive-items": true,
+    "spacing": 10,
+    "reverse-direction": false,
+    "icons": {},
+  },
+
+  "group/bluetoothgroup": {
+    "orientation": "inherit",
+    "modules": ["bluetooth", "bluetooth#2", "custom/space"],
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false,
+      "click-to-reveal": false,
+      "start-expanded": false,
+    },
+  },
+
+  "bluetooth": {
+    "format": "no-format?",
+    "format-disabled": "󰂯?",
+    "format-off": "󰂲",
+    "format-on": "󰂯",
+    "format-connected": "󰂱 {num_connections}",
+    "format-connected-battery": "󰂱 {num_connections}",
+    "format-no-controller": "󰂯?",
+    "rotate": 0,
+    "max-length": 25,
+    "min-length": 0,
+    "on-click": "$TERMINAL -e sh -c 'bluetoothctl'",
+    "on-click-middle": "",
+    "on-click-right": "./scripts/bluetoothtoggle.sh",
+    "on-scroll-down": "",
+    "on-scroll-up": "",
+    "tooltip": true,
+    "tooltip-format": "Controller: {controller_alias}\naddress: {controller_address} of type {controller_address_type}",
+  },
+
+  "bluetooth#2": {
+    "format": "no-format?",
+    "format-disabled": "disabled",
+    "format-off": "off",
+    "format-on": "on",
+    "format-connected": "{device_alias}",
+    "format-connected-battery": "{device_alias} ({device_battery_percentage}%)",
+    "format-no-controller": "No controllers",
+    "rotate": 0,
+    "max-length": 25,
+    "min-length": 0,
+    "on-click": "$TERMINAL -e sh -c 'bluetoothctl'",
+    "on-click-middle": "",
+    "on-click-right": "./scripts/bluetoothtoggle.sh",
+    "on-scroll-down": "",
+    "on-scroll-up": "",
+    "tooltip": true,
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-connected-battery": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}: {device_address} of type {device_address_type}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}<b>({device_battery_percentage}%)</b>: {device_address} of type {device_address_type}",
   },
 }
