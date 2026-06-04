@@ -1,4 +1,5 @@
 TERMINAL    = "$TERMINAL"
 FILEMANAGER = "$TERMINAL -e sh -c yazi"
-MENU        = "hyprlauncher"
+MENU        = "dmenu_run_desktop"
+MENUALL     = "dmenu_run"
 BROWSER     = "librewolf"

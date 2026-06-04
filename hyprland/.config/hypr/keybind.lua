@@ -1,10 +1,11 @@
 if hl.version() ~= "0.55.2" then
   hl.notification.create({
     text = "Using version " ..
-        hl.version() .. ", config was written for 0.55.2, config may break."
+        hl.version() .. ", config was written for 0.55.2, may break."
   })
 end
-local mainMod = "SUPER" -- Sets "Window + ALT + s" key as main modifier
+local scriptsDirectory = "~/.scripts"
+local mainMod = "SUPER"
 local resize_actions = {
   dwindle = function(delta)
     hl.dispatch(hl.dsp.layout("splitratio " .. delta))
@@ -36,6 +37,7 @@ hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(FILEMANAGER))
 -- hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(BROWSER))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(MENU))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd(MENUALL))
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("hyprlock"))
 
 hl.bind(mainMod .. " + RIGHT", function() resize("+0.01") end)
@@ -272,3 +274,4 @@ hl.bind("PRINT", hl.dsp.exec_cmd("~/.config/hypr/scripts/takescreenshot.sh"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("~/.config/hypr/scripts/savescreenshot.sh"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("bash -c 'kill -SIGUSR1 $(pidof waybar)'"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("bash -c 'kill -SIGUSR2 $(pidof waybar)'"))
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("bash -c '" .. scriptsDirectory .. "/passmngr.sh'"))

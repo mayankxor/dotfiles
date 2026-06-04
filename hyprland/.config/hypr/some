@@ -1,0 +1,19 @@
+notify-send "Build Complete" "Compilation finished successfully."
+
+notify-send "Low Battery" "Battery level has dropped below 15%."
+
+notify-send "Tea Reminder" "Your tea has been steeping for 5 minutes."
+
+notify-send "Music Paused" "Playback stopped because the output device changed."
+
+notify-send "Kernel Panic" "Just kidding. Everything is fine."
+
+notify-send "New Mail" "You have 3 unread messages."
+
+notify-send "Backup Finished" "All files were synchronized."
+
+notify-send "Hydration Check" "Drink some water."
+
+notify-send "Achievement Unlocked" "Spent 4 hours configuring Neovim."
+
+notify-send "The Void Calls" "A segmentation fault approaches."
