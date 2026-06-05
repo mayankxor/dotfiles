@@ -1,0 +1,10 @@
+[default]
+path = "~/Pictures/walls"
+duration = "30m"
+sorting = "random"
+mode = "stretch"
+transition-time = 1000
+offset = 0.5
+queue-size = 10
+initial-transition = true
+recursive = true
