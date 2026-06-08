@@ -40,31 +40,6 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(MENU))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd(MENUALL))
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("hyprlock"))
 
-hl.bind(mainMod .. " + RIGHT", function() resize("+0.01") end)
-hl.bind(mainMod .. " + LEFT", function() resize("-0.01") end)
-hl.bind(mainMod .. " + SHIFT + RIGHT", function() resize("+0.1") end)
-hl.bind(mainMod .. " + SHIFT + LEFT", function() resize("-0.1") end)
-
-hl.bind(mainMod .. " + UP", function()
-  if layout() == "dwindle" then
-    hl.dispatch(hl.dsp.layout("splitratio -0.01"))
-  end
-end)
-hl.bind(mainMod .. " + SHIFT + UP", function()
-  if layout() == "dwindle" then
-    hl.dispatch(hl.dsp.layout("splitratio -0.1"))
-  end
-end)
-hl.bind(mainMod .. " + DOWN", function()
-  if layout() == "dwindle" then
-    hl.dispatch(hl.dsp.layout("splitratio +0.01"))
-  end
-end)
-hl.bind(mainMod .. " + SHIFT + DOWN", function()
-  if layout() == "dwindle" then
-    hl.dispatch(hl.dsp.layout("splitratio +0.1"))
-  end
-end)
 
 hl.bind(mainMod .. " + RETURN", function()
   local layoutt = layout()
@@ -195,18 +170,6 @@ local function setLayout(name)
     }
   })
 end
-hl.bind(mainMod .. " + ALT + M", function() setLayout("monocle") end)
-hl.bind(mainMod .. " + M", function() setLayout("monocle") end)
-hl.bind(mainMod .. " + ALT + D", function() setLayout("dwindle") end)
-hl.bind(mainMod .. " + ALT + N", function() setLayout("master") end)
-hl.bind(mainMod .. " + ALT + S", function() setLayout("scrolling") end)
-hl.bind("SUPER + X", function()
-  hl.dispatch(hl.dsp.workspace.toggle_special("minimize"))
-  hl.dispatch(hl.dsp.window.move({ workspace = "+0" }))
-  hl.dispatch(hl.dsp.workspace.toggle_special("minimize"))
-  hl.dispatch(hl.dsp.window.move({ workspace = "special:minimize" }))
-  hl.dispatch(hl.dsp.workspace.toggle_special("minimize"))
-end)
 hl.bind(mainMod .. " + F1", function()
   local game_mode = (hl.get_config("animations.enabled") == false)
   if game_mode then
@@ -275,3 +238,56 @@ hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("~/.config/hypr/scripts/savescreenshot.
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("bash -c 'kill -SIGUSR1 $(pidof waybar)'"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("bash -c 'kill -SIGUSR2 $(pidof waybar)'"))
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("bash -c '" .. scriptsDirectory .. "/passmngr.sh'"))
+
+hl.bind(mainMod .. " + ALT + R", hl.dsp.submap("resize"))
+hl.define_submap("resize", function()
+  hl.bind("RIGHT", function() resize("+0.01") end)
+  hl.bind("LEFT", function() resize("-0.01") end)
+  hl.bind("SHIFT + RIGHT", function() resize("+0.1") end)
+  hl.bind("SHIFT + LEFT", function() resize("-0.1") end)
+
+  hl.bind("UP", function()
+    if layout() == "dwindle" then
+      hl.dispatch(hl.dsp.layout("splitratio -0.01"))
+    end
+  end)
+  hl.bind("SHIFT + UP", function()
+    if layout() == "dwindle" then
+      hl.dispatch(hl.dsp.layout("splitratio -0.1"))
+    end
+  end)
+  hl.bind("DOWN", function()
+    if layout() == "dwindle" then
+      hl.dispatch(hl.dsp.layout("splitratio +0.01"))
+    end
+  end)
+  hl.bind("SHIFT + DOWN", function()
+    if layout() == "dwindle" then
+      hl.dispatch(hl.dsp.layout("splitratio +0.1"))
+    end
+  end)
+  hl.bind("escape", hl.dsp.submap("reset"))
+end)
+hl.bind(mainMod .. " + M", function()
+  setLayout("monocle")
+end)
+hl.bind(mainMod .. " + ALT + L", hl.dsp.submap("layout"))
+hl.define_submap("layout", function()
+  hl.bind("M", function()
+    setLayout("monocle")
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+  hl.bind("D", function()
+    setLayout("dwindle")
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+  hl.bind("N", function()
+    setLayout("master")
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+  hl.bind("S", function()
+    setLayout("scrolling")
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+  hl.bind("escape", hl.dsp.submap("reset"))
+end)
