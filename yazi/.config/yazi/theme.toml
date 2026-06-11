@@ -1,0 +1,3 @@
+[git]
+modified = { fg = "blue" }
+deleted  = { fg = "red", bold = true }
