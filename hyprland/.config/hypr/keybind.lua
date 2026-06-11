@@ -1,7 +1,8 @@
-if hl.version() ~= "0.55.2" then
+if hl.version() ~= "0.55.3" then
   hl.notification.create({
     text = "Using version " ..
-        hl.version() .. ", config was written for 0.55.2, may break."
+        hl.version() .. ", config was written for 0.55.3, may break.",
+    timeout = 10000,
   })
 end
 local scriptsDirectory = "~/.scripts"
@@ -133,7 +134,7 @@ end)
 for i = 1, 10 do
   local key = i % 10 -- 10 maps to key 0
   hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-  hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+  hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
 -- Example special workspace (scratchpad)
