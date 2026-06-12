@@ -23,15 +23,21 @@ tooltip {
 #window,
 #windows,
 #submap,
+#media,
+#memory,
 #battery,
+#volume,
+#network,
 #clock,
+#internet,
+#privacy,
 #tray,
 #bluetoothgroup,
 #brightness {
   background: rgba(39, 39, 42, 1);
   border-radius: 8px;
   padding: 0px 2px 0px 2px;
-  margin: 4px 4px 5px 4px;
+  margin: 4px 4px 0px 4px;
   /* border: 3px solid red; */
 }
 
@@ -79,7 +85,8 @@ window#waybar.empty #window {
   font-weight: 700;
 }
 
-#backlight-slider slider {
+#backlight-slider slider,
+#pulseaudio-slider slider{
   all: unset;
   min-height: 0;
   min-width: 0;
@@ -89,14 +96,16 @@ window#waybar.empty #window {
   box-shadow: none;
 }
 
-#backlight-slider trough {
+#backlight-slider trough,
+#pulseaudio-slider trough{
   min-height: 5px;
   min-width: 75px;
   border-radius: 5px;
   background: rgba(63, 63, 70, 1);
 }
 
-#backlight-slider highlight {
+#backlight-slider highlight,
+#pulseaudio-slider highlight{
   min-width: 10px;
   border-radius: 5px;
   background: @highlight;
@@ -127,6 +136,7 @@ window#waybar.empty #window {
 }
 
 #battery.critical:not(.charging),
+#memory.critical,
 #tray > .needs-attention {
   background-color: #f53c3c;
   color: #ffffff;
@@ -141,4 +151,19 @@ window#waybar.empty #window {
 }
 #bluetooth {
   min-width: 16px;
+}
+#privacy-item.audio-in, #privacy-item.screenshare {
+  color: lightpink;
+}
+
+#memory.okayish {
+  background: #00ff48;
+  color: black;
+}
+#memory.warning {
+  background: darkorange;
+  color: black;
+}
+#custom-media-playing {
+  padding-right : 20px;
 }

@@ -1,18 +1,25 @@
 {
   "layer": "top", // Decide if the bar is displayed in front (top) of the windows or behind (bottom) them.
   "position": "top", // Bar position, can be `top`, `bottom`, `left`, `right`
-  "modules-left": ["group/windows", "hyprland/window", "hyprland/submap"], // Modules that will be displayed on the left.
-  "modules-center": ["clock"], // Modules that will be displayed in the center.
+  "modules-left": [
+    "group/windows",
+    "hyprland/window",
+    "hyprland/submap"
+    // "group/media",
+  ], // Modules that will be displayed on the left.
+  "modules-center": ["clock", "privacy"], // Modules that will be displayed in the center.
   "modules-right": [
     "battery",
+    "memory",
     "group/bluetoothgroup",
+    "group/internet",
+    "group/volume",
     "group/brightness",
     "tray",
   ], // Modules that will be displayed on the right.
   "spacing": 4, // Size of gaps in between of the different modules.
   "start_hidden": false, // Option to start the bar hidden.
-  "modifier-reset": "press", // Defines the timing of modifier key to reset the bar visibility. To reset the visibility of the bar with the press of the modifier key use `press`. Use `release` to reset the visibility upon the release of the modifier key and only if no other action happened while the key was pressed. This prevents hiding the bar when the modifier is used to switch a workpace, change binding mode or start a keybinding.
-  "exclusive": true, // Option to request an exclusive zone from the compositor. Disable this to allow drawing application windows underneath or on top of the bar. Disabled by default for `overlay` layer.
+  "modifier-reset": "press", // Defines the timing of modifier key to reset the bar visibility. To reset the visibility of the bar with the press of the modifier key use `press`. Use `release` to reset the visibility upon the release of the modifier key and only if no other action happened while the key was pressed. This prevents hiding the bar when the modifier is used to switch a workpace, change binding mode or start a keybinding. "exclusive": true, // Option to request an exclusive zone from the compositor. Disable this to allow drawing application windows underneath or on top of the bar. Disabled by default for `overlay` layer.
   "fixed-center": true, // Prefer fixed center position for the `modules-center` block. The center block will stay in the middle of the bar whenever possible. It can still be pushed around if other blocks need more space. When false, the center block is centered in the space between the left and right block.
   "passthrough": false, // Option to pass any pointer events to the window under the bar. Intended to be used with either `top` or `overlay` layers and without exclusive zone. Enabled by default for `overlay` layer.
   "ipc": false, // Option to subscribe to the Sway IPC bar configuration and visibility events and control waybar with `swaymsg` bar command. Requires `bar_id` value from sway configuration to be wither passed with the `-b` commandline argument or specified with the `id` option. See https://github.com/Alexays/Waybar/pull/1244 for the documentation and configuration examples.
@@ -75,13 +82,13 @@
   "hyprland/submap": {
     "format": "{}",
     "max-length": 10,
-    "on-click": "",
+    "on-click": "reset",
     "on-click-middle": "",
     "on-click-right": "",
     "on-scroll-up": "",
     "on-scroll-down": "",
     "rotate": 0,
-    "tooltip": true,
+    "tooltip": false,
     "always-on": false,
     "default-submap": "Default",
   },
@@ -202,7 +209,7 @@
   },
 
   "tray": {
-    "icon-size": 20,
+    "icon-size": 21,
     "show-passive-items": true,
     "spacing": 10,
     "reverse-direction": false,
@@ -233,7 +240,7 @@
     "min-length": 0,
     "on-click": "$TERMINAL -e sh -c 'bluetoothctl'",
     "on-click-middle": "",
-    "on-click-right": "./scripts/bluetoothtoggle.sh",
+    "on-click-right": "~/.config/waybar/scripts/bluetoothtoggle.sh",
     "on-scroll-down": "",
     "on-scroll-up": "",
     "tooltip": true,
@@ -253,7 +260,7 @@
     "min-length": 0,
     "on-click": "$TERMINAL -e sh -c 'bluetoothctl'",
     "on-click-middle": "",
-    "on-click-right": "./scripts/bluetoothtoggle.sh",
+    "on-click-right": "~/.config/waybar/scripts/bluetoothtoggle.sh",
     "on-scroll-down": "",
     "on-scroll-up": "",
     "tooltip": true,
@@ -261,5 +268,181 @@
     "tooltip-format-connected-battery": "{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}: {device_address} of type {device_address_type}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}<b>({device_battery_percentage}%)</b>: {device_address} of type {device_address_type}",
+  },
+  "network": {
+    "interval": 5,
+    "family": "ipv4",
+    "format": "{ifname}, {ipaddr}",
+    "format-ethernet": "",
+    "format-wifi": "{icon}",
+    "format-linked": "",
+    "format-disconnected": "󰤫",
+    "format-disabled": "󰤭",
+    // "format-alt": "",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "rotate": 0,
+    "max-length": 30,
+    "on-click": "$TERMINAL nmtui-connect",
+    "on-click-middle": "",
+    "on-click-right": "~/.config/waybar/scripts/togglewifi.sh",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "tooltip": true,
+    "tooltip-format": "",
+    "tooltip-format-ethernet": "",
+    "tooltip-format-wifi": "Interface: {ifname}\nIP: {ipaddr}\nGateway: {gwaddr}\nNetmask: {netmask}[{cidr}](IPV4), {netmask6}[{cidr6}](IPV6)",
+    "tooltip-format-disconnected": "",
+    "tooltip-format-disabled": "",
+  },
+  "network#2": {
+    "interval": 5,
+    "family": "ipv4",
+    "format": "{ifname}, {ipaddr}",
+    "format-ethernet": "{essid}",
+    "format-wifi": "{essid}",
+    "format-linked": "{essid}",
+    "format-disconnected": "disconnected",
+    "format-disabled": "disabled",
+    // "format-alt": "",
+    "rotate": 0,
+    "on-click": "$TERMINAL nmtui-connect",
+    "on-click-middle": "",
+    "on-click-right": "",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "tooltip": true,
+    "tooltip-format": "{essid}:\n\tStrength: {signalStrength}%({signaldBm}dBm)\n\tfrequency: {frequency}GHz\n\tUP: {bandwidthUpBytes}\n\tDOWN: {bandwidthDownBytes}\n\tTOTAL: {bandwidthTotalBytes}",
+    "tooltip-format-ethernet": "",
+    "tooltip-format-wifi": "",
+    "tooltip-format-disconnected": "",
+    "tooltip-format-disabled": "",
+  },
+  "group/internet": {
+    "orientation": "inherit",
+    "modules": ["network", "network#2"],
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false,
+      "click-to-reveal": false,
+      "start-expanded": false,
+    },
+  },
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 18,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24,
+      },
+    ],
+    "expand": true,
+    "ignore-monitor": true,
+    "ignore": [
+      {
+        "type": "audio-in",
+        "name": "cava",
+      },
+    ],
+  },
+  "memory": {
+    "interval": 10,
+    "format": " {percentage}%",
+    "rotate": 0,
+    "states": {
+      "okayish": 30,
+      "warning": 70,
+      "critical": 90,
+    },
+    "max-length": 10,
+    "on-click": "$TERMINAL -e sh -ic 'free -h | command bat --language cpuinfo --plain; echo Press Enter to close...;read'",
+    "on-click-middle": "",
+    "on-click-right": "",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "tooltip": true,
+    "tooltip-format": "RAM: {used}/{total} GiB ({percentage}%) - {avail}Gib remaining\nSwap: {swapUsed}/{swapTotal} GiB ({swapPercentage}%) - {swapAvail}Gib remaining",
+  },
+  "group/volume": {
+    "orientation": "inherit",
+    "modules": ["pulseaudio", "pulseaudio/slider"],
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false,
+      "click-to-reveal": false,
+      "start-expanded": false,
+    },
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-muted": "",
+    "format-source": "{volume}%",
+    "format-source-muted": "{volume}%",
+    "format-icons": {
+      "headphone": "󰋋",
+      // "headset": "󰋎",
+      "phone": "󰏲",
+      "phone-muted": "󱔰",
+      "car": "󰄋",
+      "hdmi": "󰡁",
+      "default": ["", "", ""],
+    },
+    "rotate": 0,
+    "states": {
+      "critical": 90,
+    },
+    "max-length": 10,
+    "scroll-step": 1.0,
+    "on-click": "pavucontrol",
+    "on-click-middle": "",
+    "on-click-right": "",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "tooltip": true,
+    "tooltip-format": "{desc}",
+    "max-volume": 100,
+    "ignored-sinks": {},
+    "reverse-scrolling": false,
+    "reverse-mouse-scrolling": false,
+  },
+
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal",
+  },
+  "custom/media-playing": {
+    "exec": "~/.config/waybar/custom/media-scroll.sh",
+    "escape": true,
+    "tooltip": false,
+    "hide-empty-text": true,
+    "return-type": "text",
+  },
+
+  "custom/media-time": {
+    "exec": "~/.config/waybar/custom/media-time.sh",
+    "escape": true,
+    "tooltip": false,
+    "interval": 1,
+    "hide-empty-text": true,
+    "return-type": "text",
+  },
+
+  "group/media": {
+    "orientation": "inherit",
+    "modules": ["custom/media-playing", "custom/media-time"],
   },
 }
