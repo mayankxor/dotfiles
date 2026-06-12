@@ -12,3 +12,19 @@ require('font-sample'):setup {
   bg = 'white',
   fg = 'black',
 }
+
+require("bookmarks"):setup({
+  last_directory = { enable = false, persist = false, mode = "dir" },
+  persist = "none",
+  desc_format = "full",
+  custom_desc_input = false,
+  notify = {
+    enable = true,
+    timeout = 5,
+    message = {
+      new = "New bookmark '<key>' -> '<folder>'",
+      delete = "Deleted bookmark in '<key>",
+      delete_all = "Deleted all bookmarks"
+    }
+  }
+})
