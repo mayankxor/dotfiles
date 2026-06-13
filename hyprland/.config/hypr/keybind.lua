@@ -27,10 +27,8 @@ local function resize(delta)
   end
 end
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(TERMINAL))
 hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + SHIFT + Q",
   hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(FILEMANAGER))
@@ -195,26 +193,28 @@ hl.bind(mainMod .. " + F1", function()
   })
 end)
 
-hl.bind(mainMod .. " + tab", function()
-  local layouts     = { "scrolling", "dwindle", "master", "monocle" }
-  local workspace   = hl.get_active_workspace()
-  local next_layout = "dwindle"
-
-  if not workspace then
-    return
-  end
-
-  for i = 1, #layouts do
-    if layouts[i] == workspace.tiled_layout then
-      local next_layout_idx = (i % #layouts) + 1
-      next_layout = layouts[next_layout_idx]
-      break
-    end
-  end
-
-  hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
-  hl.notification.create({ text = "Workspace layout: " .. next_layout, timeout = 5000, color = "#00ff00" })
-end)
+-- hl.bind(mainMod .. " + tab", function()
+--   local layouts     = { "scrolling", "dwindle", "master", "monocle" }
+--   local workspace   = hl.get_active_workspace()
+--   local next_layout = "dwindle"
+--
+--   if not workspace then
+--     return
+--   end
+--
+--   for i = 1, #layouts do
+--     if layouts[i] == workspace.tiled_layout then
+--       local next_layout_idx = (i % #layouts) + 1
+--       next_layout = layouts[next_layout_idx]
+--       break
+--     end
+--   end
+--
+--   hl.workspace_rule({ workspace = workspace.name, layout = next_layout })
+--   hl.notification.create({ text = "Workspace layout: " .. next_layout, timeout = 5000, color = "#00ff00" })
+-- end)
+hl.bind(mainMod .. " + TAB", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + SHIFT + TAB", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + SHIFT + G", function()
   hl.exec_cmd("hyprctl reload")
 end)
@@ -300,3 +300,4 @@ hl.define_submap("open", function()
   opener(FILEMANAGER, "E")
   hl.bind("escape", hl.dsp.submap("reset"))
 end)
+hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("wpaperctl next-wallpaper"))
