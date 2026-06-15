@@ -5,7 +5,7 @@ hl.config({
     blur = {
       enabled                   = true,   -- enable kawase window background blur
       size                      = 8,      -- blur size (distance)
-      passes                    = 1,      -- the amount of passes to perform
+      passes                    = 2,      -- the amount of passes to perform
       ignore_opacity            = true,   -- make the blur layer ignore the opacity of the window
       new_optimizations         = true,   -- whether to enable further optimizations to the blur. Recommended to leave on, as it will massively improve performance.
       xray                      = false,  -- if enabled, floating windows will ignore tiled windows in their blur. Only available if new_optimizations is true. Will reduce overhead on floating blur significantly.

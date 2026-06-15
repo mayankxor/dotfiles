@@ -189,6 +189,8 @@ hl.bind(mainMod .. " + F1", function()
       shadow = { enabled = false, },
       blur = { enabled = false, },
       rounding = 0,
+      active_opacity = 1,
+      inactive_opacity = 1
     }
   })
 end)

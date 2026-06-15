@@ -3,7 +3,7 @@ hl.config({
   general = {
     border_size             = 2,                                                               -- size of the border around windows
     gaps_in                 = 2,                                                               -- gaps between windows
-    gaps_out                = 6,                                                               -- gaps between windows and monitor edges
+    gaps_out                = 3,                                                               -- gaps between windows and monitor edges
     float_gaps              = 0,                                                               -- gaps between windows and monitor edges for floating windows, `-1` means default
     gaps_workspaces         = 0,                                                               -- gaps between workspaces. Stacks with `gaps_out`
     col                     = {
