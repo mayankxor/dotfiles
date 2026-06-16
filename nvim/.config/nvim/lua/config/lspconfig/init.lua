@@ -1,2 +1,5 @@
 require("config.lspconfig.clangd")
 require("config.lspconfig.lua_ls")
+require("config.lspconfig.tombi")
+require("config.lspconfig.qmlls")
+require("config.lspconfig.gopls")
