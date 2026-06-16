@@ -1,7 +1,7 @@
-if hl.version() ~= "0.55.3" then
+if hl.version() ~= "0.55.4" then
   hl.notification.create({
     text = "Using version " ..
-        hl.version() .. ", config was written for 0.55.3, may break.",
+        hl.version() .. ", config was written for 0.55.4, may break.",
     timeout = 10000,
   })
 end
