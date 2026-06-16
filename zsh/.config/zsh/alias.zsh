@@ -8,6 +8,7 @@ alias cd..="cd .."
 alias nohup=nohupx
 alias grep="grep --color --with-filename --line-number"
 alias gs="git status"
+alias yt="yt-dlp -S res:720,+size"
 
 bat_alias lsblk conf
 bat_alias free cpuinfo
