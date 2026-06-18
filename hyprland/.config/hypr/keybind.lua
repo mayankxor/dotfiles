@@ -238,7 +238,7 @@ hl.bind("PRINT", hl.dsp.exec_cmd(scriptsDirectory .. "/wayland/takescreenshot"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(scriptsDirectory .. "/wayland/savescreenshot"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("bash -c 'kill -SIGUSR1 $(pidof waybar)'"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("bash -c 'kill -SIGUSR2 $(pidof waybar)'"))
-hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("bash -c '" .. scriptsDirectory .. "/passmngr.sh'"))
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("bash -c '" .. scriptsDirectory .. "/dmenu/passmngr'"))
 
 hl.bind(mainMod .. " + ALT + R", hl.dsp.submap("resize"))
 hl.define_submap("resize", function()
