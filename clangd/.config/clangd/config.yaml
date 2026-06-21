@@ -1,6 +1,7 @@
 CompileFlags:
   Add: 
     - -Wall
+    - -Wno-vla
     - -IMyIncludeDir
     - -std=c++17
     - -I/usr/include/c++/13
