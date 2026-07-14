@@ -34,16 +34,16 @@ set("n", "X", [["_X]], { desc = "Remove character from under the cursor without 
 
 -- Replace under cursor
 set(
-	"n",
-	"<leader>ruc",
-	[[:%s/\<<c-r><c-w>\>//gI<left><left><left>]],
-	{ desc = "Substitute word under cursor throughout the buffer" }
+  "n",
+  "<leader>ruc",
+  [[:%s/\<<c-r><c-w>\>//gI<left><left><left>]],
+  { desc = "Substitute word under cursor throughout the buffer" }
 )
 set(
-	"v",
-	"<leader>ruc",
-	[[:<bs><bs><bs><bs><bs>%s/<c-r>=getline("'<")[col("'<")-1 : col("'>")-1]<cr>//gI<left><left><left>]],
-	{ desc = "Substitute data selected throughout the buffer(doesnt work for multiline selection)" }
+  "v",
+  "<leader>ruc",
+  [[:<bs><bs><bs><bs><bs>%s/<c-r>=getline("'<")[col("'<")-1 : col("'>")-1]<cr>//gI<left><left><left>]],
+  { desc = "Substitute data selected throughout the buffer(doesnt work for multiline selection)" }
 )
 
 -- tab management
@@ -52,7 +52,7 @@ set("n", "tx", vim.cmd.tabclose, { desc = "Close the tab" })
 set("n", "tn", vim.cmd.tabnext, { desc = "Go to next tab" })
 set("n", "tp", vim.cmd.tabprevious, { desc = "Go to previous tab" })
 set("n", "td", function()
-	vim.cmd("tabnew %")
+  vim.cmd("tabnew %")
 end, { desc = "Duplicate the current tab" })
 set("n", "<tab>", vim.cmd.tabnext, { desc = "Go to next tab" })
 set("n", "<s-tab>", vim.cmd.tabprevious, { desc = "Go to previous tab" })
@@ -70,26 +70,32 @@ set("n", "k", "gk")
 -- Miscellaneous
 set("n", "<c-c>", "<cmd>nohl<cr>", { desc = "Remove search highlights from buffer", silent = true })
 set(
-	"n",
-	"<leader>x",
-	"<cmd>silent !chmod +x %<cr><cmd>lua print('Current buffer is now executable')<cr>",
-	{ desc = "Make current buffer executable" }
+  "n",
+  "<leader>x",
+  "<cmd>silent !chmod +x %<cr><cmd>lua print('Current buffer is now executable')<cr>",
+  { desc = "Make current buffer executable" }
 )
 set(
-	"n",
-	"so",
-	"<cmd>silent update<cr><cmd>source %<cr><cmd>lua print('File sourced')<cr>",
-	{ desc = "Source the current buffer" }
+  "n",
+  "so",
+  "<cmd>silent update<cr><cmd>source %<cr><cmd>lua print('File sourced')<cr>",
+  { desc = "Source the current buffer" }
 )
 set("n", "<leader>db", "<cmd>bdelete<cr>", { desc = "Remove current saved buffer from memory" })
 set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Exit from terminal mode" })
 set(
-	"n",
-	"J",
-	"mzJ`z",
-	{ desc = "Does what 'J' does but keeps the cursor in place instead of moving it to beginning of next line" }
+  "n",
+  "J",
+  "mzJ`z",
+  { desc = "Does what 'J' does but keeps the cursor in place instead of moving it to beginning of next line" }
 )
 set("n", "<leader>ex", "<cmd>Ex<cr>", { desc = "Open file explorer" })
 set("n", "<m-tab>", "<cmd>bnext<cr>", { desc = "Go to next buffer" })
 set("o", "aq", 'a"')
 set("o", "iq", 'i"')
+set("n", "<leader>Db", function()
+  if vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()) ~= "" then
+    vim.cmd("enew")
+    vim.cmd("bdelete#")
+  end
+end)
