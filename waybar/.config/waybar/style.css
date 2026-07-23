@@ -25,6 +25,7 @@ tooltip {
 #submap,
 #media,
 #memory,
+#cpu,
 #battery,
 #volume,
 #network,
@@ -137,6 +138,7 @@ window#waybar.empty #window {
 
 #battery.critical:not(.charging),
 #memory.critical,
+#cpu.critical,
 #tray > .needs-attention {
   background-color: #f53c3c;
   color: #ffffff;
@@ -156,10 +158,13 @@ window#waybar.empty #window {
   color: lightpink;
 }
 
+#cpu.okayish,
 #memory.okayish {
   background: #00ff48;
   color: black;
 }
+
+#cpu.warning,
 #memory.warning {
   background: darkorange;
   color: black;

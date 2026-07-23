@@ -1,82 +1,78 @@
 {
-  "layer": "top", // Decide if the bar is displayed in front (top) of the windows or behind (bottom) them.
-  "position": "top", // Bar position, can be `top`, `bottom`, `left`, `right`
-  "modules-left": [
-    "group/windows",
-    "hyprland/window",
-    "hyprland/submap"
-    // "group/media",
-  ], // Modules that will be displayed on the left.
-  "modules-center": ["clock", "privacy"], // Modules that will be displayed in the center.
+  "layer": "top",
+  "position": "top",
+  "modules-left": ["group/windows", "hyprland/window", "hyprland/submap"],
+  "modules-center": ["clock", "privacy"],
   "modules-right": [
     "battery",
     "memory",
+    "cpu",
     "group/bluetoothgroup",
     "group/internet",
     "group/volume",
     "group/brightness",
     "tray",
-  ], // Modules that will be displayed on the right.
-  "spacing": 4, // Size of gaps in between of the different modules.
-  "start_hidden": false, // Option to start the bar hidden.
-  "modifier-reset": "press", // Defines the timing of modifier key to reset the bar visibility. To reset the visibility of the bar with the press of the modifier key use `press`. Use `release` to reset the visibility upon the release of the modifier key and only if no other action happened while the key was pressed. This prevents hiding the bar when the modifier is used to switch a workpace, change binding mode or start a keybinding. "exclusive": true, // Option to request an exclusive zone from the compositor. Disable this to allow drawing application windows underneath or on top of the bar. Disabled by default for `overlay` layer.
-  "fixed-center": true, // Prefer fixed center position for the `modules-center` block. The center block will stay in the middle of the bar whenever possible. It can still be pushed around if other blocks need more space. When false, the center block is centered in the space between the left and right block.
-  "passthrough": false, // Option to pass any pointer events to the window under the bar. Intended to be used with either `top` or `overlay` layers and without exclusive zone. Enabled by default for `overlay` layer.
-  "ipc": false, // Option to subscribe to the Sway IPC bar configuration and visibility events and control waybar with `swaymsg` bar command. Requires `bar_id` value from sway configuration to be wither passed with the `-b` commandline argument or specified with the `id` option. See https://github.com/Alexays/Waybar/pull/1244 for the documentation and configuration examples.
-  "reload_style_on_change": false, // Option to enable reloading the CSS style if a modification is detected on the style sheet file or any imported CSS files.
-  "on-sigusr1": "toggle", // Action that is performed when receiving SIGUSR1 kill signal. Possible values: `show`, `hide`, `toggle`, `reload`, `noop`.
-  "on-sigusr2": "reload", // Action that is performed when receiving SIGUSR2 kill signal. Possible values: `show`, `hide`, `toggle`, `reload`, `noop`.
-
+  ],
+  "spacing": 4,
+  "start_hidden": false,
+  "modifier-reset": "press",
+  "fixed-center": true,
+  "passthrough": false,
+  "ipc": false,
+  "reload_style_on_change": false,
+  "on-sigusr1": "toggle",
+  "on-sigusr2": "reload",
   "custom/space": { "format": " ", "tooltip": false },
-
   "hyprland/workspaces": {
-    "active-only": false, // If set to true, only active workspace will be shown on bar. Unless a workspace is persistent, visible, or special. Otherwise all workspace groups are shown.
-    "hide-active": false, // If set to true, the active workspace will be hidden. Unless a workspace is persistent or special.
-    "all-outputs": false, // If set to false, workspaces group will be shown only in assigned output. Otherwise all workspace groups are shown.
-    "format": "{id}", // The format, how information should be displayed.
-    "format-icons": [], // Based on the workspace name and state, the corresponding icon gets selected. See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#module-hyprland-configuration-icons
-    "persistent-workspaces": [], // Lists workspaces that should always be shown, even when nonexistent. See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#persistent-workspaces
-    "workspace-taskbar": [], // Show per-workspace taskbars with app icons (similar to wlr/taskbar) instead of text representations. See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#workspace-taskbars
-    "persistent-only": false, // If set to true, only persistent workspaces will be shown on bar.
-    "show-special": true, // If set to true, will display special workspace alongside regular workspaces.
-    "special-visible-only": true, // If this and `show-special` are set to true, special workspaces will be shown only if visible.
-    "sort-by": "DEFAULT", // How to sort workspaces.
-    "window-rewrite": [], // An object of regexes to match against window classes (and/or titles, See https://github.com/Alexays/Waybar/wiki/Module:-Hyprland#module-hyprland-window-rewrite and map to a new representation. Mapping `firefox -> `, for example.
-    "window-rewrite-default": "?", // The default representation to be used when a window does not match any rules configured in `window-rewrite`. "format-window-separator": " ", // The string used to separate window representations from each other.
-    "move-to-monitor": false, // If set to true, open the workspace on the current monitor when clicking on a workspace button. Otherwise, the workspace will open on the monitor where it was previously assigned. Analog to using `focusworkspaceoncurrentmonitor` dispatcher instead of `workspace` in Hyprland.
-    "ignore-workspaces": [], // An array of regexes to match against workspace names. If there's a match, the workspace will be ignored and won't be shown in your bar.
-    "on-scroll-up": "", // Command to execute when scrolling up on the module.
-    "on-scroll-down": "", // Command to execute when scrolling down on the module.
+    "active-only": false,
+    "hide-active": false,
+    "all-outputs": false,
+    "format": "{id}",
+    "format-icons": [],
+    "persistent-workspaces": [],
+    "workspace-taskbar": [],
+    "persistent-only": false,
+    "show-special": true,
+    "special-visible-only": true,
+    "sort-by": "DEFAULT",
+    "window-rewrite": [],
+    "window-rewrite-default": "?",
+    "move-to-monitor": false,
+    "ignore-workspaces": [],
+    "on-scroll-up": "",
+    "on-scroll-down": "",
   },
 
   "hyprland/window": {
-    "format": "{title}", // The format, how information should be displayed. On `{}` the current window title is displayed.
-    "max-length": 30, // The maximum length in character the module should display.
+    "format": "{title}",
+    "max-length": 30,
     "rewrite": {
-      "amazon.com:?.? :? ?(.*) — librewolf": " $1",
-      "google — librewolf": "",
-      "(.*) - google search — librewolf": " $1",
-      "reddit - .* — librewolf": "",
-      "(.* : r/[a-zA-Z0-9]*) — LibreWolf": " $1",
-      "wikipedia — librewolf": "",
-      "(.*) - wikipedia — LibreWolf": " $1",
-      "whatsapp ?w?e?b? ?— librewolf": "󰖣",
-      "(.*) whatsapp — librewolf": "󰖣 $1",
-      "github — librewolf": "",
-      "Discord .* ?— librewolf": "",
-      "^(.*) discord .* ?— librewolf": " $1",
+      "amazon.com:?.? :? ?(.*) — (librewolf|zen browser)": " $1",
+      "google — (librewolf|zen browser)": "",
+      "settings — (librewolf|zen browser)": "",
+      "(.*) - google search — (librewolf|zen browser)": " $1",
+      "reddit - .* — (librewolf|zen browser)": "",
+      "(.* : r/[a-zA-Z0-9]*) — (librewolf|zen browser)": " $1",
+      "wikipedia — (librewolf|zen browser)": "",
+      "(.*) - wikipedia — (librewolf|zen browser)": " $1",
+      "whatsapp(?: web)? — (librewolf|zen browser)": "󰖣",
+      "(.*) whatsapp — (librewolf|zen browser)": "󰖣 $1",
+      "github — (librewolf|zen browser)": "",
+      "Discord .* ?— (librewolf|zen browser)": "",
+      "^(.*) discord .* ?— (librewolf|zen browser)": " $1",
+      "^(.*) - KeePassXC": " $1",
       "nvim": "",
       "st": "",
       "vim": "",
       "(.*) - mpv$": " $1",
-      "(.*) - youtube — librewolf$": "󰗃 $1",
-      "youtube — librewolf": "󰗃",
-      "^(?!amazon.com:?.? :? ?)(?!.* - youtube — librewolf$)(?!google ?)(?!reddit.*)(?!wikipedia)(?!whatsapp ?w?e?b?)(?!github)(.*) — librewolf$": " $1",
-      "librewolf": "",
-    }, // Rules to rewrite the module format output. The rules are identical to those for `sway/window`. See https://github.com/Alexays/Waybar/wiki/Module:-Sway#rewrite-rules
-    "separate-outputs": false, // Show the active window of the monitor the bar belongs to, instead of the focused window.
-    "icon": false, // Option to disable application icon.
-    "icon-size": 24, // Set the size of application icon.
+      "(.*) - youtube — (librewolf|zen browser)$": "󰗃 $1",
+      "youtube — (librewolf|zen browser)": "󰗃",
+      "^(?!amazon.com:?.? :? ?)(?!.*(?: - )?youtube — (?:librewolf|zen browser)$)(?!google ?)(?!settings)(?!reddit.*)(?!wikipedia)(?!whatsapp(?: web)?)(?!github)(.*) — (librewolf|zen browser)$": " $1",
+      "(librewolf|zen browser)": "",
+    },
+    "separate-outputs": false,
+    "icon": false,
+    "icon-size": 24,
   },
 
   "hyprland/submap": {
@@ -93,11 +89,11 @@
     "default-submap": "Default",
   },
   "hyprland/windowcount": {
-    "format": "[{}]", // The format for how information should be displayed. On {}, the current workspace window count in displayed.
-    "format-empty": "​", // Override the format when the workspace contains no windows.
-    "format-windowed": "", // Override the format when the workspace contains no fullscreen windows.
-    "format-fullscreen": "", // Override the format when the workspace contains a fullscreen window.
-    "separate-outputs": true, // Show the active workspace window count of the monitor the bar belongs to, instead of the focused workspace.
+    "format": "[{}]",
+    "format-empty": "​",
+    "format-windowed": "",
+    "format-fullscreen": "",
+    "separate-outputs": true,
   },
 
   "group/windows": {
@@ -106,29 +102,29 @@
   },
 
   "backlight": {
-    "interval": 2, // The polling interval (in seconds) for the backlight level.
-    "format": "{icon} {percent}%", // The format, how information should be displayed. On `{}` data gets inserted.
-    "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"], // Based on the current screen brightness, the corresponding icon gets selected. The order is low to high.
-    "max-length": 7, // The maximum length in characters the module should display.
-    "rotate": 0, // Positive value to rotate the text label.
-    "states": {}, // A number of backlight states which get activated on certain brightness levels. See https://github.com/Alexays/Waybar/wiki/States
-    "on-click": "", // Command to execute when clicking on the module.
-    "on-click-middle": "", // Command to execute when you middle click on the module using the mousewheel.
-    "on-click-right": "", // Command to execute when you right click on the module.
-    "on-scroll-up": "", // Command to execute when scrolling up on the module. This replaces the default behaviour of brightness control.
-    "on-scroll-down": "", // Command to execute when scrolling down on the module. This replaces the default behaviour of brightness control.
-    "reverse-scrolling": false, // Option to reverse the scroll direction for devices other than a mouse (touchpad, trackpad, etc)
-    "reverse-mouse-scrolling": false, // Option to reverse the scroll direction for mice.
-    "scroll-step": 1.0, // The speed in which to change the brightness when scrolling.
-    "tooltip": false, //  	Option to disable tooltip on hover.
-    "tooltip-format": "", // Text to be displayed in the tooltip.
+    "interval": 2,
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"],
+    "max-length": 7,
+    "rotate": 0,
+    "states": {},
+    "on-click": "",
+    "on-click-middle": "",
+    "on-click-right": "",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "reverse-scrolling": false,
+    "reverse-mouse-scrolling": false,
+    "scroll-step": 1.0,
+    "tooltip": false,
+    "tooltip-format": "",
   },
 
   "backlight/slider": {
-    "min": 10, // The minimum value the slider should display and set.
-    "max": 100, // The maximum value the slider should display and set.
-    "orientation": "horizontal", // The orientation of the slider. Can be either `horizontal` or `vertical`.
-    "device": "", // The name of the preferred device to control. If left empty, a device will be chosen automatically.
+    "min": 10,
+    "max": 100,
+    "orientation": "horizontal",
+    "device": "",
   },
 
   "group/brightness": {
@@ -143,10 +139,9 @@
   },
 
   "battery": {
-    "design-capacity": false, // Option to enable the use of the design capacity instead of the actual maximal capacity. This, even full, the battery may be at less than 100%.
-    "interval": 10, // The polling interval (in seconds) for the battery status.
+    "design-capacity": false,
+    "interval": 10,
     "states": {
-      // A number of battery states which get activated on certain capacity levels. See https://github.com/Alexays/Waybar/wiki/States
       "full": 101, // 94-100
       "almost-full": 93, // 85-93
       "healthy": 85, // 59-85
@@ -155,28 +150,28 @@
       "low": 20, // 10-20
       "critical": 10, // 0-10
     },
-    "format": "{icon} {capacity}%", // The format, how the information should be displayed.
-    "format-time": "{H} h {M} min", // The format of the estimate of time until full or empty. Use {m} for zero-padded minutes.
+    "format": "{icon} {capacity}%",
+    "format-time": "{H} h {M} min",
     "format-icons": {
-      // Based on the current capacity, the corresponding icon gets selected. The order is low to high. Or by the state if it is an object.
       "default": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
       "charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
     },
-    "max-length": 7, // The maximum length (in characters) the module should display.
-    "rotate": 0, // Positive value to rotate the text label.
-    "on-click": "", // Command to execute when clicking the module.
-    "on-click-middle": "", // Command to execute when you middle click on the module using the mousewheel.
-    "on-click-right": "", // Command to execute when you right click on the module.
-    "on-scroll-up": "", // Command to execute when scrolling up on the module.
-    "on-scroll-down": "", // Command to execute when scrolling down on the module.
-    "tooltip": true, // Option to enable tooltip on hover.
-    "tooltip-format": "Power drawn: {power} W\n{timeTo}\nCharge cycles seen: {cycles}\nMax Battery health: {health}%", // The tooltip format.
+    "max-length": 7,
+    "rotate": 0,
+    // BUG: On st, the child process dies while resizing st. Does not occur on kitty no matter how drastic the resize is.(Tested on hyprland only)
+    "on-click": "$TERMINAL -e sh -c 'watch --interval 1 --differences --no-title acpi --everything 2>/dev/null'",
+    "on-click-middle": "",
+    "on-click-right": "",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "tooltip": true,
+    "tooltip-format": "Power drawn: {power} W\n{timeTo}\nCharge cycles seen: {cycles}\nMax Battery health: {health}%",
     "tooltip-format-charging": "Power drawn: {power} W\n{timeTo}\nCharge cycles seen: {cycles}\nBattery health: {health}%",
   },
 
   "clock": {
     "interval": 1,
-    "format-alt": "{:%B %d %Y %H:%M:%S %A}", // strftime
+    "format-alt": "{:%B %d %Y %H:%M:%S %A}",
     "format": "{:%H:%M:%S}",
     "rotate": 0,
     "on-click": "",
@@ -374,6 +369,23 @@
     "on-scroll-down": "",
     "tooltip": true,
     "tooltip-format": "RAM: {used}/{total} GiB ({percentage}%) - {avail}Gib remaining\nSwap: {swapUsed}/{swapTotal} GiB ({swapPercentage}%) - {swapAvail}Gib remaining",
+  },
+  "cpu": {
+    "interval": 10,
+    "format": " {usage}%",
+    "rotate": 0,
+    "states": {
+      "okayish": 30,
+      "warning": 70,
+      "critical": 90,
+    },
+    "max-length": 10,
+    "on-click": "$TERMINAL -e sh -ic 'htop'",
+    "on-click-middle": "",
+    "on-click-right": "",
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "tooltip": true,
   },
   "group/volume": {
     "orientation": "inherit",
