@@ -45,6 +45,85 @@ vim.api.nvim_create_autocmd("FileType", {
     end, { buffer = args.buf, desc = "Compile and run C file" })
   end,
 })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "cpp",
+  callback = function(args)
+    vim.opt.makeprg = "g++ -Wall -O2 -std=c++11 % -o %:r"
+    vim.keymap.set("n", "<leader>cnr", function()
+      vim.cmd("make")
+      vim.cmd("copen")
+    end)
+  end
+})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "cpp",
+--   callback = function(args)
+--     vim.keymap.set("n", "<leader>cnr", function()
+--       local file = vim.fn.expand("%:p")
+--       local basename = vim.fn.expand("%:t:r")
+--
+--       vim.cmd("split")
+--       vim.cmd("enew")
+--
+--       vim.fn.jobstart(
+--         "echo 'Compiling...'; if g++ '"
+--         .. file
+--         .. "' -o '"
+--         .. basename
+--         .. "' -std=c++11 -Wall -O2; then clear; ./"
+--         .. basename
+--         .. "; fi",
+--         {
+--           term = true,
+--           on_exit = function()
+--             vim.schedule(function()
+--               vim.cmd("stopinsert")
+--               vim.cmd("checktime")
+--             end)
+--           end,
+--         }
+--       )
+--
+--       vim.cmd("startinsert")
+--       -- local file = vim.fn.expand("%:p")
+--       -- local basename = vim.fn.expand("%:t:r")
+--       --
+--       -- vim.cmd("split")
+--       --
+--       -- local cmd = string.format( "echo 'Compiling...'; if g++ '%s' -o '%s' -std=c++11 -Wall -O2; then clear; ./'%s'; fi", file, basename, basename)
+--       --
+--       -- vim.fn.termopen({ "sh", "-c", cmd }, {
+--       --   on_exit = function()
+--       --     vim.schedule(function()
+--       --       vim.cmd("checktime")
+--       --     end)
+--       --   end,
+--       -- })
+--       --
+--       -- vim.cmd("startinsert")
+--     end, { buffer = args.buf, desc = "Compile and run cpp file" })
+--   end,
+-- })
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "cpp",
+--   callback = function(args)
+--     vim.keymap.set("n", "<leader>cnr", function()
+--       local file = vim.fn.expand("%:p")
+--       local basename = vim.fn.expand("%:t:r")
+--       vim.cmd(
+--         "split | terminal echo 'Compiling...'; if g++ '"
+--         .. file
+--         .. "' -o '"
+--         .. basename
+--         .. "' -std=c++11 -Wall -O2 ; then clear; ./"
+--         .. basename
+--         .. ";fi"
+--       )
+--       vim.cmd("startinsert")
+--     end, { buffer = args.buf, desc = "Compile and run cpp file" })
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "term://*",
@@ -105,25 +184,5 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set("n", "zM", "zM", { desc = "Close all folds in buffer", noremap = true, silent = true })
     vim.keymap.set("n", "[z", "[z", { desc = "Jump to start of open fold", noremap = true, silent = true })
     vim.keymap.set("n", "]z", "]z", { desc = "Jump to end of open fold", noremap = true, silent = true })
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "cpp",
-  callback = function(args)
-    vim.keymap.set("n", "<leader>cnr", function()
-      local file = vim.fn.expand("%:p")
-      local basename = vim.fn.expand("%:t:r")
-      vim.cmd(
-        "split | terminal echo 'Compiling...'; if g++ '"
-        .. file
-        .. "' -o '"
-        .. basename
-        .. "' -std=c++11 -Wall -O2 < inputf.in > outputf.in; then clear; ./"
-        .. basename
-        .. ";fi"
-      )
-      vim.cmd("startinsert")
-    end, { buffer = args.buf, desc = "Compile and run C file" })
   end,
 })
