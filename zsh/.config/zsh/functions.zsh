@@ -3,6 +3,8 @@ nohupx(){
 	command nohup "$@" > /dev/null 2>&1 </dev/null &
 }
 
+autoload -Uz add-zsh-hook
+
 # use bat to format output of commands
 bat_alias(){
   local name=$1
@@ -40,4 +42,27 @@ function y(){
 	IFS= read -r -d '' cwd < "$tmp"
 	[ -n "$cwd" ] && [ "$cwd" != "$pwd" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
+}
+
+# FOOT
+function osc7-pwd() {
+    emulate -L zsh # also sets localoptions for us
+    setopt extendedglob
+    local LC_ALL=C
+    printf '\e]7;file://%s%s\e\' $HOST ${PWD//(#m)([^@-Za-z&-;_~])/%${(l:2::0:)$(([##16]#MATCH))}}
+}
+
+function chpwd-osc7-pwd() {
+    (( ZSH_SUBSHELL )) || osc7-pwd
+}
+add-zsh-hook -Uz chpwd chpwd-osc7-pwd
+
+function preexec {
+  print -n "\e]133;C\e\\"
+}
+
+function gitemp(){
+  dir=$(mktemp -d)
+  cd $dir
+  git init .
 }

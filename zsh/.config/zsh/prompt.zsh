@@ -1,6 +1,12 @@
 autoload -Uz vcs_info
-precmd() { vcs_info }
-zstyle ':vcs_info:*' formats ' %s(%F{red}%b%f)'
+precmd() { 
+  if ! builtin zle; then
+    print -n "\e]133;D\e\\"
+  fi
+  vcs_info
+  print -Pn "\e]133;A\e\\"
+}
+zstyle ':vcs_info:*' formats ' (%F{red}%b%f)'
 NEWLINE=$'\n'
 
 ####### BATTERY MODULE #######
