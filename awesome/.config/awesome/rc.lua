@@ -10,10 +10,7 @@ local menubar = require("menubar")
 require("awful.hotkeys_popup.keys")
 require("errorhandling")
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-TERMINAL = "st"
-EDITOR = os.getenv("EDITOR") or "vi"
-EDITOR_CMD = TERMINAL .. " -e " .. EDITOR
-MODKEY = "Mod4"
+require("globals")
 awful.layout.layouts = {
   awful.layout.suit.floating,
   awful.layout.suit.tile,
