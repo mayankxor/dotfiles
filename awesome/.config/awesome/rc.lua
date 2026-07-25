@@ -11,7 +11,6 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
-local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
@@ -60,7 +59,6 @@ awful.layout.layouts = {
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 local mymainmenu = require("menu")
-local mylauncher = require("wibar.launcher")
 
 
 -- Menubar configuration
@@ -70,9 +68,7 @@ menubar.utils.terminal = TERMINAL -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
--- {{{ Wibar
 require("wibar.wibar")
--- }}}
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
