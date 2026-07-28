@@ -3,7 +3,6 @@ ZSH_CONFIG_DIR="$HOME/.config/zsh"
 source $ZSH_CONFIG_DIR/functions.zsh
 source $ZSH_CONFIG_DIR/alias.zsh
 source $ZSH_CONFIG_DIR/autostart.zsh
-source $ZSH_CONFIG_DIR/completion.zsh
 source $ZSH_CONFIG_DIR/plugins.zsh
 source $ZSH_CONFIG_DIR/prompt.zsh
 source $ZSH_CONFIG_DIR/exports.zsh
@@ -29,3 +28,4 @@ export PATH="$HOME/.grok/bin:$PATH"
 fpath=(~/.grok/completions/zsh $fpath)
 autoload -Uz compinit && compinit -C
 # <<< grok installer <<<
+source $ZSH_CONFIG_DIR/completion.zsh
