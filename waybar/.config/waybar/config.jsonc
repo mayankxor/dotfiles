@@ -60,6 +60,7 @@
       "github — (librewolf|zen browser)": "",
       "Discord .* ?— (librewolf|zen browser)": "",
       "^(.*) discord .* ?— (librewolf|zen browser)": " $1",
+      "^(.*) – wordpress.com — (librewolf|zen browser)": " $1",
       "^(.*) - KeePassXC": " $1",
       "nvim": "",
       "st": "",
