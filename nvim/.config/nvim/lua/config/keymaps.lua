@@ -3,10 +3,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Move through splits using <m-h/j/k/l>
-set("n", "<m-h>", "<c-w><c-h>", { desc = "Move to left pane" })
-set("n", "<m-j>", "<c-w><c-j>", { desc = "Move to down pane" })
-set("n", "<m-k>", "<c-w><c-k>", { desc = "Move to up pane" })
-set("n", "<m-l>", "<c-w><c-l>", { desc = "Move to right pane" })
+set("n", "<c-h>", "<c-w><c-h>", { desc = "Move to left pane" })
+set("n", "<c-j>", "<c-w><c-j>", { desc = "Move to down pane" })
+set("n", "<c-k>", "<c-w><c-k>", { desc = "Move to up pane" })
+set("n", "<c-l>", "<c-w><c-l>", { desc = "Move to right pane" })
 
 -- Resize splits sing <m-left/right/up/down>
 set("n", "<m-left>", "<c-w>5<", { desc = "Make the split horizontally smaller by 5 points" })
