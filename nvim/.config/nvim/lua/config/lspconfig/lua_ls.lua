@@ -70,98 +70,98 @@
 ---
 
 local root_markers1 = {
-	".emmyrc.json",
-	".luarc.json",
-	".luarc.jsonc",
+  ".emmyrc.json",
+  ".luarc.json",
+  ".luarc.jsonc",
 }
 local root_markers2 = {
-	".luacheckrc",
-	".stylua.toml",
-	"stylua.toml",
-	"selene.toml",
-	"selene.yml",
+  ".luacheckrc",
+  ".stylua.toml",
+  "stylua.toml",
+  "selene.toml",
+  "selene.yml",
 }
 
 vim.lsp.config("lua_ls", {
-	cmd = { "lua-language-server" },
-	filetypes = { "lua" },
-	root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers1, root_markers2, { ".git" } }
-		or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { ".git" }),
+  cmd = { "lua-language-server" },
+  filetypes = { "lua" },
+  root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers1, root_markers2, { ".git" } }
+      or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { ".git" }),
 
-	capabilities = {
-		textDocument = {
-			completion = {
-				completionItem = {
-					commitCharactersSupport = true,
-					deprecatedSupport = true,
-					insertReplaceSupport = true,
-					insertTextModeSupport = {
-						valueSet = { 1, 2 },
-					},
-					labelDetailsSupport = true,
-					preselectSupport = true,
-					resolveSupport = {
-						properties = {
-							"documentation",
-							"additionalTextEdits",
-							"insertTextFormat",
-							"insertTextMode",
-							"command",
-						},
-					},
-					snippetSupport = true,
-					tagSupport = {
-						valueSet = { 1 },
-					},
-				},
-				completionList = {
-					itemDefaults = { "commitCharacters", "editRange", "insertTextFormat", "insertTextMode", "data" },
-				},
-				contextSupport = true,
-				dynamicRegistration = false,
-				insertTextMode = 1,
-			},
-		},
-	},
+  capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+          commitCharactersSupport = true,
+          deprecatedSupport = true,
+          insertReplaceSupport = true,
+          insertTextModeSupport = {
+            valueSet = { 1, 2 },
+          },
+          labelDetailsSupport = true,
+          preselectSupport = true,
+          resolveSupport = {
+            properties = {
+              "documentation",
+              "additionalTextEdits",
+              "insertTextFormat",
+              "insertTextMode",
+              "command",
+            },
+          },
+          snippetSupport = true,
+          tagSupport = {
+            valueSet = { 1 },
+          },
+        },
+        completionList = {
+          itemDefaults = { "commitCharacters", "editRange", "insertTextFormat", "insertTextMode", "data" },
+        },
+        contextSupport = true,
+        dynamicRegistration = false,
+        insertTextMode = 1,
+      },
+    },
+  },
 
-	---@type lspconfig.settings.lua_ls
-	settings = {
-		Lua = {
-			diagnostics = {
-			},
-			completion = { callSnippet = "Replace" },
-			codeLens = { enable = true },
-			hint = { enable = true, semicolon = "Disable" },
-		},
-	},
+  ---@type lspconfig.settings.lua_ls
+  settings = {
+    Lua = {
+      diagnostics = {
+      },
+      completion = { callSnippet = "Replace" },
+      codeLens = { enable = true },
+      hint = { enable = true, semicolon = "Disable" },
+    },
+  },
 
-	on_attach = function(_, bufnr)
-		local map = function(keys, func, desc)
-			if desc then
-				desc = "LSP: " .. desc
-			end
-			vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
-		end
-		map("<leader>sd", vim.diagnostic.open_float, "Show diagnostics")
-		map("[d", function()
-			vim.diagnostic.jump({ count = -1 })
-		end, "Goto previous diagnostic")
-		map("]d", function()
-			vim.diagnostic.jump({ count = 1 })
-		end, "Goto next diagnostic")
-		map("<leader>q", vim.diagnostic.setloclist)
-		map("gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
-		map("gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
-		map("gT", vim.lsp.buf.type_definition, "[g]o to [T]ype definition")
-		map("gi", vim.lsp.buf.implementation, "[g]o to [i]mplementation")
-		map("K", vim.lsp.buf.hover, "Hover Documentation")
-		map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-		map("gr", vim.lsp.buf.references, "[g]o to [r]eferences")
-		map("<leader>rn", vim.lsp.buf.rename, "Rename")
-		map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-		map("<leader>cf", function()
-			vim.lsp.buf.format({ async = true })
-		end, "Format")
-	end,
+  on_attach = function(_, bufnr)
+    local map = function(keys, func, desc)
+      if desc then
+        desc = "LSP: " .. desc
+      end
+      vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+    end
+    map("<leader>sd", vim.diagnostic.open_float, "Show diagnostics")
+    map("[d", function()
+      vim.diagnostic.jump({ count = -1 })
+    end, "Goto previous diagnostic")
+    map("]d", function()
+      vim.diagnostic.jump({ count = 1 })
+    end, "Goto next diagnostic")
+    map("<leader>q", vim.diagnostic.setloclist)
+    map("gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
+    map("gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
+    map("gT", vim.lsp.buf.type_definition, "[g]o to [T]ype definition")
+    map("gi", vim.lsp.buf.implementation, "[g]o to [i]mplementation")
+    map("K", vim.lsp.buf.hover, "Hover Documentation")
+    map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+    map("gr", vim.lsp.buf.references, "[g]o to [r]eferences")
+    map("<leader>rn", vim.lsp.buf.rename, "Rename")
+    map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+    map("<leader>cf", function()
+      vim.lsp.buf.format({ async = true })
+    end, "Format")
+  end,
 })
 vim.lsp.enable("lua_ls")
