@@ -164,8 +164,9 @@ return {
   {
     "hrsh7th/nvim-cmp",
     enabled = true,
-    dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer" },
+    dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip" },
     config = function()
+      local luasnip = require("luasnip")
       -- Use for Visual Studio Code Dark+ Theme Colors in the completion menu(Only for custom view)
       -- vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { bg='NONE', strikethrough=true, fg='#808080' })
       -- vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { bg='NONE', fg='#569CD6' })
@@ -276,11 +277,12 @@ return {
         },
         snippet = {
           expand = function(args)
-            vim.snippet.expand(args.body)
+            require("luasnip").lsp_expand(args.body)
           end,
         },
         -- Where completions come from
         sources = cmp.config.sources({
+          { name = "luasnip" },
           {
             name = "nvim_lsp",
             entry_filter = function()
@@ -355,10 +357,16 @@ return {
             if cmp.visible() then
               local entries = cmp.get_entries()
               if #entries == 1 then
-                cmp.confirm({ select = true })
+                if luasnip.expandable() then
+                  luasnip.expand()
+                else
+                  cmp.confirm({ select = true })
+                end
               else
                 cmp.select_next_item()
               end
+            elseif luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
             else
               fallback()
             end
@@ -368,10 +376,19 @@ return {
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
             else
               fallback()
             end
           end, { "i", "s" }),
+          ["<C-j>"] = cmp.mapping(function(fallback)
+            if luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, {"i", "s"})
         }),
         -- Disable completions in certain contexts, such as comments
         enabled = function()
