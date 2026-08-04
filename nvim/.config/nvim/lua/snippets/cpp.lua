@@ -1,14 +1,5 @@
 local parse = require("luasnip.util.parser").parse_snippet
 
-local function has_stdlib()
-  for _, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, -1, false)) do
-    if line:match("^%s*#include%s*<stdlib%.h>%s*$") then
-      return true
-    end
-  end
-  return false
-end
-
 local function trim(value)
   return (value:gsub("^%s+", ""):gsub("%s+$", ""))
 end
@@ -21,7 +12,6 @@ local sn = ls.snippet_node
 local s = ls.snippet
 local d = ls.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
-
 
 -- Split only on top-level commas. This keeps commas inside function-pointer
 -- parameters, array expressions, and quoted strings intact.
@@ -113,19 +103,13 @@ return {
   parse({
       trig = "st",
       name = "Starter Template",
-      dscr = "Standard starter template for a tiny C program",
+      dscr = "Standard starter template for a tiny Cpp program",
     },
-    "#include <stdbool.h>\n#include <stdio.h>\n#include <stdlib.h>\n\nint main(int argc, char *argv[])\n{\n\t$0\n\treturn EXIT_SUCCESS;\n}"),
-  parse({
-      trig = "#st",
-      name = "Preprocessor Starter Template",
-      dscr = "Preprocessor starter template for a C project",
-    },
-    "#include <assert.h>\n#include <errno.h>\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n#include <stdio.h>\n#include <stdlib.h>\n$0"),
+    "#include <iostream>\n\nint main(int argc, char *argv[])\n{\n\t$0\n\treturn 0;\n}"),
   s({
     trig = "docfunc",
     name = "Documented function",
-    dscr = "C function with documentation generated from its signature",
+    dscr = "Cpp function with documentation generated from its signature",
   }, {
     d(5, documentation, { 1, 3 }),
     i(1, "return_type"),
@@ -144,53 +128,11 @@ return {
 int main(int argc, char *argv[])
 {{
     {}
-    return EXIT_SUCCESS;
-}}
-]], {
-      i(0),
-    }),
-    {
-      condition = has_stdlib,
-      show_condition = has_stdlib,
-    }
-  ),
-
-
-  s(
-    { trig = "main", name = "main() template", desc = "Standard main() template" },
-    fmt([[
-int main(int argc, char *argv[])
-{{
-    {}
     return 0;
 }}
 ]], {
       i(0),
-    }),
-    {
-      condition = function() return not has_stdlib() end,
-      show_condition = function() return not has_stdlib() end
-    }
-  ),
-
-  s(
-    { trig = "mainn", name = "main(void) template", desc = "no-args main() snippet" },
-    fmt([[
-int main(void)
-{{
-    {}
-    return EXIT_SUCCESS;
-}}
-]], {
-      i(0),
-    }),
-    {
-      condition = has_stdlib,
-      show_condition = has_stdlib,
-    }
-  ),
-
-
+    }), {}),
   s(
     { trig = "mainn", name = "main(void) template", desc = "no-args main() snippet" },
     fmt([[
@@ -201,11 +143,7 @@ int main(void)
 }}
 ]], {
       i(0),
-    }),
-    {
-      condition = function() return not has_stdlib() end,
-      show_condition = function() return not has_stdlib() end
-    }
+    }), {}
   ),
   parse({
     trig = "#inc",
@@ -228,11 +166,6 @@ int main(void)
     dscr = "Function-like macro snippet",
   }, "#define ${1:MACRO}($2) ($3)"),
   parse({
-    trig = "#gnu",
-    name = "_GNU_SOURCE",
-    dscr = "Enable GNU extensions (functions)",
-  }, "#define _GNU_SOURCE"),
-  parse({
     trig = "#if",
     name = "#if",
     dscr = "#if snippet",
@@ -247,11 +180,6 @@ int main(void)
     name = "#ifndef",
     dscr = "#ifndef snippet",
   }, "#ifndef ${1:MACRO}\n$2\n#endif /* ifndef $1 */\n$0"),
-  parse({
-    trig = "#once",
-    name = "include once",
-    dscr = "Header include guard",
-  }, "#ifndef ${1:FILE}_H\n#define $1_H\n$2\n#endif /* end of include guard: $1_H */\n$0"),
   parse({
     trig = "#nocpp",
     name = "extern C",
@@ -301,7 +229,18 @@ int main(void)
     trig = "switch",
     name = "switch",
     dscr = "'switch' snippet",
-  }, "switch (${1:expression}) {\n\t$0\n}"),
+  }, "switch (${1:expression}) {\n\t$2\ndefault:\n\t$3;\n\tbreak;\n}\n$0"),
+  parse({
+    trig = "try",
+    name = "try",
+    desc = "Code snippet for try catch",
+  }, [[try {
+	$2
+}
+catch (${1:const std::exception&}) {
+  $3
+}
+$0]]),
   parse({
     trig = "case",
     name = "case",
@@ -337,6 +276,16 @@ int main(void)
     name = "for",
     dscr = "Generic 'for' loop",
   }, "for ($1;$2;$3) {\n\t$4\n}\n$0"),
+  parse({
+    trig = "forr",
+    name = "reverse for loop",
+    dscr = "Code snippet for reverse 'for' loop"
+  }, "for (${1:size_t} ${2:i} = ${3:length}-1; $2 >= ${4:0}; $2--){\n\t$5\n}\n$0"),
+  parse({
+    trig = "foreach",
+    name = "foreach",
+    dscr = "Code snippet for range-based for loop (c++11) statement"
+  }, "for (${1:auto} ${2:var} : ${3:collection}){\n\t$4\n}\n$0"),
   parse({
     trig = "forc",
     name = "for count",
@@ -396,7 +345,17 @@ int main(void)
     trig = "union",
     name = "union",
     dscr = "'union' snippet",
-  }, "union ${1:MyUnion} {$0\n};"),
+  }, "union ${1:MyUnion} {\n\t$2\n};\n$0"),
+  parse({
+    trig = "cin",
+    name = "cin",
+    desc = "Code snippet for std::cin, provided the header is set",
+  }, [[std::cin >> $1;]]),
+  parse({
+    trig = "cout",
+    name = "cout",
+    desc = "Code snippet for printing to std::cout, provided the header is set",
+  }, [[std::cout << ${1:message};]]),
   parse({
     trig = "typeunion",
     name = "union type",
@@ -407,6 +366,90 @@ int main(void)
     name = "enum",
     dscr = "Define an enumeration",
   }, "enum $1{ $0 };"),
+  parse({
+    trig = "enum class",
+    name = "enum class",
+    dscr = "Code snippet for enum class (c++11)",
+  }, "enum class {$1:MyClass} {$2};$0"),
+  parse({
+    trig = "class",
+    name = "class",
+    desc = "Code snippet for class",
+  }, [[class ${1:MyClass} {
+public:
+	$1();
+	$1($1 &&) = default;
+	$1(const $1 &) = default;
+	$1 &operator=($1 &&) = default;
+	$1 &operator=(const $1 &) = default;
+	~$1();
+
+private:
+	$2
+};
+
+$1::$1() {
+  $3
+}
+
+$1::~$1() {
+  $4
+}]]),
+  parse({
+    trig = "eclass",
+    name = "eclass",
+    desc = "Code snippet for empty class",
+  }, [[class ${1:MyClass} {
+public:
+	$2
+private:
+	$3
+};
+]]),
+  parse({
+    trig = "qclass",
+    name = "qclass",
+    desc = "Code snippet for empty Qt class",
+  }, [[class ${1:MyClass} : public QObject {
+	Q_OBJECT;
+public:
+
+explicit $1(QObject *parent = nullptr);
+	$2
+signals:
+
+public slots:
+};
+]]),
+  parse({
+    trig = "classi",
+    name = "classi",
+    desc = "Code snippet for class with inline constructor/destructor",
+  }, [[class ${1:MyClass} {
+public:
+	$1() = default;
+	$1($1 &&) = default;
+	$1(const $1 &) = default;
+	$1 &operator=($1 &&) = default;
+	$1 &operator=(const $1 &) = default;
+	~$1() = default;
+
+private:
+	$2
+};]]),
+  parse({
+    trig = "interface",
+    name = "interface",
+    desc = "Code snippet for interface (Visual C++)",
+  }, [[__interface I${1:Interface} {
+	$0
+};]]),
+  parse({
+    trig = "namespace",
+    name = "namespace",
+  }, [[namespace ${1:MyNamespace} {
+	$2
+}]]),
   parse({
     trig = "puts",
     name = "puts",
@@ -427,6 +470,18 @@ int main(void)
     name = "fprintf",
     dscr = "fprintf() snippet",
   }, "fprintf(${1:stderr}, \"${2:%s}\\n\"$3);$0"),
+  parse({
+      trig = "#guard",
+      name = "#guard",
+      desc = "header guard. format :\n\tINCLUDE_<dirname>_<filename>_<extension>_",
+    },
+    [[#ifndef INCLUDE${TM_DIRECTORY/.*[\/\\](.*)/_${1:/upcase}/}${TM_FILENAME_BASE/(.*)/_${1:/upcase}/}${TM_FILENAME/.*\.(.*)/_${1:/upcase}/}_
+#define INCLUDE${TM_DIRECTORY/.*[\/\\](.*)/_${1:/upcase}/}${TM_FILENAME_BASE/(.*)/_${1:/upcase}/}${TM_FILENAME/.*\.(.*)/_${1:/upcase}/}_
+
+$1
+
+#endif  // INCLUDE${TM_DIRECTORY/.*[\/\\](.*)/_${1:/upcase}/}${TM_FILENAME_BASE/(.*)/_${1:/upcase}/}${TM_FILENAME/.*\.(.*)/_${1:/upcase}/}_
+$0]]),
   parse({
     trig = "sprintf",
     name = "sprintf",
@@ -562,22 +617,46 @@ int main(void)
     name = "@warning",
     dscr = "Indicates special considerations when using the function.",
   }, "@warning ${1:Text}"),
-
   parse({
     trig = "@deprecated",
     name = "@deprecated",
     dscr = "Marks the function as deprecated, and no longer recommended for use",
   }, "@deprecated ${1:Text}"),
-
   parse({
     trig = "@todo",
     name = "@todo",
     dscr = "Used to mark areas of the code that require improvements",
   }, "@todo ${1:Text}"),
-
   parse({
     trig = "@fixme",
     name = "@fixme",
     dscr = "Used to mark areas of the code that require fixing",
   }, "@fixme ${1:Text}"),
+  parse({
+    trig = "sca",
+    name = "sca",
+    desc = "static_cast<type>(expression)",
+  }, [[static_cast<${1:unsigned}>(${2:expr})$3]]),
+  parse({
+    trig = "dca",
+    name = "dca",
+    desc = "dynamic_cast<type>(expression)",
+  }, [[dynamic_cast<${1:unsigned}>(${2:expr})$3]]),
+  parse({
+    trig = "rca",
+    name = "rca",
+    desc = "reinterpret_cast<type>(expression)",
+  }, [[reinterpret_cast<${1:unsigned}>(${2:expr})$3]]),
+  parse({
+    trig = "cca",
+    name = "cca",
+    desc = "const_cast<type>(expression)",
+  }, [[const_cast<${1:unsigned}>(${2:expr})$3]]),
+  parse({
+    trig = "af",
+    name = "af",
+    desc = "auto function and trailing return",
+  }, [[auto ${1:name}( ${2:void} ) -> ${3:auto} {
+	${5}
+}]]),
 }
