@@ -2,6 +2,18 @@ return {
   "j-hui/fidget.nvim",
   enabled = true,
   config = function()
+    local function border(hl_name)
+      return {
+        { "╭", hl_name },
+        { "─", hl_name },
+        { "╮", hl_name },
+        { "│", hl_name },
+        { "╯", hl_name },
+        { "─", hl_name },
+        { "╰", hl_name },
+        { "│", hl_name },
+      }
+    end
     require("fidget").setup(
       {
         -- Options related to LSP progress subsystem
@@ -57,7 +69,7 @@ return {
           poll_rate = 10,               -- How frequently to update and render notifications
           filter = vim.log.levels.INFO, -- Minimum notifications level
           history_size = 128,           -- Number of removed messages to retain in history
-          override_vim_notify = false,  -- Automatically override vim.notify() with Fidget
+          override_vim_notify = true,   -- Automatically override vim.notify() with Fidget
           configs =                     -- How to configure notification groups when instantiated
           { default = require("fidget.notification").default_config },
           redirect =                    -- Conditionally redirect notifications to another backend
@@ -69,9 +81,9 @@ return {
 
           -- Options related to how notifications are rendered as text
           view = {
-            stack_upwards = true,    -- Display notification items from bottom to top
+            stack_upwards = false,   -- Display notification items from bottom to top
             align = "message",       -- Indent messages longer than a single line
-            reflow = false,          -- Reflow (wrap) messages wider than notification window
+            reflow = true,           -- Reflow (wrap) messages wider than notification window
             icon_separator = " ",    -- Separator between group name and icon
             group_separator = "---", -- Separator between notification groups
             group_separator_hl =     -- Highlight group used for group separator
@@ -85,19 +97,19 @@ return {
 
           -- Options related to the notification window and buffer
           window = {
-            normal_hl = "Comment", -- Base highlight group in the notification window
-            winblend = 100,        -- Background color opacity in the notification window
-            border = "none",       -- Border around the notification window
-            zindex = 45,           -- Stacking priority of the notification window
-            max_width = 0,         -- Maximum width of the notification window
-            max_height = 0,        -- Maximum height of the notification window
-            x_padding = 1,         -- Padding from edge of window boundary
-            y_padding = 0,         -- Padding from top/bottom edge of window boundary
-            align = "bottom",      -- How to align the notification window vertically
-            h_align = "right",     -- How to align the notification window horizontally
-            relative = "editor",   -- What the notification window position is relative to
-            tabstop = 8,           -- Width of each tab character in the notification window
-            avoid = {}             -- Filetypes the notification window should avoid
+            normal_hl = "Comment",        -- Base highlight group in the notification window
+            winblend = 40,                -- Background color opacity in the notification window
+            border = border("CmpBorder"), -- Border around the notification window
+            zindex = 45,                  -- Stacking priority of the notification window
+            max_width = 40,               -- Maximum width of the notification window
+            max_height = 0,               -- Maximum height of the notification window
+            x_padding = 1,                -- Padding from edge of window boundary
+            y_padding = 0,                -- Padding from top/bottom edge of window boundary
+            align = "top",                -- How to align the notification window vertically
+            h_align = "right",            -- How to align the notification window horizontally
+            relative = "editor",          -- What the notification window position is relative to
+            tabstop = 8,                  -- Width of each tab character in the notification window
+            avoid = {}                    -- Filetypes the notification window should avoid
             -- e.g., { "aerial", "NvimTree", "neotest-summary" }
           },
         },
