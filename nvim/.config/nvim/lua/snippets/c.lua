@@ -99,7 +99,7 @@ return {
     name = "Multiline comment",
     dscr = "Convenient multiline comment",
     wordTrig = false,
-}, "/* $1 */$0"),
+  }, "/* $1 */$0"),
   parse({
       trig = "st",
       name = "Starter Template",
@@ -112,7 +112,6 @@ return {
       dscr = "Preprocessor starter template for a C project",
     },
     "#include <assert.h>\n#include <errno.h>\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n#include <stdio.h>\n#include <stdlib.h>\n$0"),
-
   s({
     trig = "docfunc",
     name = "Documented function",
@@ -126,11 +125,11 @@ return {
     i(3, "args"),
     t({ ")", "{", "\t" }),
     i(4, "/* code */"),
-    t({ "", "}" ,""}),
+    t({ "", "}", "" }),
     i(0),
   }),
   s(
-    { trig="main", name="main() template", desc="Standard main() template"},
+    { trig = "main", name = "main() template", desc = "Standard main() template" },
     fmt([[
 int main(int argc, char *argv[])
 {{
@@ -148,7 +147,7 @@ int main(int argc, char *argv[])
 
 
   s(
-    { trig="main", name="main() template", desc="Standard main() template"},
+    { trig = "main", name = "main() template", desc = "Standard main() template" },
     fmt([[
 int main(int argc, char *argv[])
 {{
@@ -164,8 +163,8 @@ int main(int argc, char *argv[])
     }
   ),
 
-s(
-    { trig="mainn", name="main(void) template", desc="no-args main() snippet"},
+  s(
+    { trig = "mainn", name = "main(void) template", desc = "no-args main() snippet" },
     fmt([[
 int main(void)
 {{
@@ -183,7 +182,7 @@ int main(void)
 
 
   s(
-    { trig="mainn", name="main(void) template", desc="no-args main() snippet"},
+    { trig = "mainn", name = "main(void) template", desc = "no-args main() snippet" },
     fmt([[
 int main(void)
 {{
