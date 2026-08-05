@@ -6,11 +6,11 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *fonts[] = {
+    "IosevkaTerm Nerd Font Mono:style=Regular:size=14",
     "JetBrainsMono Nerd Font:style=Regular:size=14",
     "0xProto Nerd Font:style=Regular:size=14",
-    "Monocraft:style=Regular:size=14",
-    "IosevkaTerm Nerd Font Mono:style=Regular:size=14",
     "Hurmit Nerd Font:style=Regular:size=14",
+    "Monocraft:style=Regular:size=14",
 };
 static size_t currentfont = 0;
 static int borderpx = 0;
