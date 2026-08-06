@@ -35,7 +35,9 @@ hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(FILEMANAGER))
 hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(MENU))
 hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd(MENUALL))
-hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd(scriptsDirectory .. "/dmenu/dmenukill"))
+hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + SHIFT + ESCAPE", hl.dsp.exec_cmd(scriptsDirectory .. "/X/xkiller")) -- Somehow works on wayland too!
 
 
 hl.bind(mainMod .. " + RETURN", function()
