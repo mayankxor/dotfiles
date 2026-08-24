@@ -310,5 +310,10 @@ function battery_level_gauge() {
 ####### /BATTERY MODULE #######
 
 # PS1='[%F{#2fc6b2}%n@%M%f %F{#2fc66c}%0~%f]${vcs_info_msg_0_}${NEWLINE}%(!.#.$) '
-PS1='[%F{#2fc6b2}%n@%M%f %F{#2fc66c}%0~%f]${vcs_info_msg_0_}%(!.#.$) '
-RPS1='[$(battery_pct_prompt)]%?  %* %F{green}  %f%j'
+if [[ -n "$TERMUX_VERSION" ]]; then
+  PS1='[%F{#2fc66c}%0~%f]${vcs_info_msg_0_}%(!.#.$) '
+  RPS1='%F{green}  %f%j'
+else
+  PS1='[%F{#2fc6b2}%n@%M%f %F{#2fc66c}%0~%f]${vcs_info_msg_0_}%(!.#.$) '
+  RPS1='[$(battery_pct_prompt)]%?  %* %F{green}  %f%j'
+fi
