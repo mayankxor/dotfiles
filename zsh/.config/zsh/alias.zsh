@@ -10,6 +10,8 @@ alias grep="grep --color --with-filename --line-number"
 alias gs="git status"
 alias yt="yt-dlp -S res:720,+size"
 
-bat_alias lsblk conf
-bat_alias free cpuinfo
-bat_alias ps log
+if (( $+commands[bat] ));then
+  bat_alias lsblk conf
+  bat_alias free cpuinfo
+  bat_alias ps log
+fi
