@@ -23,4 +23,4 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^v' edit-command-line
 
-source $ZSH_CONFIG_DIR/completion.zsh
+source $ZSH_CONFIG_DIR/completions/init.zsh
