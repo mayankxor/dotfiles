@@ -20,7 +20,6 @@
 --info right
 --info-command 'echo "\x1b[33;1m$FZF_POS\x1b[m/$FZF_INFO"'
 --separator ─
---ghost "Type sum..."
 --input-border none
 # --preview 'bat --color=always --tabs 2 --theme "Monokai Extended Bright" --style auto {}'
 # --preview '~/fzf-preview.sh {}'
