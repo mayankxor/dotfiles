@@ -4,6 +4,7 @@ source $ZSH_CONFIG_DIR/functions.zsh
 source $ZSH_CONFIG_DIR/alias.zsh
 source $ZSH_CONFIG_DIR/autostart.zsh
 source $ZSH_CONFIG_DIR/plugins.zsh
+source $ZSH_CONFIG_DIR/colors.zsh
 source $ZSH_CONFIG_DIR/prompt.zsh
 source $ZSH_CONFIG_DIR/exports.zsh
 source $ZSH_CONFIG_DIR/keybinds.zsh

@@ -2,7 +2,7 @@ autoload -Uz vcs_info
 precmd() { 
   vcs_info
 }
-zstyle ':vcs_info:*' formats ' (%F{red}%b%f)'
+zstyle ':vcs_info:*' formats '%s:%b'
 NEWLINE=$'\n'
 
 ####### BATTERY MODULE #######
@@ -310,6 +310,6 @@ if [[ -n "$TERMUX_VERSION" ]]; then
   PS1='[%F{#2fc66c}%0~%f]${vcs_info_msg_0_}%(!.#.$) '
   RPS1='%F{green}  %f%j'
 else
-  PS1='[%F{#2fc6b2}%n@%M%f %F{#2fc66c}%0~%f]${vcs_info_msg_0_}%(!.#.$) '
-  RPS1='[$(battery_pct_prompt)]%?  %* %F{green}  %f%j'
+  PS1='%F{$base16[base06]}%0~%f %F{$base16[base0F]}${vcs_info_msg_0_}%f$NEWLINE%(!.μ.λ) '
+  # RPS1='[$(battery_pct_prompt)]%?  %* %F{green}  %f%j'
 fi
