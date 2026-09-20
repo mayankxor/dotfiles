@@ -2,25 +2,60 @@ return {
   "folke/flash.nvim",
   event = "VeryLazy",
   keys = {
-    { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-    { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-    { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-    { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    {
+      "s",
+      mode = { "n", "x", "o" },
+      function()
+        require("flash").jump()
+      end,
+      desc = "Flash",
+    },
+    {
+      "S",
+      mode = { "n", "x", "o" },
+      function()
+        require("flash").treesitter()
+      end,
+      desc = "Flash Treesitter",
+    },
+    {
+      "r",
+      mode = "o",
+      function()
+        require("flash").remote()
+      end,
+      desc = "Remote Flash",
+    },
+    {
+      "R",
+      mode = { "o", "x" },
+      function()
+        require("flash").treesitter_search()
+      end,
+      desc = "Treesitter Search",
+    },
+    {
+      "<c-s>",
+      mode = { "c" },
+      function()
+        require("flash").toggle()
+      end,
+      desc = "Toggle Flash Search",
+    },
   },
   config = function()
     vim.api.nvim_set_hl(0, "FlashLabel", {
-    fg = "#ff9e64",
-    bold = true,
+      fg = "#ff9e64",
+      bold = true,
     })
-vim.keymap.set({"n", "x", "o"}, "<c-space>", function()
-  require("flash").treesitter({
-    actions = {
-      ["<c-space>"] = "next",
-      ["<BS>"] = "prev"
-    }
-  })
-end, { desc = "Treesitter incremental selection" })
+    vim.keymap.set({ "n", "x", "o" }, "<c-space>", function()
+      require("flash").treesitter({
+        actions = {
+          ["<c-space>"] = "next",
+          ["<BS>"] = "prev",
+        },
+      })
+    end, { desc = "Treesitter incremental selection" })
     require("flash").setup({
       -- labels = "abcdefghijklmnopqrstuvwxyz",
       labels = "asdfghjklqwertyuiopzxcvbnm",
@@ -182,9 +217,9 @@ end, { desc = "Treesitter incremental selection" })
             -- disable jump labels when not enabled, when using a count,
             -- or when recording/executing registers
             opts.jump_labels = opts.jump_labels
-                and vim.v.count == 0
-                and vim.fn.reg_executing() == ""
-                and vim.fn.reg_recording() == ""
+              and vim.v.count == 0
+              and vim.fn.reg_executing() == ""
+              and vim.fn.reg_recording() == ""
 
             -- Show jump labels only in operator-pending mode
             -- opts.jump_labels = vim.v.count == 0 and vim.fn.mode(true):find("o")
@@ -261,8 +296,8 @@ end, { desc = "Treesitter incremental selection" })
           border = "none",
           width = 1, -- when <=1 it's a percentage of the editor width
           height = 1,
-          row = -1,  -- when negative it's an offset from the bottom
-          col = 0,   -- when negative it's an offset from the right
+          row = -1, -- when negative it's an offset from the bottom
+          col = 0, -- when negative it's an offset from the right
           zindex = 1000,
         },
       },
@@ -278,5 +313,5 @@ end, { desc = "Treesitter incremental selection" })
         motion = false,
       },
     })
-  end
+  end,
 }

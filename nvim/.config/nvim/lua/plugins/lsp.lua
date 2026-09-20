@@ -299,10 +299,10 @@ return {
               keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%([\-.]\w*\)*\)]],
               get_bufnrs = function()
                 if -- If file size > 1 megabyte, dont scan it for buffer completion
-                    vim.api.nvim_buf_get_offset(
-                      vim.api.nvim_get_current_buf(),
-                      vim.api.nvim_buf_line_count(vim.api.nvim_get_current_buf())
-                    ) > 1024 * 1024
+                  vim.api.nvim_buf_get_offset(
+                    vim.api.nvim_get_current_buf(),
+                    vim.api.nvim_buf_line_count(vim.api.nvim_get_current_buf())
+                  ) > 1024 * 1024
                 then
                   return {}
                 end
@@ -388,7 +388,7 @@ return {
             else
               fallback()
             end
-          end, {"i", "s"})
+          end, { "i", "s" }),
         }),
         -- Disable completions in certain contexts, such as comments
         enabled = function()
@@ -403,6 +403,6 @@ return {
     end,
   },
   {
-    "neovim/nvim-lspconfig"
-  }
+    "neovim/nvim-lspconfig",
+  },
 }

@@ -6,24 +6,24 @@ return {
         deprecatedSupport = true,
         insertReplaceSupport = true,
         insertTextModeSupport = {
-          valueSet = { 1, 2 }
+          valueSet = { 1, 2 },
         },
         labelDetailsSupport = true,
         preselectSupport = true,
         resolveSupport = {
-          properties = { "documentation", "additionalTextEdits", "insertTextFormat", "insertTextMode", "command" }
+          properties = { "documentation", "additionalTextEdits", "insertTextFormat", "insertTextMode", "command" },
         },
         snippetSupport = true,
         tagSupport = {
-          valueSet = { 1 }
-        }
+          valueSet = { 1 },
+        },
       },
       completionList = {
-        itemDefaults = { "commitCharacters", "editRange", "insertTextFormat", "insertTextMode", "data" }
+        itemDefaults = { "commitCharacters", "editRange", "insertTextFormat", "insertTextMode", "data" },
       },
       contextSupport = true,
       dynamicRegistration = false,
-      insertTextMode = 1
-    }
-  }
+      insertTextMode = 1,
+    },
+  },
 }

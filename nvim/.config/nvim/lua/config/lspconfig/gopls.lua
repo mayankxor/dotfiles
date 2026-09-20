@@ -39,18 +39,18 @@ local std_lib = nil
 ---@param custom_args go_dir_custom_args
 ---@param on_complete fun(dir: string | nil)
 local function identify_go_dir(custom_args, on_complete)
-  local cmd = { 'go', 'env', custom_args.envvar_id }
+  local cmd = { "go", "env", custom_args.envvar_id }
   vim.system(cmd, { text = true }, function(output)
-    local res = vim.trim(output.stdout or '')
-    if output.code == 0 and res ~= '' then
-      if custom_args.custom_subdir and custom_args.custom_subdir ~= '' then
+    local res = vim.trim(output.stdout or "")
+    if output.code == 0 and res ~= "" then
+      if custom_args.custom_subdir and custom_args.custom_subdir ~= "" then
         res = res .. custom_args.custom_subdir
       end
       on_complete(res)
     else
       vim.schedule(function()
         vim.notify(
-          ('[gopls] identify ' .. custom_args.envvar_id .. ' dir cmd failed with code %d: %s\n%s'):format(
+          ("[gopls] identify " .. custom_args.envvar_id .. " dir cmd failed with code %d: %s\n%s"):format(
             output.code,
             vim.inspect(cmd),
             output.stderr
@@ -64,11 +64,11 @@ end
 
 ---@return string?
 local function get_std_lib_dir()
-  if std_lib and std_lib ~= '' then
+  if std_lib and std_lib ~= "" then
     return std_lib
   end
 
-  identify_go_dir({ envvar_id = 'GOROOT', custom_subdir = '/src' }, function(dir)
+  identify_go_dir({ envvar_id = "GOROOT", custom_subdir = "/src" }, function(dir)
     if dir then
       std_lib = dir
     end
@@ -78,11 +78,11 @@ end
 
 ---@return string?
 local function get_mod_cache_dir()
-  if mod_cache and mod_cache ~= '' then
+  if mod_cache and mod_cache ~= "" then
     return mod_cache
   end
 
-  identify_go_dir({ envvar_id = 'GOMODCACHE' }, function(dir)
+  identify_go_dir({ envvar_id = "GOMODCACHE" }, function(dir)
     if dir then
       mod_cache = dir
     end
@@ -94,23 +94,23 @@ end
 ---@return string?
 local function get_root_dir(fname)
   if mod_cache and fname:sub(1, #mod_cache) == mod_cache then
-    local clients = vim.lsp.get_clients({ name = 'gopls' })
+    local clients = vim.lsp.get_clients({ name = "gopls" })
     if #clients > 0 then
       return clients[#clients].config.root_dir
     end
   end
   if std_lib and fname:sub(1, #std_lib) == std_lib then
-    local clients = vim.lsp.get_clients({ name = 'gopls' })
+    local clients = vim.lsp.get_clients({ name = "gopls" })
     if #clients > 0 then
       return clients[#clients].config.root_dir
     end
   end
-  return vim.fs.root(fname, 'go.work') or vim.fs.root(fname, 'go.mod') or vim.fs.root(fname, '.git')
+  return vim.fs.root(fname, "go.work") or vim.fs.root(fname, "go.mod") or vim.fs.root(fname, ".git")
 end
 
 vim.lsp.config("gopls", {
-  cmd = { 'gopls' },
-  filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
   root_dir = function(bufnr, on_dir)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     get_mod_cache_dir()
@@ -118,7 +118,7 @@ vim.lsp.config("gopls", {
     -- see: https://github.com/neovim/nvim-lspconfig/issues/804
     on_dir(get_root_dir(fname))
   end,
-  init_options = { semanticTokens = true, },
+  init_options = { semanticTokens = true },
   settings = {
     gopls = {
       gofumpt = true,
@@ -151,7 +151,7 @@ vim.lsp.config("gopls", {
         functionTypeParameters = true,
         parameterNames = true,
         rangeVariableTypes = true,
-      }
+      },
     },
   },
   capabilities = {
@@ -162,24 +162,24 @@ vim.lsp.config("gopls", {
           deprecatedSupport = true,
           insertReplaceSupport = true,
           insertTextModeSupport = {
-            valueSet = { 1, 2 }
+            valueSet = { 1, 2 },
           },
           labelDetailsSupport = true,
           preselectSupport = true,
           resolveSupport = {
-            properties = { "documentation", "additionalTextEdits", "insertTextFormat", "insertTextMode", "command" }
+            properties = { "documentation", "additionalTextEdits", "insertTextFormat", "insertTextMode", "command" },
           },
           snippetSupport = true,
           tagSupport = {
-            valueSet = { 1 }
-          }
+            valueSet = { 1 },
+          },
         },
         completionList = {
-          itemDefaults = { "commitCharacters", "editRange", "insertTextFormat", "insertTextMode", "data" }
+          itemDefaults = { "commitCharacters", "editRange", "insertTextFormat", "insertTextMode", "data" },
         },
         contextSupport = true,
         dynamicRegistration = false,
-        insertTextMode = 1
+        insertTextMode = 1,
       },
       semanticTokens = {
         augmentsSyntaxTokens = true,
@@ -189,15 +189,50 @@ vim.lsp.config("gopls", {
         overlappingTokenSupport = true,
         requests = {
           full = {
-            delta = true
+            delta = true,
           },
-          range = true
+          range = true,
         },
         serverCancelSupport = false,
-        tokenModifiers = { "declaration", "definition", "readonly", "static", "deprecated", "abstract", "async", "modification", "documentation", "defaultLibrary" },
-        tokenTypes = { "namespace", "type", "class", "enum", "interface", "struct", "typeParameter", "parameter", "variable", "property", "enumMember", "event", "function", "method", "macro", "keyword", "modifier", "comment", "string", "number", "regexp", "operator", "decorator" }
+        tokenModifiers = {
+          "declaration",
+          "definition",
+          "readonly",
+          "static",
+          "deprecated",
+          "abstract",
+          "async",
+          "modification",
+          "documentation",
+          "defaultLibrary",
+        },
+        tokenTypes = {
+          "namespace",
+          "type",
+          "class",
+          "enum",
+          "interface",
+          "struct",
+          "typeParameter",
+          "parameter",
+          "variable",
+          "property",
+          "enumMember",
+          "event",
+          "function",
+          "method",
+          "macro",
+          "keyword",
+          "modifier",
+          "comment",
+          "string",
+          "number",
+          "regexp",
+          "operator",
+          "decorator",
+        },
       },
-    }
+    },
   },
 })
 vim.lsp.enable("gopls")

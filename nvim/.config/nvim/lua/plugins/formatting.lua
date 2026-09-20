@@ -73,12 +73,12 @@ return {
           command = "/usr/lib/qt6/bin/qmlformat",
           args = { "-i", "$FILENAME" },
           stdin = false,
-        }
+        },
       },
       formatters_by_ft = {
         jsonc = { "prettierd" },
         lua = { "stylua" },
-        qml = { "qmlformat" }
+        qml = { "qmlformat" },
       },
       format_on_save = {
         timeout_ms = 500,

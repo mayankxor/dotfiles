@@ -22,7 +22,6 @@ local s = ls.snippet
 local d = ls.dynamic_node
 local fmt = require("luasnip.extras.fmt").fmt
 
-
 -- Split only on top-level commas. This keeps commas inside function-pointer
 -- parameters, array expressions, and quoted strings intact.
 local function split_arguments(signature)
@@ -52,7 +51,7 @@ local function split_arguments(signature)
       elseif character == quote then
         quote = nil
       end
-    elseif character == "\"" or character == "'" then
+    elseif character == '"' or character == "'" then
       quote = character
       table.insert(current, character)
     elseif character == "(" or character == "[" or character == "{" then
@@ -88,10 +87,7 @@ local function documentation(args)
 
   for parameter_index, parameter in ipairs(parameters) do
     table.insert(nodes, t({ "", " * @param " .. parameter .. " " }))
-    table.insert(
-      nodes,
-      r(jump_index, "docfunc_param_" .. parameter_index, i(nil, ""))
-    )
+    table.insert(nodes, r(jump_index, "docfunc_param_" .. parameter_index, i(nil, "")))
     jump_index = jump_index + 1
   end
 
@@ -102,7 +98,6 @@ local function documentation(args)
   return sn(nil, nodes)
 end
 
-
 return {
   parse({
     trig = "//",
@@ -110,18 +105,22 @@ return {
     dscr = "Convenient multiline comment",
     wordTrig = false,
   }, "/* $1 */$0"),
-  parse({
+  parse(
+    {
       trig = "st",
       name = "Starter Template",
       dscr = "Standard starter template for a tiny C program",
     },
-    "#include <stdbool.h>\n#include <stdio.h>\n#include <stdlib.h>\n\nint main(int argc, char *argv[])\n{\n\t$0\n\treturn EXIT_SUCCESS;\n}"),
-  parse({
+    "#include <stdbool.h>\n#include <stdio.h>\n#include <stdlib.h>\n\nint main(int argc, char *argv[])\n{\n\t$0\n\treturn EXIT_SUCCESS;\n}"
+  ),
+  parse(
+    {
       trig = "#st",
       name = "Preprocessor Starter Template",
       dscr = "Preprocessor starter template for a C project",
     },
-    "#include <assert.h>\n#include <errno.h>\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n#include <stdio.h>\n#include <stdlib.h>\n$0"),
+    "#include <assert.h>\n#include <errno.h>\n#include <stdbool.h>\n#include <stddef.h>\n#include <stdint.h>\n#include <stdio.h>\n#include <stdlib.h>\n$0"
+  ),
   s({
     trig = "docfunc",
     name = "Documented function",
@@ -140,71 +139,89 @@ return {
   }),
   s(
     { trig = "main", name = "main() template", desc = "Standard main() template" },
-    fmt([[
+    fmt(
+      [[
 int main(int argc, char *argv[])
 {{
     {}
     return EXIT_SUCCESS;
 }}
-]], {
-      i(0),
-    }),
+]],
+      {
+        i(0),
+      }
+    ),
     {
       condition = has_stdlib,
       show_condition = has_stdlib,
     }
   ),
-
 
   s(
     { trig = "main", name = "main() template", desc = "Standard main() template" },
-    fmt([[
+    fmt(
+      [[
 int main(int argc, char *argv[])
 {{
     {}
     return 0;
 }}
-]], {
-      i(0),
-    }),
+]],
+      {
+        i(0),
+      }
+    ),
     {
-      condition = function() return not has_stdlib() end,
-      show_condition = function() return not has_stdlib() end
+      condition = function()
+        return not has_stdlib()
+      end,
+      show_condition = function()
+        return not has_stdlib()
+      end,
     }
   ),
 
   s(
     { trig = "mainn", name = "main(void) template", desc = "no-args main() snippet" },
-    fmt([[
+    fmt(
+      [[
 int main(void)
 {{
     {}
     return EXIT_SUCCESS;
 }}
-]], {
-      i(0),
-    }),
+]],
+      {
+        i(0),
+      }
+    ),
     {
       condition = has_stdlib,
       show_condition = has_stdlib,
     }
   ),
 
-
   s(
     { trig = "mainn", name = "main(void) template", desc = "no-args main() snippet" },
-    fmt([[
+    fmt(
+      [[
 int main(void)
 {{
     {}
     return 0;
 }}
-]], {
-      i(0),
-    }),
+]],
+      {
+        i(0),
+      }
+    ),
     {
-      condition = function() return not has_stdlib() end,
-      show_condition = function() return not has_stdlib() end
+      condition = function()
+        return not has_stdlib()
+      end,
+      show_condition = function()
+        return not has_stdlib()
+      end,
     }
   ),
   parse({
@@ -214,9 +231,9 @@ int main(void)
   }, "#include <$1>$0"),
   parse({
     trig = "#incl",
-    name = "#include \"...\"",
-    dscr = "#include \"...\" snippet",
-  }, "#include \"$1\"$0"),
+    name = '#include "..."',
+    dscr = '#include "..." snippet',
+  }, '#include "$1"$0'),
   parse({
     trig = "#def",
     name = "#define macro",
@@ -256,17 +273,17 @@ int main(void)
     trig = "#nocpp",
     name = "extern C",
     dscr = "Disable C++ name mangling in C headers",
-  }, "#ifdef __cplusplus\nextern \"C\" {\n#endif\n$1\n\n#ifdef __cplusplus\n} /* extern \"C\" */\n#endif\n$0"),
+  }, '#ifdef __cplusplus\nextern "C" {\n#endif\n$1\n\n#ifdef __cplusplus\n} /* extern "C" */\n#endif\n$0'),
   parse({
     trig = "#err",
     name = "#error",
     dscr = "#error snippet",
-  }, "#error \"$1\"\n$0"),
+  }, '#error "$1"\n$0'),
   parse({
     trig = "#warn",
     name = "#warning",
     dscr = "#warning snippet",
-  }, "#warning \"$1\"\n$0"),
+  }, '#warning "$1"\n$0'),
   parse({
     trig = "if",
     name = "if",
@@ -411,47 +428,47 @@ int main(void)
     trig = "puts",
     name = "puts",
     dscr = "puts() snippet",
-  }, "puts(\"${1:This function doesn't need newline.}\");$0"),
+  }, 'puts("${1:This function doesn\'t need newline.}");$0'),
   parse({
     trig = "fputs",
     name = "fputs",
     dscr = "puts() snippet",
-  }, "fputs(\"${2:This is a simpler printf.\\n}\", ${1:stdout});$0"),
+  }, 'fputs("${2:This is a simpler printf.\\n}", ${1:stdout});$0'),
   parse({
     trig = "printf",
     name = "printf",
     dscr = "printf() snippet",
-  }, "printf(\"${1:%s}\\n\"$2);$0"),
+  }, 'printf("${1:%s}\\n"$2);$0'),
   parse({
     trig = "fprintf",
     name = "fprintf",
     dscr = "fprintf() snippet",
-  }, "fprintf(${1:stderr}, \"${2:%s}\\n\"$3);$0"),
+  }, 'fprintf(${1:stderr}, "${2:%s}\\n"$3);$0'),
   parse({
     trig = "sprintf",
     name = "sprintf",
     dscr = "sprintf() snippet",
-  }, "sprintf(${1:buf}, \"${2:%s}\\n\"$3);$0"),
+  }, 'sprintf(${1:buf}, "${2:%s}\\n"$3);$0'),
   parse({
     trig = "snprintf",
     name = "snprintf",
     dscr = "snprintf() snippet",
-  }, "snprintf(${1:buf}, ${2:max}, \"${3:%s}\\n\"$3);$0"),
+  }, 'snprintf(${1:buf}, ${2:max}, "${3:%s}\\n"$3);$0'),
   parse({
     trig = "scanf",
     name = "scanf",
     dscr = "scanf() snippet",
-  }, "scanf(\"${1:%d}\"$2);$0"),
+  }, 'scanf("${1:%d}"$2);$0'),
   parse({
     trig = "fscanf",
     name = "fscanf",
     dscr = "fscanf() snippet",
-  }, "fscanf(${1:stdin}, \"${2:%d}\"$3);$0"),
+  }, 'fscanf(${1:stdin}, "${2:%d}"$3);$0'),
   parse({
     trig = "sscanf",
     name = "sscanf",
     dscr = "sscanf() snippet",
-  }, "sscanf(${1:buf}, \"${2:%d}\"$3);$0"),
+  }, 'sscanf(${1:buf}, "${2:%d}"$3);$0'),
   parse({
     trig = "malloc",
     name = "malloc",
@@ -486,57 +503,57 @@ int main(void)
     trig = "static_assert",
     name = "static_assert",
     dscr = "static_assert() snippet",
-  }, "static_assert(${1:false}, \"${2:Oopsie}\");"),
+  }, 'static_assert(${1:false}, "${2:Oopsie}");'),
   parse({
     trig = "err",
     name = "err",
     dscr = "err() snippet",
-  }, "err(${1:EXIT_FAILURE}, \"${2:%s}\"$0);"),
+  }, 'err(${1:EXIT_FAILURE}, "${2:%s}"$0);'),
   parse({
     trig = "errx",
     name = "errx",
     dscr = "errx() snippet",
-  }, "errx(${1:EXIT_FAILURE}, \"${2:%s}\"$0);"),
+  }, 'errx(${1:EXIT_FAILURE}, "${2:%s}"$0);'),
   parse({
     trig = "warn",
     name = "warn",
     dscr = "warn() snippet",
-  }, "warn(\"${1:%s}\"$0);"),
+  }, 'warn("${1:%s}"$0);'),
   parse({
     trig = "warnx",
     name = "warnx",
     dscr = "warnx() snippet",
-  }, "warnx(\"${1:%s}\"$0);"),
+  }, 'warnx("${1:%s}"$0);'),
   parse({
     trig = "chkio_eof",
     name = "fputs() errcheck",
     dscr = "Error checking for int IO functions",
-  }, "if (${1:status} == EOF$2) {\n\t${3:err(EXIT_FAILURE, \"IO is hard\");}\n}"),
+  }, 'if (${1:status} == EOF$2) {\n\t${3:err(EXIT_FAILURE, "IO is hard");}\n}'),
   parse({
     trig = "chkio_null",
     name = "fgets() errcheck",
     dscr = "Error checking for pointer-type IO functions",
-  }, "if (!${1:status}) {\n\t${2:err(EXIT_FAILURE, \"IO is very hard\");}\n}"),
+  }, 'if (!${1:status}) {\n\t${2:err(EXIT_FAILURE, "IO is very hard");}\n}'),
   parse({
     trig = "chkio_mi",
     name = "fseek() errcheck",
     dscr = "Error checking for fseek(), getline() like functions",
-  }, "if (${1:status} == -1$2) {\n\t${3:err(EXIT_FAILURE, \"IO is super hard\");}\n}"),
+  }, 'if (${1:status} == -1$2) {\n\t${3:err(EXIT_FAILURE, "IO is super hard");}\n}'),
   parse({
     trig = "chkio_neg",
     name = "printf() errcheck",
     dscr = "Error checking for printf()-like functions",
-  }, "if (${1:status} < 0$2) {\n\t${3:err(EXIT_FAILURE, \"Ran out of ink\");}\n}"),
+  }, 'if (${1:status} < 0$2) {\n\t${3:err(EXIT_FAILURE, "Ran out of ink");}\n}'),
   parse({
     trig = "chkmem",
     name = "malloc() errcheck",
     dscr = "Error checking for malloc()-like",
-  }, "if (!${1:status}) {\n\t${2:err(EXIT_FAILURE, \"Your memory is doomed\");}\n}"),
+  }, 'if (!${1:status}) {\n\t${2:err(EXIT_FAILURE, "Your memory is doomed");}\n}'),
   parse({
     trig = "printv",
     name = "Print a variable",
     dscr = "Call printf() to log value of a variable",
-  }, "printf(\"$1 = %${2:d}\\n\", ${1:var}$3);"),
+  }, 'printf("$1 = %${2:d}\\n", ${1:var}$3);'),
   parse({
     trig = "arrlen",
     name = "Array length",

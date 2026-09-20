@@ -12,10 +12,12 @@
 --- Source in the [QtDeclarative repository](https://code.qt.io/cgit/qt/qtdeclarative.git/)
 
 vim.lsp.config("qmlls", {
-  cmd = { '/usr/lib/qt6/bin/qmlls', "-I", "/usr/lib/qt6/qml" },
-  filetypes = { 'qml', 'qmljs' },
-  root_markers = { '.git', '.qmlls.ini' },
-  on_attach = function(client, bufnr) client.server_capabilities.semanticTokensProvider = nil end,
+  cmd = { "/usr/lib/qt6/bin/qmlls", "-I", "/usr/lib/qt6/qml" },
+  filetypes = { "qml", "qmljs" },
+  root_markers = { ".git", ".qmlls.ini" },
+  on_attach = function(client, bufnr)
+    client.server_capabilities.semanticTokensProvider = nil
+  end,
   capabilities = {
     textDocument = {
       completion = {
@@ -24,26 +26,26 @@ vim.lsp.config("qmlls", {
           deprecatedSupport = true,
           insertReplaceSupport = true,
           insertTextModeSupport = {
-            valueSet = { 1, 2 }
+            valueSet = { 1, 2 },
           },
           labelDetailsSupport = true,
           preselectSupport = true,
           resolveSupport = {
-            properties = { "documentation", "additionalTextEdits", "insertTextFormat", "insertTextMode", "command" }
+            properties = { "documentation", "additionalTextEdits", "insertTextFormat", "insertTextMode", "command" },
           },
           snippetSupport = true,
           tagSupport = {
-            valueSet = { 1 }
-          }
+            valueSet = { 1 },
+          },
         },
         completionList = {
-          itemDefaults = { "commitCharacters", "editRange", "insertTextFormat", "insertTextMode", "data" }
+          itemDefaults = { "commitCharacters", "editRange", "insertTextFormat", "insertTextMode", "data" },
         },
         contextSupport = true,
         dynamicRegistration = false,
-        insertTextMode = 1
-      }
-    }
-  }
+        insertTextMode = 1,
+      },
+    },
+  },
 })
 vim.lsp.enable("qmlls")

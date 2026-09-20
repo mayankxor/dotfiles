@@ -610,7 +610,7 @@ return {
         vim.b[0].nvim_surround_buffer_opts = M.merge_opts(M.get_opts(), buffer_opts)
       end
       require("nvim-surround").setup(M)
-    end
+    end,
   },
   -- {
   --   'nvim-mini/mini.surround',

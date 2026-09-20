@@ -42,7 +42,7 @@ local function split_arguments(signature)
       elseif character == quote then
         quote = nil
       end
-    elseif character == "\"" or character == "'" then
+    elseif character == '"' or character == "'" then
       quote = character
       table.insert(current, character)
     elseif character == "(" or character == "[" or character == "{" then
@@ -78,10 +78,7 @@ local function documentation(args)
 
   for parameter_index, parameter in ipairs(parameters) do
     table.insert(nodes, t({ "", " * @param " .. parameter .. " " }))
-    table.insert(
-      nodes,
-      r(jump_index, "docfunc_param_" .. parameter_index, i(nil, ""))
-    )
+    table.insert(nodes, r(jump_index, "docfunc_param_" .. parameter_index, i(nil, "")))
     jump_index = jump_index + 1
   end
 
@@ -92,7 +89,6 @@ local function documentation(args)
   return sn(nil, nodes)
 end
 
-
 return {
   parse({
     trig = "//",
@@ -101,11 +97,10 @@ return {
     wordTrig = false,
   }, "/* $1 */$0"),
   parse({
-      trig = "st",
-      name = "Starter Template",
-      dscr = "Standard starter template for a tiny Cpp program",
-    },
-    "#include <iostream>\n\nint main(int argc, char *argv[])\n{\n\t$0\n\treturn 0;\n}"),
+    trig = "st",
+    name = "Starter Template",
+    dscr = "Standard starter template for a tiny Cpp program",
+  }, "#include <iostream>\n\nint main(int argc, char *argv[])\n{\n\t$0\n\treturn 0;\n}"),
   s({
     trig = "docfunc",
     name = "Documented function",
@@ -124,26 +119,35 @@ return {
   }),
   s(
     { trig = "main", name = "main() template", desc = "Standard main() template" },
-    fmt([[
+    fmt(
+      [[
 int main(int argc, char *argv[])
 {{
     {}
     return 0;
 }}
-]], {
-      i(0),
-    }), {}),
+]],
+      {
+        i(0),
+      }
+    ),
+    {}
+  ),
   s(
     { trig = "mainn", name = "main(void) template", desc = "no-args main() snippet" },
-    fmt([[
+    fmt(
+      [[
 int main(void)
 {{
     {}
     return 0;
 }}
-]], {
-      i(0),
-    }), {}
+]],
+      {
+        i(0),
+      }
+    ),
+    {}
   ),
   parse({
     trig = "#inc",
@@ -152,9 +156,9 @@ int main(void)
   }, "#include <$1>$0"),
   parse({
     trig = "#incl",
-    name = "#include \"...\"",
-    dscr = "#include \"...\" snippet",
-  }, "#include \"$1\"$0"),
+    name = '#include "..."',
+    dscr = '#include "..." snippet',
+  }, '#include "$1"$0'),
   parse({
     trig = "#def",
     name = "#define macro",
@@ -184,17 +188,17 @@ int main(void)
     trig = "#nocpp",
     name = "extern C",
     dscr = "Disable C++ name mangling in C headers",
-  }, "#ifdef __cplusplus\nextern \"C\" {\n#endif\n$1\n\n#ifdef __cplusplus\n} /* extern \"C\" */\n#endif\n$0"),
+  }, '#ifdef __cplusplus\nextern "C" {\n#endif\n$1\n\n#ifdef __cplusplus\n} /* extern "C" */\n#endif\n$0'),
   parse({
     trig = "#err",
     name = "#error",
     dscr = "#error snippet",
-  }, "#error \"$1\"\n$0"),
+  }, '#error "$1"\n$0'),
   parse({
     trig = "#warn",
     name = "#warning",
     dscr = "#warning snippet",
-  }, "#warning \"$1\"\n$0"),
+  }, '#warning "$1"\n$0'),
   parse({
     trig = "if",
     name = "if",
@@ -230,17 +234,20 @@ int main(void)
     name = "switch",
     dscr = "'switch' snippet",
   }, "switch (${1:expression}) {\n\t$2\ndefault:\n\t$3;\n\tbreak;\n}\n$0"),
-  parse({
-    trig = "try",
-    name = "try",
-    desc = "Code snippet for try catch",
-  }, [[try {
+  parse(
+    {
+      trig = "try",
+      name = "try",
+      desc = "Code snippet for try catch",
+    },
+    [[try {
 	$2
 }
 catch (${1:const std::exception&}) {
   $3
 }
-$0]]),
+$0]]
+  ),
   parse({
     trig = "case",
     name = "case",
@@ -279,12 +286,12 @@ $0]]),
   parse({
     trig = "forr",
     name = "reverse for loop",
-    dscr = "Code snippet for reverse 'for' loop"
+    dscr = "Code snippet for reverse 'for' loop",
   }, "for (${1:size_t} ${2:i} = ${3:length}-1; $2 >= ${4:0}; $2--){\n\t$5\n}\n$0"),
   parse({
     trig = "foreach",
     name = "foreach",
-    dscr = "Code snippet for range-based for loop (c++11) statement"
+    dscr = "Code snippet for range-based for loop (c++11) statement",
   }, "for (${1:auto} ${2:var} : ${3:collection}){\n\t$4\n}\n$0"),
   parse({
     trig = "forc",
@@ -371,11 +378,13 @@ $0]]),
     name = "enum class",
     dscr = "Code snippet for enum class (c++11)",
   }, "enum class {$1:MyClass} {$2};$0"),
-  parse({
-    trig = "class",
-    name = "class",
-    desc = "Code snippet for class",
-  }, [[class ${1:MyClass} {
+  parse(
+    {
+      trig = "class",
+      name = "class",
+      desc = "Code snippet for class",
+    },
+    [[class ${1:MyClass} {
 public:
 	$1();
 	$1($1 &&) = default;
@@ -394,23 +403,29 @@ $1::$1() {
 
 $1::~$1() {
   $4
-}]]),
-  parse({
-    trig = "eclass",
-    name = "eclass",
-    desc = "Code snippet for empty class",
-  }, [[class ${1:MyClass} {
+}]]
+  ),
+  parse(
+    {
+      trig = "eclass",
+      name = "eclass",
+      desc = "Code snippet for empty class",
+    },
+    [[class ${1:MyClass} {
 public:
 	$2
 private:
 	$3
 };
-]]),
-  parse({
-    trig = "qclass",
-    name = "qclass",
-    desc = "Code snippet for empty Qt class",
-  }, [[class ${1:MyClass} : public QObject {
+]]
+  ),
+  parse(
+    {
+      trig = "qclass",
+      name = "qclass",
+      desc = "Code snippet for empty Qt class",
+    },
+    [[class ${1:MyClass} : public QObject {
 	Q_OBJECT;
 public:
 
@@ -420,12 +435,15 @@ signals:
 
 public slots:
 };
-]]),
-  parse({
-    trig = "classi",
-    name = "classi",
-    desc = "Code snippet for class with inline constructor/destructor",
-  }, [[class ${1:MyClass} {
+]]
+  ),
+  parse(
+    {
+      trig = "classi",
+      name = "classi",
+      desc = "Code snippet for class with inline constructor/destructor",
+    },
+    [[class ${1:MyClass} {
 public:
 	$1() = default;
 	$1($1 &&) = default;
@@ -436,41 +454,49 @@ public:
 
 private:
 	$2
-};]]),
-  parse({
-    trig = "interface",
-    name = "interface",
-    desc = "Code snippet for interface (Visual C++)",
-  }, [[__interface I${1:Interface} {
+};]]
+  ),
+  parse(
+    {
+      trig = "interface",
+      name = "interface",
+      desc = "Code snippet for interface (Visual C++)",
+    },
+    [[__interface I${1:Interface} {
 	$0
-};]]),
-  parse({
-    trig = "namespace",
-    name = "namespace",
-  }, [[namespace ${1:MyNamespace} {
+};]]
+  ),
+  parse(
+    {
+      trig = "namespace",
+      name = "namespace",
+    },
+    [[namespace ${1:MyNamespace} {
 	$2
-}]]),
+}]]
+  ),
   parse({
     trig = "puts",
     name = "puts",
     dscr = "puts() snippet",
-  }, "puts(\"${1:This function doesn't need newline.}\");$0"),
+  }, 'puts("${1:This function doesn\'t need newline.}");$0'),
   parse({
     trig = "fputs",
     name = "fputs",
     dscr = "puts() snippet",
-  }, "fputs(\"${2:This is a simpler printf.\\n}\", ${1:stdout});$0"),
+  }, 'fputs("${2:This is a simpler printf.\\n}", ${1:stdout});$0'),
   parse({
     trig = "printf",
     name = "printf",
     dscr = "printf() snippet",
-  }, "printf(\"${1:%s}\\n\"$2);$0"),
+  }, 'printf("${1:%s}\\n"$2);$0'),
   parse({
     trig = "fprintf",
     name = "fprintf",
     dscr = "fprintf() snippet",
-  }, "fprintf(${1:stderr}, \"${2:%s}\\n\"$3);$0"),
-  parse({
+  }, 'fprintf(${1:stderr}, "${2:%s}\\n"$3);$0'),
+  parse(
+    {
       trig = "#guard",
       name = "#guard",
       desc = "header guard. format :\n\tINCLUDE_<dirname>_<filename>_<extension>_",
@@ -481,32 +507,33 @@ private:
 $1
 
 #endif  // INCLUDE${TM_DIRECTORY/.*[\/\\](.*)/_${1:/upcase}/}${TM_FILENAME_BASE/(.*)/_${1:/upcase}/}${TM_FILENAME/.*\.(.*)/_${1:/upcase}/}_
-$0]]),
+$0]]
+  ),
   parse({
     trig = "sprintf",
     name = "sprintf",
     dscr = "sprintf() snippet",
-  }, "sprintf(${1:buf}, \"${2:%s}\\n\"$3);$0"),
+  }, 'sprintf(${1:buf}, "${2:%s}\\n"$3);$0'),
   parse({
     trig = "snprintf",
     name = "snprintf",
     dscr = "snprintf() snippet",
-  }, "snprintf(${1:buf}, ${2:max}, \"${3:%s}\\n\"$3);$0"),
+  }, 'snprintf(${1:buf}, ${2:max}, "${3:%s}\\n"$3);$0'),
   parse({
     trig = "scanf",
     name = "scanf",
     dscr = "scanf() snippet",
-  }, "scanf(\"${1:%d}\"$2);$0"),
+  }, 'scanf("${1:%d}"$2);$0'),
   parse({
     trig = "fscanf",
     name = "fscanf",
     dscr = "fscanf() snippet",
-  }, "fscanf(${1:stdin}, \"${2:%d}\"$3);$0"),
+  }, 'fscanf(${1:stdin}, "${2:%d}"$3);$0'),
   parse({
     trig = "sscanf",
     name = "sscanf",
     dscr = "sscanf() snippet",
-  }, "sscanf(${1:buf}, \"${2:%d}\"$3);$0"),
+  }, 'sscanf(${1:buf}, "${2:%d}"$3);$0'),
   parse({
     trig = "malloc",
     name = "malloc",
@@ -541,57 +568,57 @@ $0]]),
     trig = "static_assert",
     name = "static_assert",
     dscr = "static_assert() snippet",
-  }, "static_assert(${1:false}, \"${2:Oopsie}\");"),
+  }, 'static_assert(${1:false}, "${2:Oopsie}");'),
   parse({
     trig = "err",
     name = "err",
     dscr = "err() snippet",
-  }, "err(${1:EXIT_FAILURE}, \"${2:%s}\"$0);"),
+  }, 'err(${1:EXIT_FAILURE}, "${2:%s}"$0);'),
   parse({
     trig = "errx",
     name = "errx",
     dscr = "errx() snippet",
-  }, "errx(${1:EXIT_FAILURE}, \"${2:%s}\"$0);"),
+  }, 'errx(${1:EXIT_FAILURE}, "${2:%s}"$0);'),
   parse({
     trig = "warn",
     name = "warn",
     dscr = "warn() snippet",
-  }, "warn(\"${1:%s}\"$0);"),
+  }, 'warn("${1:%s}"$0);'),
   parse({
     trig = "warnx",
     name = "warnx",
     dscr = "warnx() snippet",
-  }, "warnx(\"${1:%s}\"$0);"),
+  }, 'warnx("${1:%s}"$0);'),
   parse({
     trig = "chkio_eof",
     name = "fputs() errcheck",
     dscr = "Error checking for int IO functions",
-  }, "if (${1:status} == EOF$2) {\n\t${3:err(EXIT_FAILURE, \"IO is hard\");}\n}"),
+  }, 'if (${1:status} == EOF$2) {\n\t${3:err(EXIT_FAILURE, "IO is hard");}\n}'),
   parse({
     trig = "chkio_null",
     name = "fgets() errcheck",
     dscr = "Error checking for pointer-type IO functions",
-  }, "if (!${1:status}) {\n\t${2:err(EXIT_FAILURE, \"IO is very hard\");}\n}"),
+  }, 'if (!${1:status}) {\n\t${2:err(EXIT_FAILURE, "IO is very hard");}\n}'),
   parse({
     trig = "chkio_mi",
     name = "fseek() errcheck",
     dscr = "Error checking for fseek(), getline() like functions",
-  }, "if (${1:status} == -1$2) {\n\t${3:err(EXIT_FAILURE, \"IO is super hard\");}\n}"),
+  }, 'if (${1:status} == -1$2) {\n\t${3:err(EXIT_FAILURE, "IO is super hard");}\n}'),
   parse({
     trig = "chkio_neg",
     name = "printf() errcheck",
     dscr = "Error checking for printf()-like functions",
-  }, "if (${1:status} < 0$2) {\n\t${3:err(EXIT_FAILURE, \"Ran out of ink\");}\n}"),
+  }, 'if (${1:status} < 0$2) {\n\t${3:err(EXIT_FAILURE, "Ran out of ink");}\n}'),
   parse({
     trig = "chkmem",
     name = "malloc() errcheck",
     dscr = "Error checking for malloc()-like",
-  }, "if (!${1:status}) {\n\t${2:err(EXIT_FAILURE, \"Your memory is doomed\");}\n}"),
+  }, 'if (!${1:status}) {\n\t${2:err(EXIT_FAILURE, "Your memory is doomed");}\n}'),
   parse({
     trig = "printv",
     name = "Print a variable",
     dscr = "Call printf() to log value of a variable",
-  }, "printf(\"$1 = %${2:d}\\n\", ${1:var}$3);"),
+  }, 'printf("$1 = %${2:d}\\n", ${1:var}$3);'),
   parse({
     trig = "arrlen",
     name = "Array length",
@@ -652,11 +679,14 @@ $0]]),
     name = "cca",
     desc = "const_cast<type>(expression)",
   }, [[const_cast<${1:unsigned}>(${2:expr})$3]]),
-  parse({
-    trig = "af",
-    name = "af",
-    desc = "auto function and trailing return",
-  }, [[auto ${1:name}( ${2:void} ) -> ${3:auto} {
+  parse(
+    {
+      trig = "af",
+      name = "af",
+      desc = "auto function and trailing return",
+    },
+    [[auto ${1:name}( ${2:void} ) -> ${3:auto} {
 	${5}
-}]]),
+}]]
+  ),
 }

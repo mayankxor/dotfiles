@@ -86,7 +86,7 @@ vim.lsp.config("lua_ls", {
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
   root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers1, root_markers2, { ".git" } }
-      or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { ".git" }),
+    or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { ".git" }),
 
   capabilities = {
     textDocument = {
@@ -127,8 +127,7 @@ vim.lsp.config("lua_ls", {
   ---@type lspconfig.settings.lua_ls
   settings = {
     Lua = {
-      diagnostics = {
-      },
+      diagnostics = {},
       completion = { callSnippet = "Replace" },
       codeLens = { enable = true },
       hint = { enable = true, semicolon = "Disable" },

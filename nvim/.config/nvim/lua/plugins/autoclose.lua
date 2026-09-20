@@ -1,17 +1,17 @@
 return {
   {
-    'nvim-mini/mini.surround',
-    version = '*',
+    "nvim-mini/mini.surround",
+    version = "*",
     enabled = true,
     config = function()
       require("mini.surround").setup()
-    end
+    end,
   },
   {
     "m4xshen/autoclose.nvim",
     enabled = true,
     config = function()
       require("autoclose").setup()
-    end
-  }
+    end,
+  },
 }
