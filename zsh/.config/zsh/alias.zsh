@@ -7,7 +7,19 @@ alias diff="diff --color=auto --show-c-function  --tabsize=2 --recursive"
 alias cd..="cd .."
 alias nohup=nohupx
 alias grep="grep --color --with-filename --line-number"
+
 alias gs="git status"
+alias gl="git log"
+alias gc="git commit"
+alias ga="git add"
+alias gp="git push"
+alias gpu="git pull"
+alias gsh="git show"
+alias gb="git branch"
+alias gcl="git clone"
+alias gi="git init"
+alias gd="git diff"
+
 alias yt="yt-dlp -S res:720,+size"
 
 if (( $+commands[bat] ));then
