@@ -9,7 +9,7 @@ alias nohup=nohupx
 alias grep="grep --color --with-filename --line-number"
 
 alias gs="git status"
-alias gl="git log"
+alias gl="git log --all --graph --pretty=format:'commit: %C(magenta)%h %C(auto) %C(auto)%d%n%C(auto)Author: %C(white)%an <%C(cyan)%ae%C(auto)>%nTime  : %aD %at - %ar%n%n%C(always,bold green)%B'"
 alias gc="git commit"
 alias ga="git add"
 alias gp="git push"
