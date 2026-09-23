@@ -6,6 +6,7 @@ zstyle ':completion:*' menu select
 load_completions=(
   herdr
   grok
+  delta
   )
 
 for cmd in $load_completions; do
