@@ -7,6 +7,7 @@ load_completions=(
   herdr
   grok
   delta
+  onefetch
   )
 
 for cmd in $load_completions; do

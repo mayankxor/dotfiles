@@ -1,0 +1,1 @@
+eval "$(onefetch --generate=zsh)"
