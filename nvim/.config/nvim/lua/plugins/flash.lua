@@ -1,7 +1,7 @@
 return {
   "folke/flash.nvim",
   event = "VeryLazy",
-  enabled = false,
+  enabled = vim.fn.has("nvim-0.8.0") == 1,
   keys = {
     {
       "s",
