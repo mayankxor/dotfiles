@@ -10,7 +10,9 @@ source $ZSH_CONFIG_DIR/exports.zsh
 source $ZSH_CONFIG_DIR/keybinds.zsh
 source $ZSH_CONFIG_DIR/locale.zsh
 source $ZSH_CONFIG_DIR/options.zsh
-source $ZSH_CONFIG_DIR/secrets.zsh
+if [[ -f $ZSH_CONFIG_DIR/secrets.zsh ]]; then
+  source $ZSH_CONFIG_DIR/secrets.zsh
+fi
 source $ZSH_CONFIG_DIR/xdg.zsh
 
 source <(fzf --zsh)
