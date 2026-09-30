@@ -30,20 +30,20 @@ return {
         default_file_explorer = true,
         columns = {
           { "icon", add_padding = true },
-          {
-            "type",
-            highlight = function()
-              vim.api.nvim_set_hl(0, "OilTypeHighlightGroup", { fg = "#FCFAFA" })
-              return "OilTypeHighlightGroup"
-            end,
-          },
-          {
-            "permissions",
-            highlight = function()
-              vim.api.nvim_set_hl(0, "OilPermissionsHighlightGroup", { fg = "#C8D3D5" })
-              return "OilPermissionsHighlightGroup"
-            end,
-          },
+          -- {
+          --   "type",
+          --   highlight = function()
+          --     vim.api.nvim_set_hl(0, "OilTypeHighlightGroup", { fg = "#FCFAFA" })
+          --     return "OilTypeHighlightGroup"
+          --   end,
+          -- },
+          -- {
+          --   "permissions",
+          --   highlight = function()
+          --     vim.api.nvim_set_hl(0, "OilPermissionsHighlightGroup", { fg = "#C8D3D5" })
+          --     return "OilPermissionsHighlightGroup"
+          --   end,
+          -- },
           {
             "size",
             highlight = function()

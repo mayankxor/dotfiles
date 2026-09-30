@@ -31,7 +31,7 @@ return {
             no_hash = false, -- hex without '#' at word boundaries
           },
           rgb = { enable = true }, -- rgb()/rgba() functions
-          hsl = { enable = false }, -- hsl()/hsla() functions
+          hsl = { enable = true }, -- hsl()/hsla() functions
           oklch = { enable = false }, -- oklch() function
           hwb = { enable = false }, -- hwb() function (CSS Color Level 4)
           lab = { enable = false }, -- lab() function (CIE Lab)
@@ -61,14 +61,14 @@ return {
           custom = {}, -- list of custom parser definitions
         },
         display = {
-          mode = "background", -- string or list: "background"|"foreground"|"underline"|"virtualtext"
+          mode = "virtualtext", -- string or list: "background"|"foreground"|"underline"|"virtualtext"
           background = {
             bright_fg = "#000000", -- text color on bright backgrounds
             dark_fg = "#ffffff", -- text color on dark backgrounds
           },
           virtualtext = {
             char = "■", -- character used for virtualtext
-            position = "eol", -- "eol"|"before"|"after"
+            position = "before", -- "eol"|"before"|"after"
             hl_mode = "foreground", -- "background"|"foreground"
           },
           priority = {

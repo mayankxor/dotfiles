@@ -4,7 +4,7 @@ return {
   enabled = vim.fn.has("nvim-0.8.0") == 1,
   keys = {
     {
-      "s",
+      "<leader>s",
       mode = { "n", "x", "o" },
       function()
         require("flash").jump()
@@ -12,10 +12,15 @@ return {
       desc = "Flash",
     },
     {
-      "S",
+      "<leader>S",
       mode = { "n", "x", "o" },
       function()
-        require("flash").treesitter()
+        require("flash").treesitter({
+          actions = {
+            ["n"] = "next",
+            ["p"] = "prev",
+          },
+        })
       end,
       desc = "Flash Treesitter",
     },
@@ -136,7 +141,7 @@ return {
         -- show the label before the match
         before = false, ---@type boolean|number[]
         -- position of the label extmark
-        style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
+        style = "inline", ---@type "eol" | "overlay" | "right_align" | "inline"
         -- flash tries to re-use labels that were already assigned to a position,
         -- when typing more characters. By default only lower-case labels are re-used.
         reuse = "lowercase", ---@type "lowercase" | "all" | "none"
