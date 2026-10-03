@@ -155,16 +155,16 @@ return {
   },
 
   -- To get extra capabilities
-  -- {
-  --   "hrsh7th/cmp-nvim-lsp",
-  --   enabled = true,
-  -- },
+  {
+    "hrsh7th/cmp-nvim-lsp",
+    enabled = true,
+  },
 
   -- Frontend
   {
     "hrsh7th/nvim-cmp",
     enabled = true,
-    dependencies = { "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip" },
+    dependencies = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip" },
     config = function()
       local luasnip = require("luasnip")
       -- Use for Visual Studio Code Dark+ Theme Colors in the completion menu(Only for custom view)
