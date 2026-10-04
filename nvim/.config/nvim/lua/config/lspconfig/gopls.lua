@@ -118,6 +118,34 @@ vim.lsp.config("gopls", {
     -- see: https://github.com/neovim/nvim-lspconfig/issues/804
     on_dir(get_root_dir(fname))
   end,
+  on_attach = function(client, bufnr)
+    local map = function(keys, func, desc)
+      if desc then
+        desc = "LSP: " .. desc
+      end
+      vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+    end
+    map("<leader>sd", vim.diagnostic.open_float, "Show diagnostics")
+    map("[d", function()
+      vim.diagnostic.jump({ count = -1 })
+    end, "Goto previous diagnostic")
+    map("]d", function()
+      vim.diagnostic.jump({ count = 1 })
+    end, "Goto next diagnostic")
+    map("<leader>q", vim.diagnostic.setloclist)
+    map("gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
+    map("gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
+    map("gT", vim.lsp.buf.type_definition, "[g]o to [T]ype definition")
+    map("gi", vim.lsp.buf.implementation, "[g]o to [i]mplementation")
+    map("K", vim.lsp.buf.hover, "Hover Documentation")
+    map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+    map("gr", vim.lsp.buf.references, "[g]o to [r]eferences")
+    map("<leader>rn", vim.lsp.buf.rename, "Rename")
+    map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+    map("<leader>cf", function()
+      vim.lsp.buf.format({ async = true })
+    end, "Format")
+  end,
   init_options = { semanticTokens = true },
   settings = {
     gopls = {
