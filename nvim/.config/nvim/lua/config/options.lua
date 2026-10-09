@@ -68,7 +68,7 @@ vim.diagnostic.config({
   virtual_lines = false,
 })
 opt.showmode = true -- show the current mode in cmdline
-opt.cmdheight = 1 -- height of command line
+opt.cmdheight = 0 -- height of command line
 
 -- -- ui2 shows command line when required, otherwise its invisible
 -- require("vim._core.ui2").enable({
@@ -98,4 +98,7 @@ opt.cmdheight = 1 -- height of command line
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor"
 opt.shortmess:append("I") -- remove initial splash screen
 opt.winborder = "rounded"
+opt.showcmdloc = "statusline"
+opt.statusline =
+  "%f%m%r%h%w%q %{get(b:, 'gitsigns_status', '')}@%{get(b:, 'gitsigns_head', '')} %=%=%S %=buf=%n %{v:lua.vim.fn.mode()} %y%l/%L:%c(%p%%)"
 vim.cmd([[colorscheme catppuccin]])
