@@ -39,7 +39,7 @@ opt.fileignorecase = true -- ignore casing when using filenames
 opt.endofline = false -- appends <EOL> for last line
 opt.endoffile = false -- appends <C-z> at end of file
 opt.mousehide = true -- hide mouse pointer when typing(for gvim)
-opt.shell = "/usr/bin/zsh" -- shell to use for :!
+-- opt.shell = "/usr/bin/zsh" -- shell to use for :!
 opt.ruler = true -- show line coordinates in statusline
 opt.smoothscroll = false -- show >>> when lines are wrapped
 opt.spell = false -- spell checking
@@ -100,5 +100,5 @@ opt.shortmess:append("I") -- remove initial splash screen
 opt.winborder = "rounded"
 opt.showcmdloc = "statusline"
 opt.statusline =
-  "%f%m%r%h%w%q %{get(b:, 'gitsigns_status', '')}@%{get(b:, 'gitsigns_head', '')} %=%=%S %=buf=%n %{v:lua.vim.fn.mode()} %y%l/%L:%c(%p%%)"
+  "%{toupper(v:lua.vim.fn.mode())}|%f%m%r%h%w%q %{get(b:, 'gitsigns_head', '') !=# '' ? get(b:, 'gitsigns_status', '') . '@' . get(b:, 'gitsigns_head', '') : ''} %=%=%S %=buf=%n %y%l/%L:%c(%p%%)"
 vim.cmd([[colorscheme catppuccin]])
