@@ -99,6 +99,15 @@ opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-bl
 opt.shortmess:append("I") -- remove initial splash screen
 opt.winborder = "rounded"
 opt.showcmdloc = "statusline"
+
+local function LSPNAME()
+  local lsp = vim.lsp.get_clients({ bufnr = 0 })
+  if #lsp == 0 then
+    return ""
+  end
+  return "LSP: " .. lsp[1].name
+end
+_G.LSPNAME = LSPNAME
 opt.statusline =
-  "%{toupper(v:lua.vim.fn.mode())}|%f%m%r%h%w%q %{get(b:, 'gitsigns_head', '') !=# '' ? get(b:, 'gitsigns_status', '') . '@' . get(b:, 'gitsigns_head', '') : ''} %=%=%S %=buf=%n %y%l/%L:%c(%p%%)"
+  "%{toupper(v:lua.vim.fn.mode())}|%f%m%r%h%w%q %{get(b:, 'gitsigns_head', '') !=# '' ? get(b:, 'gitsigns_status', '') . '@' . get(b:, 'gitsigns_head', '') : ''} %=%=%S   %{v:lua.LSPNAME()}%=buf=%n %y%l/%L:%c(%p%%)"
 vim.cmd([[colorscheme catppuccin]])
