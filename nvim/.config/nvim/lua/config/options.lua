@@ -71,29 +71,31 @@ opt.showmode = true -- show the current mode in cmdline
 opt.cmdheight = 0 -- height of command line
 
 -- -- ui2 shows command line when required, otherwise its invisible
--- require("vim._core.ui2").enable({
--- 	enable = true, -- Whether to enable or disable the UI.
--- 	msg = { -- Options related to the message module.
--- 		---@type 'cmd'|'msg' Default message target, either in the
--- 		---cmdline or in a separate ephemeral message window.
--- 		---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
--- 		---or table mapping |ui-messages| kinds and triggers to a target.
--- 		targets = "cmd",
--- 		cmd = { -- Options related to messages in the cmdline window.
--- 			height = 0.5, -- Maximum height while expanded for messages beyond 'cmdheight'.
--- 		},
--- 		dialog = { -- Options related to dialog window.
--- 			height = 0.5, -- Maximum height.
--- 		},
--- 		msg = { -- Options related to msg window.
--- 			height = 0.5, -- Maximum height.
--- 			timeout = 4000, -- Time a message is visible in the message window.
--- 		},
--- 		pager = { -- Options related to message window.
--- 			height = 1, -- Maximum height.
--- 		},
--- 	},
--- })
+if vim.fn.has("nvim-0.12.0") == 1 then
+  require("vim._core.ui2").enable({
+    enable = true, -- Whether to enable or disable the UI.
+    msg = { -- Options related to the message module.
+      ---@type 'cmd'|'msg' Default message target, either in the
+      ---cmdline or in a separate ephemeral message window.
+      ---@type string|table<string, 'cmd'|'msg'|'pager'> Default message target
+      ---or table mapping |ui-messages| kinds and triggers to a target.
+      targets = "cmd",
+      cmd = { -- Options related to messages in the cmdline window.
+        height = 0.5, -- Maximum height while expanded for messages beyond 'cmdheight'.
+      },
+      dialog = { -- Options related to dialog window.
+        height = 0.5, -- Maximum height.
+      },
+      msg = { -- Options related to msg window.
+        height = 0.5, -- Maximum height.
+        timeout = 4000, -- Time a message is visible in the message window.
+      },
+      pager = { -- Options related to message window.
+        height = 1, -- Maximum height.
+      },
+    },
+  })
+end
 --
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor"
 opt.shortmess:append("I") -- remove initial splash screen
