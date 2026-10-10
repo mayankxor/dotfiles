@@ -111,5 +111,5 @@ local function LSPNAME()
 end
 _G.LSPNAME = LSPNAME
 opt.statusline =
-  "%{toupper(v:lua.vim.fn.mode())}|%f%m%r%h%w%q %{get(b:, 'gitsigns_head', '') !=# '' ? get(b:, 'gitsigns_status', '') . '@' . get(b:, 'gitsigns_head', '') : ''} %=%=%S   %{v:lua.LSPNAME()}%=buf=%n %y%l/%L:%c(%p%%)"
+  "%{toupper(v:lua.vim.fn.mode())}|%f%m%r%h%w%q %{get(b:, 'gitsigns_head', '') !=# '' ? get(b:, 'gitsigns_status', '') . '@' . get(b:, 'gitsigns_head', '') : ''} %=%=%S   %{v:lua.LSPNAME()}%=buf=%n %-14.(%l/%L:%c%)%5(%p%%%)"
 vim.cmd([[colorscheme catppuccin]])
