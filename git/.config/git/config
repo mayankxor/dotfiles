@@ -1,0 +1,78 @@
+[core]
+  compression = 9
+  whitespace = error
+  preloadindex = true
+  pager = delta
+  editor = nvim
+
+[init]
+  defaultBranch = main
+
+[status]
+  branch = true
+  showStash = true
+  showUntrackedFiles = all
+
+[branch]
+  sort = -committerdate
+
+[diff]
+  algorithm = histogram
+  context = 3
+  renames = copies
+  mnemonicPrefix = true
+  interHunkContext = 10
+
+[pager]
+  diff = delta --line-numbers
+  branch = true
+  tag = true
+
+[tag]
+  sort = version:refname
+
+[help]
+  autocorrect = prompt
+
+[interactive]
+  diffFilter = delta --color-only
+  singlekey = true
+
+[delta]
+  navigate = true
+  dark = true
+
+[color "diff"]
+  meta = black bold
+  frag = magenta
+  context = white
+  whitespace = yellow reverse
+  old = red
+
+[column]
+  ui = auto
+
+[merge]
+  conflictStyle = zdiff3
+
+[log]
+  abbrevCommit = true
+
+[advice]
+  addEmptyPathspec = true
+  pushNonFastForward = true
+  statusHints = true
+
+[push]
+  autoSetupRemote = true
+  followTags = true
+  default = simple
+
+[commit]
+  verbose = true
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+
+[url "git@gitlab.com:"]
+  insteadOf = "gl:"
