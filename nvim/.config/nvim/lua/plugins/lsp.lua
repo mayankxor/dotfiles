@@ -164,7 +164,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     enabled = true,
-    dependencies = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip" },
+    dependencies = { "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "saadparwaiz1/cmp_luasnip" },
     config = function()
       local luasnip = require("luasnip")
       -- Use for Visual Studio Code Dark+ Theme Colors in the completion menu(Only for custom view)
@@ -353,6 +353,15 @@ return {
           -- Tab => if there's only one completion possible, accept it
           --     => if there's more than one possible completion, select the next one
           --     => If there's no completion, act as regular tab
+          ["<C-Tab>"] = cmp.mapping(function(fallback)
+            -- if there are jumpable snips, then jump,
+            -- else fallback
+            if luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               local entries = cmp.get_entries()
