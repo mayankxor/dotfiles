@@ -15,7 +15,6 @@ if [[ -f $ZSH_CONFIG_DIR/secrets.zsh ]]; then
 fi
 source $ZSH_CONFIG_DIR/xdg.zsh
 
-source <(fzf --zsh)
 eval "$(zoxide init zsh --hook pwd )"
 
 HISTSIZE=10000

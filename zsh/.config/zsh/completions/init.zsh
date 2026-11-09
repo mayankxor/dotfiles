@@ -8,6 +8,7 @@ load_completions=(
   grok
   delta
   onefetch
+  fzf
   )
 
 for cmd in $load_completions; do
