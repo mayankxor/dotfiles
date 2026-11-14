@@ -15,6 +15,9 @@ return {
       builtin.find_files,
       { desc = "Lists files in your current working directory, respects .gitignore" }
     )
+    map("n", "<leader>fcfg", function()
+      builtin.find_files({ cwd = vim.fn.stdpath("config") })
+    end)
     -- local x =
     -- require("telescope.builtin").live_grep({ layout_strategy = "vertical", layout_config = { width = 0.5 } })
     map("n", "<leader>rg", function()
@@ -22,6 +25,9 @@ return {
     end, {
       desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore. (Requires ripgrep)",
     })
+    map("n", "<leader>rcfg", function()
+      builtin.live_grep({ cwd = vim.fn.stdpath("config") })
+    end)
     map("n", "<leader>fb", builtin.buffers, { desc = "Lists open buffers in current neovim instance" })
     map(
       "n",
